@@ -3,13 +3,13 @@ import React from "react";
 function Header() {
   return (
     <div className="header">
-      <nav class="navbar navbar-light bg-light">
+      <nav class="navbar navbar-light">
         <a class="navbar-brand" style={{ color: "green" }}>
-          <img
+          {/* <img
             src="http://159.89.163.128:7001/img/logo.png"
             className="header-logo w-100"
-          />
-          {/* Envitus */}
+          /> */}
+          Envitus
         </a>
         <form class="form-inline">
           <div class="dropdown " style={{Left:"-10px",position:"relative"}}>

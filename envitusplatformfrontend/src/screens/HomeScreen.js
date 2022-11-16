@@ -3,10 +3,11 @@ import { Tab, Tabs, TabList, TabPanel } from "react-tabs";
 import Dashboard from '../components/Dashboard';
 import DeviceList from '../components/DeviceList';
 import Table from '../components/Table';
+import Users from '../components/Users';
 
 function HomeScreen() {
   return (
-    <div>
+    <div className="home-screen">
       <Tabs>
         <TabList>
           <Tab>
@@ -20,6 +21,9 @@ function HomeScreen() {
           </Tab>
           <Tab>
             <p>Users</p>
+          </Tab>
+          <Tab>
+            <p>Organization</p>
           </Tab>
           <Tab>
             <p>API Key</p>
@@ -44,7 +48,12 @@ function HomeScreen() {
         </TabPanel>
         <TabPanel>
           <div className="panel-content">
-            <h1>4</h1>
+            <Users />
+          </div>
+        </TabPanel>
+        <TabPanel>
+          <div className="panel-content">
+            <h1>Organization</h1>
           </div>
         </TabPanel>
         <TabPanel>

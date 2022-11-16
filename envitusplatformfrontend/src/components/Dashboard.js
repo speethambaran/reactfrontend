@@ -79,9 +79,11 @@ function Dashboard() {
         <div className="row mt-4">
           <div className="col-md-6">
             <Map />
+            {/* <GoogleMap /> */}
           </div>
           <div className="col-md-6">
             {/* <Doughnut data = {data} /> */}
+            {/* <BarGraph /> */}
           </div>
         </div>
       </div>

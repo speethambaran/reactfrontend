@@ -6,7 +6,7 @@ function Table() {
     const test = ()=>{
         alert('test')
     }
-    const products = [
+    const devices = [
       { device_id: 1, status: "active",City:"Ernakulam",type:"sensor",landmark:"Kochi", family: "Air" },
       { device_id: 2, status: "offline",City:"Ernakulam",type:"sensor",landmark:"Kochi", family: "Water" },
       { device_id: 3, status: "active",City:"Ernakulam",type:"sensor",landmark:"Kochi", family: "Flood" },
@@ -30,12 +30,12 @@ function Table() {
         "view" : <i className='fa fa-pencil'></i>
     }   
 
-    for (let i=0;i<products.length;i++){
-        products[i].edit = actionList.edit;
-        products[i].delete = actionList.delete;
-        products[i].view = actionList.view;
-        if(products[i].status == "active"){
-            products[i].status = (
+    for (let i=0;i<devices.length;i++){
+        devices[i].edit = actionList.edit;
+        devices[i].delete = actionList.delete;
+        devices[i].view = actionList.view;
+        if(devices[i].status == "active"){
+            devices[i].status = (
               <i
                 className="fa fa-dot-circle-o"
                 style={{
@@ -45,8 +45,8 @@ function Table() {
                 }}
               ></i>
             );
-        }else if (products[i].status == "offline") {
-                products[i].status = (
+        }else if (devices[i].status == "offline") {
+                devices[i].status = (
                   <i
                     className="fa fa-dot-circle-o"
                     style={{
@@ -105,7 +105,7 @@ function Table() {
       rowStyle={{color:"#111",backgroundColor:"white"}}
         bootstrap4
         keyField="id"
-        data={products}
+        data={devices}
         columns={columns}
         defaultSorted={defaultSorted}
         pagination={pagination}
