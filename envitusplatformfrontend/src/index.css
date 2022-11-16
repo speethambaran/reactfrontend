@@ -68,6 +68,9 @@
   width: 100px;
   height: 50px;
 }
+header{
+  box-shadow: 0 4px 8px 0 rgba(41, 248, 220, 0.2), 0 6px 20px 0 rgba(26, 243, 142, 0.19);
+}
 .cardBx{
   box-shadow: 0 4px 8px 0 rgba(41, 248, 220, 0.2), 0 6px 20px 0 rgba(26, 243, 142, 0.19);
   height: 214px;
@@ -87,4 +90,9 @@ h2{
 }
 .header{
   box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+}
+h1{
+  font-size: 24px;
+  font-weight: 600;
+  color: #111;
 }

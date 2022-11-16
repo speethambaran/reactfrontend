@@ -1,6 +1,8 @@
 import React from 'react'
 import { Tab, Tabs, TabList, TabPanel } from "react-tabs";
 import Dashboard from '../components/Dashboard';
+import DeviceList from '../components/DeviceList';
+import Table from '../components/Table';
 
 function HomeScreen() {
   return (
@@ -31,7 +33,8 @@ function HomeScreen() {
         </TabPanel>
         <TabPanel>
           <div className="panel-content">
-            <h1>2</h1>
+            {/* <DeviceList /> */}
+            <Table />
           </div>
         </TabPanel>
         <TabPanel>
