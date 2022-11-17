@@ -9,8 +9,9 @@
   margin-left: 0px;
   width: 100%;
   height: 94vh;
-  background: rgb(244, 250, 253);
-  /* background-color: #484291; */
+  /* background: rgb(244, 250, 253); */
+  background-color: #ffffff;
+ 
 }
 
 .react-tabs__tab-list {
@@ -164,7 +165,7 @@ h5{
   height: 400px;
   overflow: auto;
 }
-git remote set-url origin https://github.com/speethambaran/reactfrontend.git
+
 .table-wrapper-scroll-y {
   display: block;
 }
@@ -172,3 +173,8 @@ git remote set-url origin https://github.com/speethambaran/reactfrontend.git
   position: fixed;
   width: 100%;
 } */
+.livedata_screen{
+  background-color: #003153;
+  height: 95vh;
+  width: 100%;
+}

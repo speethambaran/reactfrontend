@@ -5,6 +5,7 @@ import DeviceList from '../components/DeviceList';
 import Table from '../components/Table';
 import Users from '../components/Users';
 import AddSensorScreen from './AddSensorScreen';
+import LivedataScreen from './LivedataScreen';
 import OrganisationScreen from './OrganisationScreen';
 
 function HomeScreen() {
@@ -48,7 +49,7 @@ function HomeScreen() {
         </TabPanel>
         <TabPanel>
           <div className="panel-content">
-            <h1>3</h1>
+            <LivedataScreen />
           </div>
         </TabPanel>
         <TabPanel>
