@@ -3,18 +3,18 @@ import React from "react";
 function Header() {
   return (
     <div className="header">
-      <nav class="navbar navbar-light">
-        <a class="navbar-brand" style={{ color: "green" }}>
-          {/* <img
+      <nav className="navbar navbar-light">
+        <a className="navbar-brand" style={{ color: "green" }}>
+          <img
             src="http://159.89.163.128:7001/img/logo.png"
             className="header-logo w-100"
-          /> */}
-          Envitus
+          />
+          {/* Envitus */}
         </a>
-        <form class="form-inline">
-          <div class="dropdown " style={{Left:"-10px",position:"relative"}}>
+        <form className="form-inline">
+          <div className="dropdown " style={{Left:"-10px",position:"relative"}}>
             <i
-              class="dropdown-toggle"
+              className="dropdown-toggle"
               type="button"
               id="dropdownMenuButton"
               data-toggle="dropdown"
@@ -23,11 +23,11 @@ function Header() {
             >
               Account
             </i>
-            <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-              <a class="dropdown-item" href="#">
+            <div className="dropdown-menu" aria-labelledby="dropdownMenuButton">
+              <a className="dropdown-item" href="#">
                 Logout
               </a>
-              <a class="dropdown-item" href="#">
+              <a className="dropdown-item" href="#">
                 Profile
               </a>
               

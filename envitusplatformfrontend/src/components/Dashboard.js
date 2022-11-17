@@ -3,8 +3,17 @@ import Map from './Map';
 import { Chart as ChartJS, ArcElement, Tooltip, Legend } from "chart.js";
 import { Doughnut } from "react-chartjs-2";
 import { data } from '../data';
-
+import GoogleMapReact from "google-map-react";
+const AnyReactComponent = ({ text }) => <div>{text}</div>;
 function Dashboard() {
+  const defaultProps = {
+    center: {
+      lat: 10.99835602,
+      lng: 77.01502627,
+    },
+    zoom: 11,
+  };
+
   return (
     <div className="contaiainer-fluid p-2">
       <div className="row">
@@ -48,7 +57,7 @@ function Dashboard() {
           >
             <h2>Alert</h2>
             <div className="text-center">
-              <h1>0</h1>
+              <h1 className="digitalData">0</h1>
             </div>
           </div>
         </div>
@@ -59,7 +68,7 @@ function Dashboard() {
           >
             <h2>Daily Rain</h2>
             <div className="text-center">
-              <h1>0</h1>
+              <h1 className="digitalData">0</h1>
             </div>
           </div>
         </div>
@@ -70,7 +79,7 @@ function Dashboard() {
           >
             <h2>Daily AQI</h2>
             <div className="text-center">
-              <h1>0</h1>
+              <h1 className="digitalData">0</h1>
             </div>
           </div>
         </div>
@@ -78,6 +87,21 @@ function Dashboard() {
       <div>
         <div className="row mt-4">
           <div className="col-md-6">
+            {/* <GoogleMapReact
+              bootstrapURLKeys={{
+                key: "AIzaSyAIxBnZBrLo32r-af2Oti4CqaMOjkj_OkY",
+              }}
+              defaultCenter={}
+              // defaultZoom={defaultProps.zoom}
+            >
+              <AnyReactComponent
+                lat={59.955413}
+                lng={30.337844}
+                text="My Marker"
+              />
+            </GoogleMapReact> */}
+
+            
             <Map />
             {/* <GoogleMap /> */}
           </div>

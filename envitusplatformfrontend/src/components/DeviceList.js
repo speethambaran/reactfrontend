@@ -4,8 +4,8 @@ function DeviceList() {
   return (
     <div className="container-fluid mt-5" style={{ backgroundColor: "white" }}>
       <h1>Device List</h1>
-      <table class="table mt-5">
-        <thead class="thead-light">
+      <table className="table mt-5">
+        <thead className="thead-light">
           <tr>
             <th scope="col">device ID</th>
             <th scope="col">Status</th>

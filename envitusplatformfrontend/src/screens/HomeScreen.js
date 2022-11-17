@@ -4,6 +4,7 @@ import Dashboard from '../components/Dashboard';
 import DeviceList from '../components/DeviceList';
 import Table from '../components/Table';
 import Users from '../components/Users';
+import OrganisationScreen from './OrganisationScreen';
 
 function HomeScreen() {
   return (
@@ -53,7 +54,8 @@ function HomeScreen() {
         </TabPanel>
         <TabPanel>
           <div className="panel-content">
-            <h1>Organization</h1>
+            {/* <h1>Organization</h1> */}
+            <OrganisationScreen />
           </div>
         </TabPanel>
         <TabPanel>
