@@ -1,6 +1,15 @@
-import React from 'react'
+import React, { useEffect } from 'react'
+import { useDispatch, useSelector } from 'react-redux';
+import { listUsers } from '../actions/userActions';
 
 function OrganisationScreen() {
+  const dispatch = useDispatch();
+  const userList = useSelector((state) => state.userList);
+  const { loading, error, users } = userList;
+
+  useEffect(() => {
+    dispatch(listUsers());
+  }, [dispatch]);
   return (
     <div className="orgScreen">
       <div className="container-fluid mt-5">
@@ -83,7 +92,10 @@ function OrganisationScreen() {
         >
           <div className="modal-content">
             <div className="">
-              <h5 className="modal-title text-center" id="exampleModalCenterTitle">
+              <h5
+                className="modal-title text-center"
+                id="exampleModalCenterTitle"
+              >
                 Add Organisation
               </h5>
               <button
@@ -110,8 +122,11 @@ function OrganisationScreen() {
                     <div className="col-md-6 mt-2">
                       <p>Users</p>
                       <select className="form-control">
-                        <option>aswins</option>
-                        <option>aswins</option>
+                        {users ? (
+                          users.map((user) => <option>{user.username}</option>)
+                        ) : (
+                          <option>No user found</option>
+                        )}
                       </select>
                     </div>
 

@@ -43,7 +43,7 @@ export default function Users() {
             </h1>
           ) : (
             <div>
-              <table className="table" style={{backgroundColor:"white"}}>
+              <table className="table mt-5" style={{backgroundColor:"white"}}>
                 <thead className="thead-light">
                   <tr>
                     <th scope="col">No</th>

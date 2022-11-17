@@ -156,3 +156,19 @@ h5{
   font-size: 60px;
   color: white;
 }
+.orgRow tr{
+  overflow-y: scroll;
+}
+.my-custom-scrollbar {
+  position: relative;
+  height: 400px;
+  overflow: auto;
+}
+git remote set-url origin https://github.com/speethambaran/reactfrontend.git
+.table-wrapper-scroll-y {
+  display: block;
+}
+/* thead tr{
+  position: fixed;
+  width: 100%;
+} */
