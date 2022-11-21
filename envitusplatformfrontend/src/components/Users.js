@@ -7,6 +7,7 @@ import MessageBox from "./MessageBox";
 
 export default function Users() {
   const [user, setUser] = useState([]);
+  const [deactivatedUser, setDeactivatedUser] = useState([]);
 
   const dispatch = useDispatch();
   const userList = useSelector((state) => state.userList);
@@ -15,14 +16,14 @@ export default function Users() {
   useEffect(() => {
     dispatch(listUsers());
   }, [dispatch]);
-  
-  const deleteUser = async(userId)=>{
-      let deletedUser = await axios.post(`/users/deleteuser/`,{id : userId});
-      if (deletedUser.status == 200){
-        // alert('Do you want to delete')
-        return window.confirm("Do you want to delete");
-      }
-  }
+
+  const deleteUser = async (userId) => {
+    let deletedUser = await axios.post(`/users/deleteuser/`, { id: userId });
+    if (deletedUser.status == 200) {
+      // alert('Do you want to delete')
+      return window.confirm("Do you want to delete");
+    }
+  };
 
   return (
     <div className="container-fluid mt-5">
@@ -43,7 +44,10 @@ export default function Users() {
             </h1>
           ) : (
             <div>
-              <table className="table mt-5" style={{backgroundColor:"white"}}>
+              <table
+                className="table mt-5"
+                style={{ backgroundColor: "white" }}
+              >
                 <thead className="thead-light">
                   <tr>
                     <th scope="col">No</th>
@@ -63,7 +67,9 @@ export default function Users() {
                       <td>{user.role}</td>
                       <td>{user.username}</td>
                       <td>{user.email}</td>
-                      <td>{user.is_active == true ? "active" : "inactive"}</td>
+                      <td style={{height:"4px"}} className={`${user.is_active == true ? 'active'  :  "inactive"}`}>
+                        {user.is_active == true ? "active" : "inactive"}
+                      </td>
                       <td>
                         <i className="fa fa-pencil m-1"></i>
                         <i
@@ -78,6 +84,10 @@ export default function Users() {
               </table>
             </div>
           )}
+          <div className="mt-5">
+            <h2 style={{ color: "darkgray" }}>Deactivated Users</h2>
+            <h4 className="no_data_message">No Data Found</h4>
+          </div>
         </div>
       )}
     </div>

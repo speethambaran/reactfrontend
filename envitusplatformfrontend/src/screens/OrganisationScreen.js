@@ -4,14 +4,13 @@ import { listOrganization } from '../actions/organizationActions';
 import { listUsers } from '../actions/userActions';
 import LoadingBox from '../components/LoadingBox'
 import MessageBox from '../components/MessageBox'
-
 function OrganisationScreen() {
   const dispatch = useDispatch();
   const userList = useSelector((state) => state.userList);
   const organizationList = useSelector((state) => state.organizationList);
   const { loading, error, users } = userList;
-  const { organizations } = organizationList;
-  
+  const {  errormessage, organizations } = organizationList;
+  console.log('Error : ', error)
   useEffect(() => {
     dispatch(listUsers());
     dispatch(listOrganization())
@@ -20,8 +19,8 @@ function OrganisationScreen() {
     <div className="orgScreen">
       {loading ? (
         <LoadingBox />
-      ) : error ? (
-        <MessageBox />
+      ) : errormessage ? (
+        <MessageBox variant="danger">Oops something went wrong</MessageBox>
       ) : (
         <div>
           <div className="container-fluid mt-2">
@@ -43,9 +42,7 @@ function OrganisationScreen() {
                           className="w-25 mt-4"
                         />
                       </div>
-                      <h4 className="org-name text-center">
-                        {org.name}
-                      </h4>
+                      <h4 className="org-name text-center">{org.name}</h4>
                     </div>
                   </div>
                 ))}

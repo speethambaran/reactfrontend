@@ -1,8 +1,19 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import BootstrapTable from "react-bootstrap-table-next";
-import paginationFactory from "react-bootstrap-table2-paginator";
+import paginationFactory from "react-bootstrap-table2-paginator"; 
+import { useDispatch, useSelector } from 'react-redux';
+import { listDevices } from '../actions/deviceActions';
 
 function Table() {
+
+  const dispatch = useDispatch();
+  const deviceList = useSelector((state) => state.deviceList);
+  const { loading, error, device } = deviceList;
+ 
+  useEffect(() => {
+    dispatch(listDevices());
+  }, [dispatch]);
+
     const test = ()=>{
         alert('test')
     }
