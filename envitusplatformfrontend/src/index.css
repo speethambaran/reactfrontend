@@ -156,3 +156,56 @@ h5{
   font-size: 60px;
   color: white;
 }
+.app{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height:100vh;
+  background : linear-gradient(
+      rgba(1, 24, 11, 0.884),
+      rgba(78, 184, 119, 0.3)
+
+  ),
+  url("https://discovery.sndimg.com/content/dam/images/discovery/fullset/2020/4/2/nightsky2_getty.jpg.rend.hgtvcom.616.411.suffix/1585862428885.jpeg");
+
+background-size:cover;
+background-position: center;
+}
+
+form{
+  background-color: white;
+  padding: 0px 60px;
+  border-radius: 10px;
+  height: 95%;
+}
+
+h1{
+  color:rgb(77,1,77);
+  text-align: center;
+  font-weight: bold;
+}
+
+button{
+  width: 100%;
+  height: 50px;
+  padding: 10px;
+  border:none;
+  background-color: rebeccapurple;
+  color: white;
+  border-radius: 10px;
+  font-size: 20px;
+  font-weight: bold;
+  text-transform: uppercase;
+  margin-top: 15px;
+  margin-bottom: 30px;
+  cursor: pointer;
+  
+}
+button:hover{ transform: scale(1.1);}
+
+forms{
+  background-color: white;
+  padding: 0px 60px;
+  border-radius: 10px;
+  height: 50%;
+}

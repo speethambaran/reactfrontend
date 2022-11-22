@@ -1,82 +1,129 @@
-import React, { Component } from "react";
-import "./Register.css"
+import { useState } from "react";
+import FormInput from "../screens/FormInput"
+import axios from 'axios'
 
+const Register = () => {
+    const [Values, setValues] = useState({
+        name: "",
+        email: "",
+        contact: "",
+        username: "",
+        password: "",
+        confirmpassword: "",
 
-class RegisterScreen extends Component {
-    constructor() {
-        super()
-        this.state = ({ name: '', email: '', contact: '', username: '', password: '' })
-        
-    }
-    namechange = event => {
-        this.setState({
-            name: event.target.value
+    });
+
+    const handleSubmit =  async (e) => {
+        e.preventDefault()
+        await axios.post('http://192.46.210.81:7002/register/', { Values }).then((result) => {
+            console.log(result)
         })
-    }
-    emailchange = event => {
-        this.setState({
-            email: event.target.value
-        })
-    }
-    contactchange = event => {
-        this.setState({
-            contact: event.target.value
-        })
-    }
-    usernamechange = event => {
-        this.setState({
-            username: event.target.value
-        })
-    }
-    passwordchange = event => {
-        this.setState({
-            password: event.target.value
-        })
-    }
-    handleSubmit = event => {
     
-        alert(`${this.state.name} ${this.state.email}`);
+
+
+
+};
+const onChange = (e) => {
+    setValues({ ...Values, [e.target.name]: e.target.value });
+};
+
+
+const inputs = [
+    {
+        id: 1,
+        name: "name",
+        label: "Your name",
+        errorMessage: "Should be 3-16 characters and shouldn't include any special character",
+        placeholder: "Your name",
+        type: "text",
+        pattern: "^[A-Za-z0-9]{3,16}$",
+        required: true,
+
+
+    },
+    {
+        id: 2,
+        name: "email",
+        label: "Your email",
+        errorMessage: "should be a valid email address",
+        placeholder: "Your email",
+        type: "email",
+        // pattern:"^/S+@/S+/./S+$",
+
+        required: true,
+
+
+    },
+    {
+        id: 3,
+        name: "contact",
+        label: "Your contact",
+        errorMessage: "should be 10 digits",
+        placeholder: "Your contact",
+        type: "text",
+        required: true,
+
+
+    },
+    {
+        id: 4,
+        name: "username",
+        label: "Your username",
+        errorMessage: "Should be 3-16 characters and shouldn't include any special character",
+        placeholder: "Your username",
+        type: "text",
+        pattern: "^[A-Za-z0-9]{3,16}$",
+        required: true,
+
+
+
+    },
+    {
+        id: 5,
+        name: "password",
+        label: "Your password",
+        errorMessage: " must be eight characters or longer",
+        placeholder: "Your password",
+        type: "password",
+        // pattern: "^(?=.{8,})",
+        required: true,
+
+       
+
+    },
+    {
+        id: 6,
+        name: "confirmpassword",
+        label: "confirm password",
+        errorMessage: "passwords don't match",
+        placeholder: "confirm password",
+        type: "password",
+        pattern: Values.password,
+        required: true,
+
 
 
     }
-render() {
+]
 
 
-        return <body>
+return (
 
-<div className="container">
+    <div className="app">
 
-            <form action="" onSubmit={this.handleSubmit} >
-                <div className="cover">
-                    <h1>Register</h1>
-                    <input type="text" name="name" placeholder="name" value={this.state.name} onChange={this.namechange} required /><br />
-                    <input type="email" placeholder="email" name="email" value={this.state.email} onChange={this.emailchange} required /><br />
-                    <input type="text" placeholder="contact" name="contact" value={this.state.contact} onChange={this.contactchange} required /><br />
-                    <input type="text" placeholder="username" name="username" value={this.state.username} onChange={this.usernamechange} required /><br />
-                    <input type="password" placeholder="password" name="password" value={this.state.password} onChange={this.passwordchange} required /><br />
-                    <button className="signup-btn" type="submit">
-                        Register
-                    </button>
+        <form onSubmit={handleSubmit}>
+            <h1>Register</h1>
+            {inputs.map((input) => (
+                <FormInput key={input.id} {...input} value={Values
+                [input.name]} onChange={onChange} />
+            ))}
+             <button>Submit</button>
+            <p>Already Registered?<a href="/login">Login</a></p>
+        </form>
+    </div>
+);
 
-                    <p>Already Registered?<a  href="/login">Login</a></p>
-                </div>
-            </form>
 
-            </div>
+};
 
-        </body >
-    }
-}
-export default RegisterScreen
-
-// import React from 'react'
-
-// function RegisterScreen() {
-//   return (
-//     <div>
-//       <h1>RegisterScreen</h1>
-//     </div>
-//   );
-// }
-
-// export default RegisterScreen
+export default Register;
