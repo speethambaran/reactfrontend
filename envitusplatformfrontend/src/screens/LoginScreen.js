@@ -1,6 +1,7 @@
 import { useState } from "react";
 import FormInput from "../screens/FormInput"
 import axios from 'axios'
+import {useNavigate} from "react-router-dom";
 
 const Register = () => {
     const [Values, setValues] = useState({
@@ -13,14 +14,11 @@ const Register = () => {
 
     const handleSubmit =  async (e) => {
         e.preventDefault()
-        await axios.post('http://192.46.210.81:7002/register/', { Values }).then((result) => {
+        await axios.post('http://192.46.210.81:7002/login/', { Values }).then((result) => {
             console.log(result)
         })
-    
-
-
-
-};
+    };
+    const navigate=useNavigate()
 const onChange = (e) => {
     setValues({ ...Values, [e.target.name]: e.target.value });
 };
@@ -68,7 +66,7 @@ return (
                 <FormInput key={input.id} {...input} value={Values
                 [input.name]} onChange={onChange} />
             ))}
-             <button>Submit</button>
+             <button onClick={()=> navigate('/')}>Login</button>
             <p>Not a user?<a href="/register">Register</a></p>
         </forms>
     </div>

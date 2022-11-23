@@ -9,8 +9,9 @@
   margin-left: 0px;
   width: 100%;
   height: 94vh;
-  background: rgb(244, 250, 253);
-  /* background-color: #484291; */
+  /* background: rgb(244, 250, 253); */
+  background-color: #ffffff;
+ 
 }
 
 .react-tabs__tab-list {
@@ -107,9 +108,11 @@ h1{
 }
 
 .alert {
-  padding: 1rem;
+  padding: 2rem;
   border: 0.1rem solid transparent;
   border-radius: 0.5rem;
+  top: 15px;
+  position: relative;
 }
 
 .alert-info {
@@ -176,13 +179,14 @@ form{
   background-color: white;
   padding: 0px 60px;
   border-radius: 10px;
-  height: 95%;
+  height: 78%;
 }
 
 h1{
   color:rgb(77,1,77);
   text-align: center;
   font-weight: bold;
+  margin-top: 30px;
 }
 
 button{

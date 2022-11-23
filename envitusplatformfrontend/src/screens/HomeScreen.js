@@ -4,6 +4,8 @@ import Dashboard from '../components/Dashboard';
 import DeviceList from '../components/DeviceList';
 import Table from '../components/Table';
 import Users from '../components/Users';
+import AddSensorScreen from './AddSensorScreen';
+import LivedataScreen from './LivedataScreen';
 import OrganisationScreen from './OrganisationScreen';
 
 function HomeScreen() {
@@ -27,6 +29,9 @@ function HomeScreen() {
             <p>Organization</p>
           </Tab>
           <Tab>
+            <p>Sensor</p>
+          </Tab>
+          <Tab>
             <p>API Key</p>
           </Tab>
         </TabList>
@@ -44,7 +49,7 @@ function HomeScreen() {
         </TabPanel>
         <TabPanel>
           <div className="panel-content">
-            <h1>3</h1>
+            <LivedataScreen />
           </div>
         </TabPanel>
         <TabPanel>
@@ -56,6 +61,12 @@ function HomeScreen() {
           <div className="panel-content">
             {/* <h1>Organization</h1> */}
             <OrganisationScreen />
+          </div>
+        </TabPanel>
+        <TabPanel>
+          <div className="panel-content">
+            {/* <h1>SENSOR</h1> */}
+            <AddSensorScreen />
           </div>
         </TabPanel>
         <TabPanel>
