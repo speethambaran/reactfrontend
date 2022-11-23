@@ -1,6 +1,7 @@
 {
   "name": "envitusplatformfrontend",
   "proxy": "http://192.46.210.81:7002",
+  "allowedHosts": "all",
   "version": "0.1.0",
   "private": true,
   "dependencies": {
@@ -34,12 +35,6 @@
     "test": "react-scripts test",
     "eject": "react-scripts eject"
   },
-  "eslintConfig": {
-    "extends": [
-      "react-app",
-      "react-app/jest"
-    ]
-  },
   "browserslist": {
     "production": [
       ">0.2%",
@@ -51,5 +46,9 @@
       "last 1 firefox version",
       "last 1 safari version"
     ]
+  },
+  "devDependencies": {
+    "ajv": "^7.2.4",
+    "eslint-config-react-app": "^7.0.1"
   }
 }
