@@ -1,4 +1,5 @@
 import Axios from "axios";
+import { BASE_URL } from "../constants/AppliationConstants";
 import {
   ORGANIZATION_LIST_FAIL,
   ORGANIZATION_LIST_REQUEST,
@@ -10,7 +11,7 @@ export const listOrganization = () => async (dispatch) => {
     type: ORGANIZATION_LIST_REQUEST,
   });
   try {
-    const data = await Axios.get(`/getorganization/`);
+    const data = await Axios.get(`${BASE_URL}/getorganization/`);
     dispatch({ type: ORGANIZATION_LIST_SUCCESS, payload: data.data.message });
   } catch (error) {
     dispatch({ type: ORGANIZATION_LIST_FAIL, payload: error.message });

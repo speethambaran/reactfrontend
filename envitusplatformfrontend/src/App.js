@@ -1,28 +1,40 @@
-import React from 'react'
-import { BrowserRouter, Route, Routes } from 'react-router-dom'
-import Header from './components/Header';
+import React, { useEffect, useState } from "react";
+import { BrowserRouter, Route, Routes } from "react-router-dom";
+import Header from "./components/Header";
 // import Dashboard from './components/Dashboard';
-import HomeScreen from './screens/HomeScreen';
-import LoginScreen from './screens/LoginScreen';
-import RegisterScreen from './screens/RegisterScreen';
+import HomeScreen from "./screens/HomeScreen";
+import LoginScreen from "./screens/LoginScreen";
+import RegisterScreen from "./screens/RegisterScreen";
+import { useNavigate } from "react-router-dom";
 
 function App() {
+  const [isLoggedIn, setIsLoggedIn] = useState(false);
+  const navigate = useNavigate();
+  useEffect(() => {
+    let logginStatus = JSON.parse(localStorage.getItem("loginStatus"));
+    console.log("LOGIN STATUS : ", logginStatus);
+    if (logginStatus && logginStatus.loggedIn == true) {
+      navigate("/");
+      console.log("logged");
+    } else {
+      navigate("/login");
+    }
+  }, []);
   return (
-    <BrowserRouter>
-    <header>
-      <Header />
-    </header>
+    <div>
+      <header>
+        <Header />
+      </header>
       <main>
         <Routes>
-          <Route path="/" element={<HomeScreen />} />
-          <Route path='/login' element={<LoginScreen/>} />
-          <Route path='/register' element={<RegisterScreen />} />
+          <Route path="/" exact={true} element={<HomeScreen />} />
+          <Route path="/login" element={<LoginScreen />} />
+          <Route path="/register" element={<RegisterScreen />} />
           {/* <Route path="users/*" element={<Users />} /> */}
         </Routes>
       </main>
-    </BrowserRouter>
+    </div>
   );
 }
 
-export default App
-
+export default App;
