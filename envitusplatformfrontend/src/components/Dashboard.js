@@ -4,6 +4,8 @@ import { Chart as ChartJS, ArcElement, Tooltip, Legend } from "chart.js";
 import { Doughnut } from "react-chartjs-2";
 import { data } from '../data';
 import GoogleMapReact from "google-map-react";
+import Chart from './Chart'
+
 const AnyReactComponent = ({ text }) => <div>{text}</div>;
 function Dashboard() {
   const defaultProps = {
@@ -107,7 +109,7 @@ function Dashboard() {
           </div>
           <div className="col-md-6">
             {/* <Doughnut data = {data} /> */}
-            {/* <BarGraph /> */}
+            <Chart />
           </div>
         </div>
       </div>
