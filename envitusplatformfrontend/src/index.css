@@ -318,3 +318,22 @@ td{
   font-size: 14px;
   font-family: sans-serif;
 }
+.forms{
+  background-color: white;
+  padding: 0px 60px;
+  border-radius: 10px;
+  height: 50%;
+}
+.chart {
+  box-sizing: border-box;
+  display: flex;
+  height: 500px;
+  width: 750px;
+  border: 1px solid white;
+  background-color:white;
+  margin-top: 0em;
+  margin-left: 2em;
+  padding: 0px 60px;
+  border-radius: 10px;
+  
+}

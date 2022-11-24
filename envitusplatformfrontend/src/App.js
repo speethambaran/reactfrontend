@@ -6,6 +6,7 @@ import HomeScreen from "./screens/HomeScreen";
 import LoginScreen from "./screens/LoginScreen";
 import RegisterScreen from "./screens/RegisterScreen";
 import { useNavigate } from "react-router-dom";
+import Chart from "./components/Chart";
 
 function App() {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
@@ -30,6 +31,7 @@ function App() {
           <Route path="/" exact={true} element={<HomeScreen />} />
           <Route path="/login" element={<LoginScreen />} />
           <Route path="/register" element={<RegisterScreen />} />
+          <Route path="/chart" element={<Chart />} />
           {/* <Route path="users/*" element={<Users />} /> */}
         </Routes>
       </main>
