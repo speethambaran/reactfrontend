@@ -1,78 +1,87 @@
-import { useState } from "react";
-import FormInput from "../screens/FormInput"
-import axios from 'axios'
-import {useNavigate} from "react-router-dom";
+import axios from "axios";
+import React, { useState } from "react";
+import { BASE_URL } from "../constants/AppliationConstants";
+import { useNavigate } from "react-router-dom";
 
-const Register = () => {
-    const [Values, setValues] = useState({
-        
-        username: "",
-        password: "",
-       
+function LoginScreen(props) {
+  const [username, setUsername] = useState("");
+  const [password, setPassword] = useState("");
 
-    });
+  const navigate = useNavigate();
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    // console.log("submit called", { username, password });
+    await axios
+      .post(`${BASE_URL}/login/`, { username, password })
+      .then((response) => {
+        if (response.data.errorCode == 0) {
+          localStorage.setItem(
+            "loginStatus",
+            JSON.stringify({ loggedIn: true })
+          );
+          navigate("/dashboard");
+        } else {
+          alert("Invalid username or password");
+        }
+      });
+  };
 
-    const handleSubmit =  async (e) => {
-        e.preventDefault()
-        await axios.post('http://192.46.210.81:7002/login/', { Values }).then((result) => {
-            console.log(result)
-        })
-    };
-    const navigate=useNavigate()
-const onChange = (e) => {
-    setValues({ ...Values, [e.target.name]: e.target.value });
-};
-
-
-const inputs = [
-   
-    {
-        id: 1,
-        name: "username",
-        label: "Your username",
-        errorMessage: "Should be 3-16 characters and shouldn't include any special character",
-        placeholder: "Your username",
-        type: "text",
-        pattern: "^[A-Za-z0-9]{3,16}$",
-        required: true,
-
-
-
-    },
-    {
-        id: 2,
-        name: "password",
-        label: "Your password",
-        errorMessage: "should be 8-20 characters and include atleast 1 letter,1 number and 1 specialcharacter",
-        placeholder: "Your password",
-        type: "password",
-        // pattern:'^(((?=.*[a-z])(?=.*[A-Z]))|((?=.*[a-z])(?=.*[0-9]))|((?=.*[A-Z])(?=.*[0-9])))(?=.{6,})',
-        required: true,
-
-
-
-    },
-   
-]
-
-
-return (
-
-    <div className="app">
-
-        <forms onSubmit={handleSubmit}>
-            <h1>Login</h1>
-            {inputs.map((input) => (
-                <FormInput key={input.id} {...input} value={Values
-                [input.name]} onChange={onChange} />
-            ))}
-             <button onClick={()=> navigate('/')}>Login</button>
-            <p>Not a user?<a href="/register">Register</a></p>
-        </forms>
+  return (
+    <div>
+      <div className="header">
+        <nav className="navbar navbar-light">
+          <a className="navbar-brand" style={{ color: "green" }} href="/">
+            <img
+              src="http://159.89.163.128:7001/img/logo.png"
+              className="header-logo w-100"
+            />
+            {/* Envitus */}
+          </a>
+        </nav>
+      </div>
+      <div className="container-fluid authentication-screen">
+        <div className="row">
+          <div className="col-md-3"></div>
+          <div className="col-md-4"></div>
+          <div className="col-md-4">
+            <div className="container-fluid p-4">
+              <form onSubmit={handleSubmit}>
+                <div className="formBx p-4">
+                  <h2 className="title text-center">Login Here</h2>
+                  <p>Username</p>
+                  <input
+                    type="text"
+                    className="form-control"
+                    placeholder="Enter username"
+                    onChange={(e) => setUsername(e.target.value)}
+                  />
+                  <p>Password</p>
+                  <input
+                    type="password"
+                    className="form-control"
+                    placeholder="Enter password"
+                    onChange={(e) => setPassword(e.target.value)}
+                  />
+                  <div className="mt-1">
+                    <button type="submit" className="submitBtn">
+                      Login
+                    </button>
+                  </div>
+                  <a
+                    style={{ textDecoration: "none", fontSize: "14px" }}
+                    href="/register"
+                  >
+                    Create new Account ?
+                  </a>
+                </div>
+              </form>
+            </div>
+          </div>
+          <div className="col-md-1"></div>
+        </div>
+      </div>
     </div>
-);
+  );
+}
 
-
-};
-
-export default Register;
+export default LoginScreen;

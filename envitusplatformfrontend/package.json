@@ -1,6 +1,9 @@
 {
   "name": "envitusplatformfrontend",
+<<<<<<< HEAD
   "proxy": "http://192.46.210.81:7002",
+=======
+>>>>>>> 6d3322cb5e01d9b13b21ede72ec2c6296b9eafc0
   "allowedHosts": "all",
   "version": "0.1.0",
   "private": true,

@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 import React from 'react'
 import { BrowserRouter, Route, Routes } from 'react-router-dom'
 // import Header from './components/Header';
@@ -36,10 +37,49 @@ function App() {
       </ThemeProvider>
     </ColorModeContext.Provider>
     </BrowserRouter>
+=======
+import React, { useEffect, useState } from "react";
+import { BrowserRouter, Route, Routes } from "react-router-dom";
+import Header from "./components/Header";
+// import Dashboard from './components/Dashboard';
+import HomeScreen from "./screens/HomeScreen";
+import LoginScreen from "./screens/LoginScreen";
+import RegisterScreen from "./screens/RegisterScreen";
+import { useNavigate } from "react-router-dom";
+import Chart from "./components/Chart";
+
+function App() {
+  const [isLoggedIn, setIsLoggedIn] = useState(false);
+  const navigate = useNavigate();
+  useEffect(() => {
+    let logginStatus = JSON.parse(localStorage.getItem("loginStatus"));
+    console.log("LOGIN STATUS : ", logginStatus);
+    if (logginStatus && logginStatus.loggedIn == true) {
+      navigate("/dashboard");
+      console.log("logged");
+    }
+  }, []);
+  return (
+    <div>
+      {/* <header>
+        <Header />
+      </header> */}
+      <main>
+        <Routes>
+          <Route path="/dashboard" element={<HomeScreen />} />
+          <Route path="/" exact={true} element={<LoginScreen />} />
+          <Route path="/register" element={<RegisterScreen />} />
+          <Route path="/chart" element={<Chart />} />
+          {/* <Route path="users/*" element={<Users />} /> */}
+        </Routes>
+      </main>
+    </div>
+>>>>>>> 6d3322cb5e01d9b13b21ede72ec2c6296b9eafc0
   );
 }
 
 export default App;
+<<<<<<< HEAD
 
 
 // function App() {
@@ -64,3 +104,5 @@ export default App;
 
 // export default App
 
+=======
+>>>>>>> 6d3322cb5e01d9b13b21ede72ec2c6296b9eafc0

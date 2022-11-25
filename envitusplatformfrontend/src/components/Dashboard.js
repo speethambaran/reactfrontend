@@ -1,10 +1,10 @@
-import React from 'react'
-import Map from './Map';
+import React from "react";
+import Map from "./Map";
 import { Chart as ChartJS, ArcElement, Tooltip, Legend } from "chart.js";
 import { Doughnut } from "react-chartjs-2";
-import { data } from '../data';
+import { data } from "../data";
 import GoogleMapReact from "google-map-react";
-import Chart from './Chart'
+import Chart from "./Chart";
 
 const AnyReactComponent = ({ text }) => <div>{text}</div>;
 function Dashboard() {
@@ -103,13 +103,14 @@ function Dashboard() {
               />
             </GoogleMapReact> */}
 
-            
             <Map />
             {/* <GoogleMap /> */}
           </div>
           <div className="col-md-6">
             {/* <Doughnut data = {data} /> */}
-            <Chart />
+            <div style={{ left: "-80px", position: "relative" }}>
+              <Chart />
+            </div>
           </div>
         </div>
       </div>
@@ -117,4 +118,4 @@ function Dashboard() {
   );
 }
 
-export default Dashboard
+export default Dashboard;
