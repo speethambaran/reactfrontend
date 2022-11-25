@@ -15,21 +15,19 @@ function App() {
     let logginStatus = JSON.parse(localStorage.getItem("loginStatus"));
     console.log("LOGIN STATUS : ", logginStatus);
     if (logginStatus && logginStatus.loggedIn == true) {
-      navigate("/");
+      navigate("/dashboard");
       console.log("logged");
-    } else {
-      navigate("/login");
     }
   }, []);
   return (
     <div>
-      <header>
+      {/* <header>
         <Header />
-      </header>
+      </header> */}
       <main>
         <Routes>
-          <Route path="/" exact={true} element={<HomeScreen />} />
-          <Route path="/login" element={<LoginScreen />} />
+          <Route path="/dashboard" element={<HomeScreen />} />
+          <Route path="/" exact={true} element={<LoginScreen />} />
           <Route path="/register" element={<RegisterScreen />} />
           <Route path="/chart" element={<Chart />} />
           {/* <Route path="users/*" element={<Users />} /> */}

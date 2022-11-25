@@ -19,7 +19,7 @@ function LoginScreen(props) {
             "loginStatus",
             JSON.stringify({ loggedIn: true })
           );
-          navigate("/");
+          navigate("/dashboard");
         } else {
           alert("Invalid username or password");
         }
@@ -27,45 +27,58 @@ function LoginScreen(props) {
   };
 
   return (
-    <div className="container-fluid authentication-screen">
-      <div className="row">
-        <div className="col-md-3"></div>
-        <div className="col-md-4"></div>
-        <div className="col-md-4">
-          <div className="container-fluid p-4">
-            <form onSubmit={handleSubmit}>
-              <div className="formBx p-4">
-                <h2 className="title text-center">Login Here</h2>
-                <p>Username</p>
-                <input
-                  type="text"
-                  className="form-control"
-                  placeholder="Enter username"
-                  onChange={(e) => setUsername(e.target.value)}
-                />
-                <p>Password</p>
-                <input
-                  type="password"
-                  className="form-control"
-                  placeholder="Enter username"
-                  onChange={(e) => setPassword(e.target.value)}
-                />
-                <div className="mt-1">
-                  <button type="submit" className="submitBtn">
-                    Login
-                  </button>
+    <div>
+      <div className="header">
+        <nav className="navbar navbar-light">
+          <a className="navbar-brand" style={{ color: "green" }} href="/">
+            <img
+              src="http://159.89.163.128:7001/img/logo.png"
+              className="header-logo w-100"
+            />
+            {/* Envitus */}
+          </a>
+        </nav>
+      </div>
+      <div className="container-fluid authentication-screen">
+        <div className="row">
+          <div className="col-md-3"></div>
+          <div className="col-md-4"></div>
+          <div className="col-md-4">
+            <div className="container-fluid p-4">
+              <form onSubmit={handleSubmit}>
+                <div className="formBx p-4">
+                  <h2 className="title text-center">Login Here</h2>
+                  <p>Username</p>
+                  <input
+                    type="text"
+                    className="form-control"
+                    placeholder="Enter username"
+                    onChange={(e) => setUsername(e.target.value)}
+                  />
+                  <p>Password</p>
+                  <input
+                    type="password"
+                    className="form-control"
+                    placeholder="Enter password"
+                    onChange={(e) => setPassword(e.target.value)}
+                  />
+                  <div className="mt-1">
+                    <button type="submit" className="submitBtn">
+                      Login
+                    </button>
+                  </div>
+                  <a
+                    style={{ textDecoration: "none", fontSize: "14px" }}
+                    href="/register"
+                  >
+                    Create new Account ?
+                  </a>
                 </div>
-                <a
-                  style={{ textDecoration: "none", fontSize: "14px" }}
-                  href="/register"
-                >
-                  Create new Account ?
-                </a>
-              </div>
-            </form>
+              </form>
+            </div>
           </div>
+          <div className="col-md-1"></div>
         </div>
-        <div className="col-md-1"></div>
       </div>
     </div>
   );

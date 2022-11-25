@@ -5,6 +5,7 @@ import { listUsers } from "../actions/userActions";
 import LoadingBox from "../components/LoadingBox";
 import MessageBox from "../components/MessageBox";
 import axios from "axios";
+import { BASE_URL } from "../constants/AppliationConstants";
 
 function OrganisationScreen() {
   const dispatch = useDispatch();
@@ -22,6 +23,15 @@ function OrganisationScreen() {
         window.location.reload();
       } else {
         alert("Error");
+      }
+    });
+  };
+
+  const deleteOrganization = async (name) => {
+    await axios.post(`${BASE_URL}/deleteorganization`).then((response) => {
+      if (response.data.errorCode == 0) {
+        alert("Organization deleted");
+        window.location.reload();
       }
     });
   };
@@ -47,10 +57,40 @@ function OrganisationScreen() {
               style={{ float: "right" }}
             ></i>
             <div className="row">
+              {console.log(organizations)}
               {organizations &&
                 organizations.map((org) => (
                   <div className="col-md-4">
                     <div className="cardBx">
+                      <div style={{ float: "right" }}>
+                        {/* <i className="fa fa-ellipsis-v m-2"></i> */}
+
+                        <div class="dropdown dropleft">
+                          <i
+                            class="fa fa-ellipsis-v m-2"
+                            type="button"
+                            id="dropdownMenu2"
+                            data-toggle="dropdown"
+                            aria-haspopup="true"
+                            aria-expanded="false"
+                          ></i>
+                          <div
+                            class="dropdown-menu"
+                            aria-labelledby="dropdownMenu2"
+                          >
+                            <button class="dropdown-item" type="button">
+                              Edit
+                            </button>
+                            <button
+                              class="dropdown-item"
+                              type="button"
+                              onClick={(e) => deleteOrganization(org.name)}
+                            >
+                              Delete
+                            </button>
+                          </div>
+                        </div>
+                      </div>
                       <div className="text-center mt-5">
                         <img
                           src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRM_pp19lwbku3OLDvTF3qHLT0mhVKgCYD8jQ&usqp=CAU"

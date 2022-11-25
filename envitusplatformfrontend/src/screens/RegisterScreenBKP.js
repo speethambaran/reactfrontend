@@ -114,7 +114,7 @@ const Register = (props) => {
                   Submit
                 </button>
                 <p className="mt-2">
-                  Already Registered?<a href="/login">Login</a>
+                  Already Registered?<a href="/">Login</a>
                 </p>
               </form>
             </div>
