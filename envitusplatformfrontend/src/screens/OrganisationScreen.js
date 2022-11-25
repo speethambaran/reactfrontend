@@ -1,19 +1,34 @@
-import React, { useEffect } from 'react'
-import { useDispatch, useSelector } from 'react-redux';
-import { listOrganization } from '../actions/organizationActions';
-import { listUsers } from '../actions/userActions';
-import LoadingBox from '../components/LoadingBox'
-import MessageBox from '../components/MessageBox'
+import React, { useEffect } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { listOrganization } from "../actions/organizationActions";
+import { listUsers } from "../actions/userActions";
+import LoadingBox from "../components/LoadingBox";
+import MessageBox from "../components/MessageBox";
+import axios from "axios";
+
 function OrganisationScreen() {
   const dispatch = useDispatch();
   const userList = useSelector((state) => state.userList);
   const organizationList = useSelector((state) => state.organizationList);
   const { loading, error, users } = userList;
-  const {  errormessage, organizations } = organizationList;
-  console.log('Error : ', error)
+  const { errormessage, organizations } = organizationList;
+  console.log("Error : ", error);
+
+  const addOrganisation = async (e) => {
+    e.preventDefault();
+    await axios.post(`/addorganization/`).then((response) => {
+      if (response.data.errorCode === 0) {
+        alert("Organisation successfully added");
+        window.location.reload();
+      } else {
+        alert("Error");
+      }
+    });
+  };
+
   useEffect(() => {
     dispatch(listUsers());
-    dispatch(listOrganization())
+    dispatch(listOrganization());
   }, [dispatch]);
   return (
     <div className="orgScreen">
@@ -79,7 +94,7 @@ function OrganisationScreen() {
                 </div>
                 <div className="modal-body">
                   <div>
-                    <form>
+                    <form onSubmit={addOrganisation}>
                       <div className="row">
                         <div className="col-md-6 mt-2">
                           <p>Name</p>
@@ -113,8 +128,8 @@ function OrganisationScreen() {
                         <div className="col-md-6 mt-2">
                           <p>Devices</p>
                           <select className="form-control">
-                            <option>aswins</option>
-                            <option>aswins</option>
+                            <option></option>
+                            <option></option>
                           </select>
                         </div>
 
@@ -126,20 +141,20 @@ function OrganisationScreen() {
                           </select>
                         </div>
                       </div>
+                      <div className="modal-footer">
+                        <button
+                          type="button"
+                          className="btn btn-secondary"
+                          data-dismiss="modal"
+                        >
+                          Close
+                        </button>
+                        <button type="submit" className="btn btn-success">
+                          Save
+                        </button>
+                      </div>
                     </form>
                   </div>
-                </div>
-                <div className="modal-footer">
-                  <button
-                    type="button"
-                    className="btn btn-secondary"
-                    data-dismiss="modal"
-                  >
-                    Close
-                  </button>
-                  <button type="button" className="btn btn-success">
-                    Save
-                  </button>
                 </div>
               </div>
             </div>
@@ -150,4 +165,4 @@ function OrganisationScreen() {
   );
 }
 
-export default OrganisationScreen
+export default OrganisationScreen;
