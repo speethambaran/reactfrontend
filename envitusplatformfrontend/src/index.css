@@ -10,7 +10,6 @@ body,
   /* margin: 0; */
   font-family: 'Source Sans Pro',sans-serif;
 }
-<<<<<<< HEAD
 
 .app {
   display: flex;
@@ -48,11 +47,6 @@ body,
 
 
 
-=======
-a{
-  text-decoration: none;
-}
->>>>>>> 6d3322cb5e01d9b13b21ede72ec2c6296b9eafc0
 .react-tabs {
   display: flex;
   margin-left: 0px;
@@ -151,9 +145,9 @@ h1{
   font-weight: 600;
   color: #111;
 }
-.home-screen{
+/* .home-screen{
   background-color: red;
-}
+} */
 .danger {
   color: #a02020;
 }
@@ -188,9 +182,9 @@ h1{
   box-shadow: 0 4px 8px 0 rgb(255, 251, 1), 0 6px 20px 0 rgba(255, 251, 0, 0.925);
   transition: all 0.5s;
 }
-.home-screen{
+/* .home-screen{
   background-color: #484291;
-}
+} */
 .empty{
   align-items: center;
   display: flex;
