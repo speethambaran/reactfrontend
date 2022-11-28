@@ -20,6 +20,8 @@ function App() {
     if (logginStatus && logginStatus.loggedIn == true) {
       navigate("/dashboard");
       console.log("logged");
+    }else {
+      navigate('/')
     }
   }, []);
   return (
@@ -32,7 +34,7 @@ function App() {
           <Routes>
            
            <Route path="/dashboard" element={<HomeScreen />} />
-          <Route path='/login' element={<LoginScreen/>} />
+          <Route path='/' exact={true} element={<LoginScreen/>} />
           <Route path='/register' element={<RegisterScreen />} />
           <Route path='/chart' element={<Chart />} />
 

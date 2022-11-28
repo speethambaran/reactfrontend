@@ -1,10 +1,12 @@
 import React from "react";
 import Map from "./Map";
 import { Chart as ChartJS, ArcElement, Tooltip, Legend } from "chart.js";
-import { Doughnut } from "react-chartjs-2";
+// import { Doughnut } from "react-chartjs-2";
 import { data } from "../data";
 import GoogleMapReact from "google-map-react";
 import Chart from "./Chart";
+// import Doughnut from './DoughnutChart'
+import DoughnutChart from "./DoughnutChart";
 
 const AnyReactComponent = ({ text }) => <div>{text}</div>;
 function Dashboard() {
@@ -22,12 +24,7 @@ function Dashboard() {
         <div className="col-md-3">
           <div
             className="cardBx p-4"
-            style={{
-              color: "#ffff",
-              backgroundColor: "#74ffa0",
-              boxShadow:
-                "0 4px 8px 0 rgba(41, 248, 220, 0.2), 0 6px 20px 0 rgba(26, 243, 142, 0.19)",
-            }}
+            style={{ color: "#ffff", backgroundColor: "rgb(78 209 120)" }}
           >
             <h2 className="text-center">Device</h2>
             <div className="row">

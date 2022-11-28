@@ -203,7 +203,7 @@ export const themeSettings =(mode)=>{
             h6:{
                 fontFamily: ["Source Sans Pro","sans-serif"].join(","),
                 fontSize:14,
-            }
+            },
         
         }
     }

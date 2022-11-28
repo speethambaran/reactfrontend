@@ -55,8 +55,8 @@ function Chart() {
   }, []);
  
   return (
-    <div className="chart">
-      <Bar options={chartOptions} data={chartData} />
+    <div className="chart" >
+      <Bar style={{backgroundColor:"rgb(16 18 36)",top:"80px",position:"relative"}} options={chartOptions} data={chartData} />
     </div>
   );
 }

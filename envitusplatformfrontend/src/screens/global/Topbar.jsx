@@ -9,15 +9,22 @@ import NotificationsOutlinedIcon from "@mui/icons-material/NotificationsOutlined
 import SettingsOutlinedIcon from "@mui/icons-material/SettingsOutlined"
 import PersonOutlinedIcon from "@mui/icons-material/PersonOutlined"
 import SearchIcon from "@mui/icons-material/Search"
+import { useNavigate } from 'react-router-dom'
 const Topbar = () => {
     const theme = useTheme();
     // const color = tokens(theme.palette.mode);
     const colorMode = useContext(ColorModeContext);
+    const navigate = useNavigate();
+
+    const logoutHandler = ()=>{
+        localStorage.removeItem("loginStatus")
+        navigate('/')
+    }
 
     return (
-        <Box display="flex" justifyContent="space-between" p={2}>
+        <Box display="flex" justifyContent="space-between" p={2} className="header-icon">
             {/* search bar */}
-            <Box display="flex"><IconButton><img  alt="profile-user"
+            <Box display="flex" ><IconButton style={{ backgroundColor: 'transparent' }}><img  alt="profile-user"
                     src="http://159.89.163.128:7001/img/logo.png" className="header-logo"
                 /></IconButton></Box>
             {/* <Box
@@ -30,27 +37,28 @@ const Topbar = () => {
 
             {/* icons */}
             <Box display="flex" color="white">
-            <InputBase sx={{ ml: 2, flex: 1 }} placeholder="Search" />
-                <IconButton type="button" sx={{ p: 1 }} >
-                    <SearchIcon />
+            <InputBase sx={{ ml: 2, flex: 1 }} placeholder="Search" style={{height:"40px",top:"10px",position:"relative"}} />
+                <IconButton type="button" sx={{ p: 1 }} style={{ backgroundColor: 'transparent' }}>
+                    <SearchIcon style={{ backgroundColor: 'transparent' }}/>
                 </IconButton>
 
-                <IconButton onClick={colorMode.toggleColorMode} >
+                <IconButton onClick={colorMode.toggleColorMode} style={{ backgroundColor: 'transparent' }}>
                     {theme.palette.mode === 'dark' ? (
-                        < DarkModeOutlinedIcon />
+                        < DarkModeOutlinedIcon style={{ backgroundColor: 'transparent' }}/>
                     ) : (
-                        < LightModeOutlinedIcon />
+                        < LightModeOutlinedIcon style={{ backgroundColor: 'transparent' }}/>
                     )}
                 </IconButton>
-                <IconButton>
-                    <NotificationsOutlinedIcon />
+                <IconButton style={{ backgroundColor: 'transparent' }}>
+                    <NotificationsOutlinedIcon style={{ backgroundColor: 'transparent' }}/>
+                    <span class="badge badge-danger" >1</span>
                 </IconButton>
                 {/* <IconButton>
                     <SettingsOutlinedIcon />
                 </IconButton> */}
-                <IconButton >
+                <IconButton style={{ backgroundColor: 'transparent' }}>
                     
-                    <Box className="dropdown " style={{Left:"-10px",right:"5px",position:"relative"}}>
+                    <Box className="dropdown " style={{Left:"-10px",right:"5px",position:"relative",backgroundColor: 'transparent'}} >
             <i
               className="dropdown-toggle"
               type="button"
@@ -58,11 +66,13 @@ const Topbar = () => {
               data-toggle="dropdown"
               aria-haspopup="true"
               aria-expanded="false"
+              
+
             >
-             <PersonOutlinedIcon  />account
+             <PersonOutlinedIcon  style={{ backgroundColor: 'transparent' }}/>account
             </i>
             <Box className="dropdown-menu" aria-labelledby="dropdownMenuButton">
-              <a className="dropdown-item" href="#">
+              <a className="dropdown-item" href="#" onClick={logoutHandler}>
                 Logout
               </a>
               <a className="dropdown-item" href="#">

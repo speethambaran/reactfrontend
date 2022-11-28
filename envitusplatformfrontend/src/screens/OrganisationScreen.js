@@ -6,6 +6,7 @@ import LoadingBox from "../components/LoadingBox";
 import MessageBox from "../components/MessageBox";
 import axios from "axios";
 import { BASE_URL } from "../constants/AppliationConstants";
+import Organization from "../components/Organization";
 
 function OrganisationScreen() {
   const dispatch = useDispatch();
@@ -48,7 +49,7 @@ function OrganisationScreen() {
         <MessageBox variant="danger">Oops something went wrong</MessageBox>
       ) : (
         <div>
-          <div className="container-fluid mt-2">
+          <div className="container-fluid mt-5">
             <h2>Organization List</h2>
             <i
               className="ml-auto fa fa-plus-circle"
@@ -60,45 +61,8 @@ function OrganisationScreen() {
               {console.log(organizations)}
               {organizations &&
                 organizations.map((org) => (
-                  <div className="col-md-4">
-                    <div className="cardBx">
-                      <div style={{ float: "right" }}>
-                        {/* <i className="fa fa-ellipsis-v m-2"></i> */}
-
-                        <div class="dropdown dropleft">
-                          <i
-                            class="fa fa-ellipsis-v m-2"
-                            type="button"
-                            id="dropdownMenu2"
-                            data-toggle="dropdown"
-                            aria-haspopup="true"
-                            aria-expanded="false"
-                          ></i>
-                          <div
-                            class="dropdown-menu"
-                            aria-labelledby="dropdownMenu2"
-                          >
-                            <button class="dropdown-item" type="button">
-                              Edit
-                            </button>
-                            <button
-                              class="dropdown-item"
-                              type="button"
-                              onClick={(e) => deleteOrganization(org.name)}
-                            >
-                              Delete
-                            </button>
-                          </div>
-                        </div>
-                      </div>
-                      <div className="text-center mt-5">
-                        <img
-                          src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRM_pp19lwbku3OLDvTF3qHLT0mhVKgCYD8jQ&usqp=CAU"
-                          className="w-25 mt-4"
-                        />
-                      </div>
-                      <h4 className="org-name text-center">{org.name}</h4>
-                    </div>
+                  <div className="col-md-4 mt-4">
+                    <Organization org = {org} />
                   </div>
                 ))}
             </div>
