@@ -1,9 +1,27 @@
 import React, { useState } from 'react'
 
 function Organization({ org }) {
+    console.log('org : ',org.id)
     const [name,setName] = useState('')
+    const [description,setDescription] = useState('')
+    const [isDefault,setDefault] = useState(false)
+    const [user,setUser] = useState(org.users)
+    const [device,setDevice] = useState(org.devices)
+    const [id,setId] = useState(0)
     const deleteOrganization = async (e) => {
         e.preventDefault()
+    }
+    const editOrganization = async(e)=>{
+        e.preventDefault()
+        let dataForUpdate = {
+            id,
+            name,
+            description,
+            default: isDefault,
+            user,
+            device
+        }
+        console.log('Data for update : ',dataForUpdate)
     }
     return (
         <div>
@@ -24,7 +42,7 @@ function Organization({ org }) {
                             class="dropdown-menu"
                             aria-labelledby="dropdownMenu2"
                         >
-                            <button class="dropdown-item" type="button" data-toggle="modal" data-target="#exampleModalCenter">
+                            <button class="dropdown-item" onClick={(e)=>setId(org.id)} type="button" data-toggle="modal" data-target="#exampleModalCenter">
                                 Edit
                             </button>
                             <button
@@ -57,15 +75,34 @@ function Organization({ org }) {
                             </button>
                         </div>
                         <div class="modal-body">
-                            <form>
+                            <form onSubmit={editOrganization}>
                                 <p>Name</p>
-                                <input type='text' className='form-control'/>
+                                <input type='text' className='form-control' onChange={(e)=>setName(e.target.value)}/>
+                                <p>Description</p>
+                                <input type='text' className='form-control' onChange={(e)=>setDescription(e.target.value)}/>
+                                <p>Default</p>
+                                <select onChange={(e)=>setDefault(e.target.value)}>
+                                    <option value='yes'>Yes</option>
+                                    <option value='no'>No</option>
+                                </select>
+                                <p>Users</p>
+                                <select onChange={(e)=>setUser(e.target.value)}>
+                                    <option>dsds</option>
+                                    <option>gfgfg</option>
+                                </select>
+                                <p>Devices</p>
+                                <select onChange={(e)=>setDevice(e.target.value)}>
+                                    <option value='dsds'>dsds</option>
+                                    <option value='gfgfg'>gfgfg</option>
+                                </select>
+                                
+                                <button class="btn btn-primary" type='submit'>Save changes</button>
                             </form>
                         </div>
-                        <div class="modal-footer">
+                        {/* <div class="modal-footer">
                             <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                            <button type="button" class="btn btn-primary">Save changes</button>
-                        </div>
+                            
+                        </div> */}
                     </div>
                 </div>
             </div>

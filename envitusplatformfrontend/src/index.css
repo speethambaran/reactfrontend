@@ -124,7 +124,7 @@ header{
 }
 .cardBx{
   box-shadow: 0 4px 8px 0 rgba(41, 248, 220, 0.2), 0 6px 20px 0 rgba(26, 243, 142, 0.19);
-  height: 214px;
+  height: 254px;
   background-color: white;
   border-radius: 5px;
   border-top: 2px solid rgb(255, 0, 170);
@@ -451,4 +451,7 @@ div.modal-body p{
 th{
   font-size: 18px;
   font-family: sans-serif;
+}
+.fa-ellipsis-v{
+  color: #003153;
 }
