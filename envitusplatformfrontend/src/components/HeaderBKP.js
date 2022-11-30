@@ -12,7 +12,7 @@ function Header() {
   };
   useEffect(() => {
     let logginStatus = JSON.parse(localStorage.getItem("loginStatus"));
-    let userInfo = jSON.parse(localStorage.getItem("userData"));
+    let userInfo = JSON.parse(localStorage.getItem("userData"));
     if (logginStatus) {
       setUserInfo(true);
       setUsername(userInfo.username)

@@ -455,25 +455,3 @@ th{
 .fa-ellipsis-v{
   color: #003153;
 }
-.live{
-  color: lime;
-  background-color: lime;
-}
-.not-live{
-  color: grey;
-  background-color: grey;
-}
-
-.MuiTabs-flexContainer button{
-  background-color: rgb(96, 118, 216);
-  margin-left: 10px;
-}
-button.Mui-selected{
-  background-color: rgb(32, 73, 126);
-  border-bottom: 2px solid cyan;
-  color: white;
-}
-.pro-item-content p{
-  top: 3px;
-  position: relative;
-}

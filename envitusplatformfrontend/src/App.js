@@ -5,21 +5,30 @@ import { BrowserRouter, Route, Routes, useNavigate } from 'react-router-dom'
 import HomeScreen from './screens/HomeScreen';
 import LoginScreen from './screens/LoginScreen';
 import RegisterScreen from './screens/RegisterScreen';
-import Chart from './components/Chart';
 import { ColorModeContext, useMode } from "./theme";
 import { CssBaseline, ThemeProvider } from "@mui/material";
 import Topbar from "./screens/global/Topbar";
+import Dashboard from "./screens/Dashboard/index";
+import Sidebar from "./screens/global/Sidebar";
+import Bar from "./screens/bar";
+import Line from "./screens/line"
+import AddressMap from "./components/Map"
+import Table from './components/Table';
+import Users from './components/Users';
+import OrganisationScreen from './screens/OrganisationScreen';
+import AddSensorScreen from './screens/AddSensorScreen';
 
 function App() {
   const [theme, colorMode] = useMode();
   const [isLoggedIn, setIsLoggedIn] = useState(false);
+  const [userRole, setUserRole] = useState('')
   const navigate = useNavigate();
   useEffect(() => {
     let logginStatus = JSON.parse(localStorage.getItem("loginStatus"));
-    console.log("LOGIN STATUS : ", logginStatus);
+    let userInfo = JSON.parse(localStorage.getItem("userData"))
+    setUserRole(userInfo.role)
     if (logginStatus && logginStatus.loggedIn == true) {
       navigate("/dashboard");
-      console.log("logged");
     } 
   }, []);
   return (
@@ -27,14 +36,22 @@ function App() {
       <ThemeProvider theme={theme}>
         <CssBaseline />
         <div className="app">
+          <Sidebar/>
           <main className="content">
-            <Topbar />
-            <Routes>
-              <Route path="/dashboard" element={<HomeScreen />} />
-              <Route path='/' exact={true} element={<LoginScreen />} />
-              <Route path='/register' element={<RegisterScreen />} />
-              <Route path='/chart' element={<Chart />} />
-            </Routes>
+          <Topbar />
+          <Routes>
+            {/* <Route path="/dashboard" element={<HomeScreen />} /> */}
+            <Route path="/dashboard" exact={true}  element={<Dashboard/>}/>
+            <Route path='/' exact={true} element={<LoginScreen />} />
+            <Route path='/register' element={<RegisterScreen />} />
+            <Route path='/device' element={<Table role={userRole} />} />
+            <Route path='/users' element={<Users role={userRole} />} />
+            <Route path='/organizations' element={<OrganisationScreen role={userRole} />} />
+            <Route path='/sensors' element={<AddSensorScreen role={userRole} />} />
+            <Route path="/bar" element={<Bar/>}/>
+            <Route path="/line" element={<Line/>}/>
+            <Route path="/map" element={<AddressMap/>}/>
+             </Routes>
           </main>
         </div>
       </ThemeProvider>

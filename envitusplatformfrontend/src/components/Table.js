@@ -10,7 +10,7 @@ function Table({role}) {
   const dispatch = useDispatch();
   const deviceList = useSelector((state) => state.deviceList);
   const { loading, error, device } = deviceList;
-  console.log('ROLE ::::::::::',role)
+  
   useEffect(() => {
     dispatch(listDevices());
   }, [dispatch]);
