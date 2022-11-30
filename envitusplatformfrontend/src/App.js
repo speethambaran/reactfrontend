@@ -34,7 +34,8 @@ function App() {
           <main className="content">
           <Topbar />
           <Routes>
-            <Route path="/" exact={true}  element={<Dashboard/>}/>
+            {/* <Route path="/" exact={true}  element={<Dashboard/>}/> */}
+            <Route path="/"   element={<Dashboard/>}/>
             <Route path='/login'  element={<LoginScreen/>} />
             <Route path='/register' element={<RegisterScreen />} />
             <Route path="/bar" element={<Bar/>}/>

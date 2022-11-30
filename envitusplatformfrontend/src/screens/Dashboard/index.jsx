@@ -57,10 +57,6 @@ const Dashboard = () => {
                 >
                     <StatBox
                         title="Device"
-                        subtitle="device"
-                        progress="0.75"
-                        increase="progress" 
-                        test="jhgfghj"
                         icon={
                             <DevicesOutlinedIcon
                                 sx={{ color: colors.greenAccent[600], fontSize: "26px" }}
@@ -81,7 +77,7 @@ const Dashboard = () => {
                     <StatBox
                         title="Alert"
                         subtitle="alert"
-                        progress="0.75"
+                        progress="0.25"
                         increase="0"
                         icon={
                             <AddAlertOutlinedIcon
@@ -121,7 +117,7 @@ const Dashboard = () => {
                     <StatBox
                         title="Daily AQI"
                         subtitle="air quality index"
-                        progress="0.75"
+                        progress="0.50"
                         increase="+14%"
                         icon={
                             <AirOutlinedIcon
