@@ -1,6 +1,11 @@
 import axios from "axios";
 import React, { useState } from "react";
 import { Tab, Tabs, TabList, TabPanel } from "react-tabs";
+import AddSensorType from "../components/AddSensorType";
+import SensorParameterList from "../components/SensorParameterList";
+import { BASE_URL } from "../constants/AppliationConstants";
+
+import TableBKP from '../components/TableBKP'
 
 function AddSensorScreen() {
   const [paramName, setParamName] = useState(""); //
@@ -42,7 +47,7 @@ function AddSensorScreen() {
   const addSensorParameter = async (e) => {
     e.preventDefault();
     let data = await axios
-      .post(`/sensor/add-sensor`, sensorDataModel)
+      .post(`${BASE_URL}/sensor/add-sensor`, sensorDataModel)
       .then((result) => {
         if (result.data.errorCode == 1) {
           alert("Sensor successfully added");
@@ -54,15 +59,15 @@ function AddSensorScreen() {
   };
 
   return (
-    <div className="container-fluid sensorTab mt-5">
+    <div className="container-fluid sensorTab mt-0">
       <h2>Sensor List</h2>
-      <Tabs style={{ height: "400px", top: "10px", position: "relative" }}>
-        <TabList style={{ backgroundColor: "rgb(245 245 245)" }}>
+      <Tabs style={{ height: "800px", top: "10px", position: "relative" }}>
+        <TabList style={{ backgroundColor: "rgb(100 181 173)" }}>
           <Tab>
-            <p style={{ color: "darkcyan" }}>Sensor Parameters</p>
+            <p id="sensor_page">Sensor Parameters</p>
           </Tab>
           <Tab>
-            <p style={{ color: "darkcyan" }}>Sensor Type</p>
+            <p >Sensor Type</p>
           </Tab>
         </TabList>
 
@@ -75,64 +80,13 @@ function AddSensorScreen() {
               style={{ float: "right" }}
             ></i>
           </div>
-          <div className="panel-content table-wrapper-scroll-y my-custom-scrollbar">
-            <table
-              className="table table-fixed"
-              style={{ backgroundColor: "white" }}
-            >
-              <thead className="thead-light">
-                <tr>
-                  <th scope="col">DISPLAY NAME</th>
-                  <th scope="col">PARAMETER</th>
-                  <th scope="col">MIN</th>
-                  <th scope="col">MAX</th>
-                  <th scope="col">ACTION</th>
-                </tr>
-              </thead>
-              <tbody className="orgRow">
-                <tr>
-                  <td>Temperature</td>
-                  <td>temperature</td>
-                  <td>0</td>
-                  <td>100</td>
-                  <td>
-                    <i className="fa fa-pencil m-1"></i>
-                    <i className="fa fa-trash m-1"></i>
-                    <i className="fa fa-eye m-1"></i>
-                  </td>
-                </tr>
-              </tbody>
-            </table>
+          <div className="panel-content">
+            <SensorParameterList />
           </div>
         </TabPanel>
         <TabPanel style={{ backgroundColor: "white" }}>
           <div className="panel-content">
-            <div className="panel-content table-wrapper-scroll-y my-custom-scrollbar">
-              <table
-                className="table table-fixed"
-                style={{ backgroundColor: "white" }}
-              >
-                <thead className="thead-light">
-                  <tr>
-                    <th scope="col">SENSOR TYPE</th>
-                    <th scope="col">DESCRIPTION</th>
-                    <th scope="col">ACTION</th>
-                  </tr>
-                </thead>
-                <tbody className="orgRow">
-                  <tr>
-                    <td>ESPATNAOTDR</td>
-                    <td>test sensor type</td>
-
-                    <td>
-                      <i className="fa fa-pencil m-1"></i>
-                      <i className="fa fa-trash m-1"></i>
-                      <i className="fa fa-eye m-1"></i>
-                    </td>
-                  </tr>
-                </tbody>
-              </table>
-            </div>
+            <AddSensorType />
           </div>
         </TabPanel>
       </Tabs>
@@ -201,7 +155,7 @@ function AddSensorScreen() {
                       <p>Unit Display Html</p>
                       <input
                         type="text"
-                        placeholder=""
+                        placeholder="unit display html"
                         className="form-control"
                         onChange={(e) => setunitDisplayHtml(e.target.value)}
                       />
@@ -210,7 +164,7 @@ function AddSensorScreen() {
                       <p>Display Name Html</p>
                       <input
                         type="text"
-                        placeholder=""
+                        placeholder="display name html"
                         className="form-control"
                         onChange={(e) => setdisplayNameHtml(e.target.value)}
                       />

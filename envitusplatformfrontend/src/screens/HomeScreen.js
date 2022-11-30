@@ -13,7 +13,7 @@ function HomeScreen() {
   return (
     <div>
       <header>
-        <Header />
+        {/* <Header /> */}
       </header>
       <div className="home-screen">
         <Tabs>

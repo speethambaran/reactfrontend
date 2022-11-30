@@ -1,21 +1,29 @@
 import axios from "axios";
 import React, { useEffect, useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { listDevices } from "../actions/deviceActions";
 import { BASE_URL } from "../constants/AppliationConstants";
+import LoadingBox from '../components/LoadingBox'
+import MessageBox from '../components/MessageBox'
 
 function Table() {
-  const [devices, setDevices] = useState([]);
+  const dispatch = useDispatch();
+  const deviceList = useSelector((state) => state.deviceList);
+  const { loading, error, device } = deviceList;
+  
   useEffect(() => {
-    const fetchData = async () => {
-      const data = await axios.get(`${BASE_URL}/getdevice`);
-      setDevices(data.data.message);
-      console.log("DATA===========", data.data.message);
-    };
-    fetchData();
-  }, []);
+    dispatch(listDevices());
+  }, [dispatch]);
+
   return (
-    <div>
-      <div className="table-responsive mt-2 p-2">
-        <h1>Device List</h1>
+    <div className="mt-5">
+      {loading ? (
+        <LoadingBox />
+      ) : error ? (
+        <MessageBox variant="danger" style={{fontWeight:500}}>Oops something went wrong</MessageBox>
+      ) : (
+        <div className="table-responsive mt-2 p-2">
+        <h1 className="title">Device List</h1>
         <table className="table mt-2" style={{ backgroundColor: "white" }}>
           <thead className="thead-light">
             <tr>
@@ -29,8 +37,8 @@ function Table() {
             </tr>
           </thead>
           <tbody>
-            {devices &&
-              devices.map((device, index) => (
+            {device &&
+              device.map((device, index) => (
                 <tr>
                   <th scope="row">{index + 1}</th>
                   <td>{device.deviceId}</td>
@@ -62,6 +70,8 @@ function Table() {
           </tbody>
         </table>
       </div>
+      )}
+      
     </div>
   );
 }

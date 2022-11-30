@@ -1,9 +1,5 @@
 {
   "name": "envitusplatformfrontend",
-<<<<<<< HEAD
-  "proxy": "http://192.46.210.81:7002",
-=======
->>>>>>> 6d3322cb5e01d9b13b21ede72ec2c6296b9eafc0
   "allowedHosts": "all",
   "version": "0.1.0",
   "private": true,
@@ -15,6 +11,7 @@
     "@mui/x-data-grid": "^5.17.13",
     "@nivo/bar": "^0.80.0",
     "@nivo/core": "^0.80.0",
+    "@nivo/line": "^0.80.0",
     "@testing-library/jest-dom": "^5.16.5",
     "@testing-library/react": "^13.4.0",
     "@testing-library/user-event": "^13.5.0",
@@ -31,6 +28,7 @@
     "react-dom": "^18.2.0",
     "react-paginate": "^8.1.4",
     "react-pagination-table": "^2.0.2",
+    "react-pro-sidebar": "^0.7.1",
     "react-redux": "^8.0.5",
     "react-router-dom": "^6.4.3",
     "react-scripts": "5.0.1",

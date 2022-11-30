@@ -28,17 +28,7 @@ function LoginScreen(props) {
 
   return (
     <div>
-      <div className="header">
-        <nav className="navbar navbar-light">
-          <a className="navbar-brand" style={{ color: "green" }} href="/">
-            <img
-              src="http://159.89.163.128:7001/img/logo.png"
-              className="header-logo w-100"
-            />
-            {/* Envitus */}
-          </a>
-        </nav>
-      </div>
+      {/*  */}
       <div className="container-fluid authentication-screen">
         <div className="row">
           <div className="col-md-3"></div>
