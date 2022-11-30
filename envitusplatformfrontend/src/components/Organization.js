@@ -1,15 +1,22 @@
+import axios from 'axios'
 import React, { useState } from 'react'
+import { BASE_URL } from '../constants/AppliationConstants'
 
 function Organization({ org }) {
-    console.log('org : ',org.id)
     const [name,setName] = useState('')
     const [description,setDescription] = useState('')
     const [isDefault,setDefault] = useState(false)
-    const [user,setUser] = useState(org.users)
-    const [device,setDevice] = useState(org.devices)
-    const [id,setId] = useState(0)
-    const deleteOrganization = async (e) => {
-        e.preventDefault()
+    const [users,setUser] = useState(org.users)
+    const [devices,setDevice] = useState(org.devices)
+    const [id,setId] = useState('')
+    const deleteOrganization = async (id) => {
+        // e.preventDefault()
+        await axios.post(`${BASE_URL}/deleteorganization/`,{"id" : id}).then((response)=>{
+            if (response.data.errorCode == 0){
+                alert('Organisation deleted')
+                window.location.reload()
+            }
+        })
     }
     const editOrganization = async(e)=>{
         e.preventDefault()
@@ -18,10 +25,16 @@ function Organization({ org }) {
             name,
             description,
             default: isDefault,
-            user,
-            device
+            users,
+            devices
         }
-        console.log('Data for update : ',dataForUpdate)
+        console.log('DATA FOR UPDTE===========>',dataForUpdate)
+        // await axios.post(`${BASE_URL}/updateorganization/`,dataForUpdate).then((response)=>{
+        //     if (response.data.errorCode == 0){
+        //         alert('Organisation updated')
+        //         window.location.reload()
+        //     }
+        // })
     }
     return (
         <div>
@@ -42,13 +55,13 @@ function Organization({ org }) {
                             class="dropdown-menu"
                             aria-labelledby="dropdownMenu2"
                         >
-                            <button class="dropdown-item" onClick={(e)=>setId(org.id)} type="button" data-toggle="modal" data-target="#exampleModalCenter">
+                            <button class="dropdown-item" onClick={(e)=>localStorage.setItem("id",org.id)} type="button" data-toggle="modal" data-target="#exampleModalCenter">
                                 Edit
                             </button>
                             <button
                                 class="dropdown-item"
                                 type="button"
-                                onClick={(e) => deleteOrganization(org.name)}
+                                onClick={(e) => deleteOrganization(org.id)}
                             >
                                 Delete
                             </button>

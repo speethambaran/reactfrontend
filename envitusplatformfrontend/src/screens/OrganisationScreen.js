@@ -7,6 +7,7 @@ import MessageBox from "../components/MessageBox";
 import axios from "axios";
 import { BASE_URL } from "../constants/AppliationConstants";
 import Organization from "../components/Organization";
+import { listDevices } from "../actions/deviceActions";
 
 function OrganisationScreen() {
   const dispatch = useDispatch();
@@ -14,11 +15,12 @@ function OrganisationScreen() {
   const organizationList = useSelector((state) => state.organizationList);
   const { loading, error, users } = userList;
   const { errormessage, organizations } = organizationList;
-  console.log("Error : ", error);
+  const deviceList = useSelector((state) => state.deviceList);
+  const { device } = deviceList;
 
   const addOrganisation = async (e) => {
     e.preventDefault();
-    await axios.post(`/addorganization/`).then((response) => {
+    await axios.post(`${BASE_URL}/addorganization/`).then((response) => {
       if (response.data.errorCode === 0) {
         alert("Organisation successfully added");
         window.location.reload();
@@ -28,18 +30,10 @@ function OrganisationScreen() {
     });
   };
 
-  const deleteOrganization = async (name) => {
-    await axios.post(`${BASE_URL}/deleteorganization`).then((response) => {
-      if (response.data.errorCode == 0) {
-        alert("Organization deleted");
-        window.location.reload();
-      }
-    });
-  };
-
   useEffect(() => {
     dispatch(listUsers());
     dispatch(listOrganization());
+    dispatch(listDevices());
   }, [dispatch]);
   return (
     <div className="orgScreen">
@@ -54,7 +48,7 @@ function OrganisationScreen() {
             <i
               className="ml-auto fa fa-plus-circle"
               data-toggle="modal"
-              data-target="#exampleModalCenter"
+              data-target="#exampleModalCenterAddOrganisation"
               style={{ float: "right" }}
             ></i>
             <div className="row">
@@ -69,7 +63,7 @@ function OrganisationScreen() {
           </div>
           <div
             className="modal fade "
-            id="exampleModalCenter"
+            id="exampleModalCenterAddOrganisation"
             tabindex="-1"
             role="dialog"
             aria-labelledby="exampleModalCenterTitle"
@@ -132,8 +126,13 @@ function OrganisationScreen() {
                         <div className="col-md-6 mt-2">
                           <p>Devices</p>
                           <select className="form-control">
-                            <option></option>
-                            <option></option>
+                          {device ? (
+                              device.map((device) => (
+                                <option>{device.deviceId}</option>
+                              ))
+                            ) : (
+                              <option>No user found</option>
+                            )}
                           </select>
                         </div>
 

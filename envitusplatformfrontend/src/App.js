@@ -20,9 +20,7 @@ function App() {
     if (logginStatus && logginStatus.loggedIn == true) {
       navigate("/dashboard");
       console.log("logged");
-    }else {
-      navigate('/')
-    }
+    } 
   }, []);
   return (
     <ColorModeContext.Provider value={colorMode}>
@@ -30,17 +28,13 @@ function App() {
         <CssBaseline />
         <div className="app">
           <main className="content">
-          <Topbar />
-          <Routes>
-           
-           <Route path="/dashboard" element={<HomeScreen />} />
-          <Route path='/' exact={true} element={<LoginScreen/>} />
-          <Route path='/register' element={<RegisterScreen />} />
-          <Route path='/chart' element={<Chart />} />
-
-            
+            <Topbar />
+            <Routes>
+              <Route path="/dashboard" element={<HomeScreen />} />
+              <Route path='/' exact={true} element={<LoginScreen />} />
+              <Route path='/register' element={<RegisterScreen />} />
+              <Route path='/chart' element={<Chart />} />
             </Routes>
-            
           </main>
         </div>
       </ThemeProvider>

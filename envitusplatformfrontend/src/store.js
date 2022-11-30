@@ -1,6 +1,6 @@
 import { createStore, compose, applyMiddleware, combineReducers } from "redux";
 import thunk from "redux-thunk";
-import { deviceListReducer } from "./reducers/deviceReducers";
+import { deviceListReducer, livedataReducer } from "./reducers/deviceReducers";
 import { organizationListReducer } from "./reducers/organisationReducer";
 import { sensorParameterListReducer, sensorTypeListReducer } from "./reducers/sensorReducers";
 import { userDeleteReducer, userListReducer } from "./reducers/userReducers";
@@ -12,7 +12,8 @@ const reducer = combineReducers({
   organizationList: organizationListReducer,
   deviceList: deviceListReducer,
   sensorList: sensorTypeListReducer,
-  sensorParameterList: sensorParameterListReducer
+  sensorParameterList: sensorParameterListReducer,
+  livedata: livedataReducer
 });
 const composeEnhancer = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
 const store = createStore(

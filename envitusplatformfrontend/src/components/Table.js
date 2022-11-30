@@ -6,11 +6,11 @@ import { BASE_URL } from "../constants/AppliationConstants";
 import LoadingBox from '../components/LoadingBox'
 import MessageBox from '../components/MessageBox'
 
-function Table() {
+function Table({role}) {
   const dispatch = useDispatch();
   const deviceList = useSelector((state) => state.deviceList);
   const { loading, error, device } = deviceList;
-  
+  console.log('ROLE ::::::::::',role)
   useEffect(() => {
     dispatch(listDevices());
   }, [dispatch]);
@@ -33,7 +33,7 @@ function Table() {
               <th scope="col">City</th>
               <th scope="col">Type</th>
               <th scope="col">LandMark</th>
-              <th scope="col">Actions</th>
+              {role == "Super Admin" && (<th scope="col">Actions</th>)}
             </tr>
           </thead>
           <tbody>
@@ -42,12 +42,12 @@ function Table() {
                 <tr>
                   <th scope="row">{index + 1}</th>
                   <td>{device.deviceId}</td>
+                  {/* < (15 * 60 * 1000) ? 'ASWINS' : 'NOT LIVE' */}
                   <td>
+                    {console.log('LAST RECEIVD TIME : ',device.lastDataReceiveTime)}
                     <i
-                      className="fa fa-dot-circle-o"
+                      className={`fa fa-dot-circle-o ${((device.lastDataReceiveTime) - (new Date().valueOf() )) < 15 * 60 * 1000 ? 'live' : 'not-live'}`}
                       style={{
-                        color: "grey",
-                        backgroundColor: "grey",
                         borderRadius: "50%",
                       }}
                     ></i>
@@ -57,7 +57,8 @@ function Table() {
                   <td style={{ height: "4px" }} className="">
                     {device.location.landMark}
                   </td>
-                  <td>
+                  {role == "Super Admin" && (
+                    <td>
                     <i className="fa fa-pencil m-1"></i>
                     <i
                       className="fa fa-trash m-1"
@@ -65,6 +66,7 @@ function Table() {
                     ></i>
                     <i className="fa fa-eye m-1"></i>
                   </td>
+                  )}
                 </tr>
               ))}
           </tbody>

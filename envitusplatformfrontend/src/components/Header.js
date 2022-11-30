@@ -1,17 +1,21 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 
 function Header() {
   const [userInfo, setUserInfo] = useState(false);
+  const [username,setUsername] = useState('')
   const navigate = useNavigate();
   const logoutUser = () => {
     localStorage.removeItem("loginStatus");
+    localStorage.removeItem("userData")
     navigate("/");
   };
-  useState(() => {
+  useEffect(() => {
     let logginStatus = JSON.parse(localStorage.getItem("loginStatus"));
+    let userInfo = jSON.parse(localStorage.getItem("userData"));
     if (logginStatus) {
       setUserInfo(true);
+      setUsername(userInfo.username)
     }
   }, []);
   return (
@@ -42,7 +46,7 @@ function Header() {
                 aria-haspopup="true"
                 aria-expanded="false"
               >
-                Account
+                {username}
               </i>
               <div
                 className="dropdown-menu"
