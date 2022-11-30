@@ -1,4 +1,7 @@
 import {
+    LIVE_DATA_FAIL,
+    LIVE_DATA_REQUEST,
+    LIVE_DATA_SUCCESS,
     SENSOR_LIST_FAIL,
     SENSOR_LIST_REQUEST,
     SENSOR_LIST_SUCCESS,
@@ -39,3 +42,16 @@ export const sensorParameterListReducer = (
             return state;
     }
 };
+
+export const liveDataReducer = (state = { loading: true, livedata: [] }, action) => {
+    switch (action.type) {
+        case LIVE_DATA_REQUEST:
+            return { loading: true }
+        case LIVE_DATA_SUCCESS:
+            return { loading: false, livedata: action.payload }
+        case LIVE_DATA_FAIL:
+            return { loading: false, error: action.payload }
+        default:
+            return state
+    }
+}

@@ -144,7 +144,7 @@ const Sidebar = () => {
                         />
                         <Item
                             title="Live data"
-                            to="/contacts"
+                            to="/livedata"
                             icon={<DatasetOutlinedIcon />}
                             selected={selected}
                             setSelected={setSelected}

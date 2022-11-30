@@ -58,7 +58,7 @@ export default function BasicTabs() {
           <Tab className='text-white' label="Download csv" {...a11yProps(2)} />
         </Tabs>
       </Box>
-      <TabPanel value={value} index={0}>
+      <TabPanel value={value} index={0}> 
         Item One
         <LivedataTable />
       </TabPanel>

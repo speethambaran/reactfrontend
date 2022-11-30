@@ -2,9 +2,6 @@ import {
   DEVICE_LIST_FAIL,
   DEVICE_LIST_REQUEST,
   DEVICE_LIST_SUCCESS,
-  DEVICE_LIVEDATA_FAIL,
-  DEVICE_LIVEDATA_REQUEST,
-  DEVICE_LIVEDATA_SUCCESS,
 } from "../constants/deviceConstants";
 
 export const deviceListReducer = (
@@ -22,16 +19,3 @@ export const deviceListReducer = (
       return state;
   }
 };
-
-export const livedataReducer = (state = { loading: true, livedata: [] }, action) => {
-  switch (action.payload) {
-    case DEVICE_LIVEDATA_REQUEST:
-      return { loading: true };
-    case DEVICE_LIVEDATA_SUCCESS:
-      return { loading: false, livedata: action.payload }
-    case DEVICE_LIVEDATA_FAIL:
-      return { loading: false, error: action.payload }
-    default:
-      return state
-  }
-}

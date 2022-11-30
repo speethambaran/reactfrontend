@@ -17,6 +17,7 @@ import Table from './components/Table';
 import Users from './components/Users';
 import OrganisationScreen from './screens/OrganisationScreen';
 import AddSensorScreen from './screens/AddSensorScreen';
+import LivedataScreen from './screens/LivedataScreen'
 
 function App() {
   const [theme, colorMode] = useMode();
@@ -26,10 +27,13 @@ function App() {
   useEffect(() => {
     let logginStatus = JSON.parse(localStorage.getItem("loginStatus"));
     let userInfo = JSON.parse(localStorage.getItem("userData"))
-    setUserRole(userInfo.role)
-    if (logginStatus && logginStatus.loggedIn == true) {
+    
+    if (logginStatus && logginStatus.loggedIn == true && userInfo) {
+      setUserRole(userInfo.role)
       navigate("/dashboard");
-    } 
+    }else{
+      navigate('/')
+    }
   }, []);
   return (
     <ColorModeContext.Provider value={colorMode}>
@@ -48,6 +52,7 @@ function App() {
             <Route path='/users' element={<Users role={userRole} />} />
             <Route path='/organizations' element={<OrganisationScreen role={userRole} />} />
             <Route path='/sensors' element={<AddSensorScreen role={userRole} />} />
+            <Route path='/livedata' element={<LivedataScreen />} />
             <Route path="/bar" element={<Bar/>}/>
             <Route path="/line" element={<Line/>}/>
             <Route path="/map" element={<AddressMap/>}/>
