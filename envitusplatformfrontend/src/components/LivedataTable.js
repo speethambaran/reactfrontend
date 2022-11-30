@@ -11,6 +11,9 @@ import { useDispatch, useSelector } from 'react-redux';
 import { listLiveData } from '../actions/sensorActions';
 import LoadingBox from './LoadingBox';
 import MessageBox from './MessageBox';
+import LineChart from './Linechart';
+import LiveChart from './LiveChart';
+import { CSVLink, CSVDownload } from "react-csv";
 
 const columns = [
   { id: 'deviceId', label: 'Device Id', minWidth: 170 },
@@ -87,7 +90,9 @@ function LivedataTable() {
   return (
     <div className='container-fluid'>
       {loading ? (<LoadingBox />) : error ? (<MessageBox>{error}</MessageBox>) : (
-        <Paper sx={{ width: '80%', overflow: 'hidden' }}>
+        <div className='container'>
+          <CSVLink className='btn btn-success ml-auto' style={{float:"right",top:"-10px",position:"relative"}} data={dataRow}>Download Data</CSVLink>
+          <Paper sx={{ width: '100%', overflow: 'hidden' }}>
           <TableContainer sx={{ maxHeight: 440 }}>
             <Table stickyHeader aria-label="sticky table">
               <TableHead>
@@ -135,6 +140,9 @@ function LivedataTable() {
             onRowsPerPageChange={handleChangeRowsPerPage}
           />
         </Paper>
+        
+        </div>
+        
       )}
     </div>
   )

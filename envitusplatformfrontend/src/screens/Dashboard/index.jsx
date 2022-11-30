@@ -10,10 +10,33 @@ import AirOutlinedIcon from '@mui/icons-material/AirOutlined';
 import LineChart from "../../components/Linechart";
 import BarChart from "../../components/Barchart";
 import AddressMap from "../../components/Map"
+import InputLabel from '@mui/material/InputLabel';
+import MenuItem from '@mui/material/MenuItem';
+import FormControl from '@mui/material/FormControl';
+import Select from '@mui/material/Select';
+import { useEffect, useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { listDevices } from "../../actions/deviceActions";
 
 const Dashboard = () => {
     const theme = useTheme();
     const colors = tokens(theme.palette.mode);
+
+    const [age, setAge] = useState('');
+    const [currentDevice,setCurrentDevice] = useState('')
+
+    const dispatch = useDispatch();
+    const deviceList = useSelector((state) => state.deviceList);
+    const { loading, error, device } = deviceList;
+    
+    console.log(currentDevice)
+    useEffect(() => {
+        dispatch(listDevices());
+    }, [dispatch]);
+
+    const handleChange = (event) => {
+        setCurrentDevice(event.target.value);
+    };
 
 
     return (
@@ -21,7 +44,36 @@ const Dashboard = () => {
             <Box display="flex" justifyContent="space-between" alignItems="center" >
                 <Header title="DASHBOARD" subtitle="Welcome" />
                 <Box>
+                    <h2>Device</h2>
+                    <FormControl fullWidth>
+                        <InputLabel id="demo-simple-select-label">Device</InputLabel>
+                        <Select
+                            labelId="demo-simple-select-label"
+                            id="demo-simple-select"
+                            value={currentDevice}
+                            label="Age"
+                            onChange={(e)=>setCurrentDevice(e.target.value)}
+                        >
+                            {device ? device.map((dev)=>(
+                                <MenuItem value={dev.deviceId}>{dev.deviceId}</MenuItem>
+                            )) : ''}
+                        </Select>
+                    </FormControl>
                     <Button
+                        className="m-2"
+                        sx={{
+                            backgroundColor: colors.blueAccent[700],
+                            color: colors.grey[100],
+                            fontSize: "14px",
+                            fontWeight: "bold",
+                            padding: "10px 20px",
+                        }}
+                    >
+                        <DownloadOutlinedIcon sx={{ mr: "5px" }} />
+                        Download Reports
+                    </Button>
+                    <Button
+                        className="m-2"
                         sx={{
                             backgroundColor: colors.blueAccent[700],
                             color: colors.grey[100],
@@ -40,6 +92,7 @@ const Dashboard = () => {
             {/* grids */}
 
             <Box
+
                 display="grid"
                 gridTemplateColumns="repeat(12,1fr)"
                 gridAutoRows="140px"
@@ -59,7 +112,7 @@ const Dashboard = () => {
                         title="Device"
                         subtitle="device"
                         progress="0.75"
-                        increase="progress" 
+                        increase="progress"
                         test="jhgfghj"
                         icon={
                             <DevicesOutlinedIcon
@@ -70,7 +123,7 @@ const Dashboard = () => {
                     />
 
                 </Box>
-               
+
                 <Box
                     gridColumn="span 3"
                     backgroundColor={colors.primary[400]}
@@ -230,14 +283,14 @@ const Dashboard = () => {
                     backgroundColor={colors.primary[400]}
 
                 >
-                   
 
-                    
+
+
                 </Box>
 
 
             </Box>
-            
+
         </Box >
     )
 }

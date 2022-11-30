@@ -7,6 +7,8 @@ import Box from '@mui/material/Box';
 import Table from '../components/Table';
 import LivedataTable from '../components/LivedataTable';
 import DeviceList from '../components/DeviceList';
+import LiveChart from '../components/LiveChart';
+import LineChart from '../components/Linechart';
 
 function TabPanel(props) {
   const { children, value, index, ...other } = props;
@@ -51,19 +53,20 @@ export default function BasicTabs() {
   return (
     <Box sx={{ width: '100%' }}>
       <Table />
-      <Box sx={{ borderBottom: 1, borderColor: 'divider'}}>
+      <Box sx={{ borderBottom: 1, borderColor: 'divider' }}>
         <Tabs value={value} onChange={handleChange} aria-label="basic tabs example" >
           <Tab className='text-white' label="Raw Data" {...a11yProps(0)} />
           <Tab className='text-white' label="Graph" {...a11yProps(1)} />
           <Tab className='text-white' label="Download csv" {...a11yProps(2)} />
         </Tabs>
       </Box>
-      <TabPanel value={value} index={0}> 
-        Item One
+      <TabPanel value={value} index={0}>
+        <h2>Raw Data</h2>
         <LivedataTable />
       </TabPanel>
       <TabPanel value={value} index={1}>
-        Item Two
+          ddsdsd
+          
       </TabPanel>
       <TabPanel value={value} index={2}>
         Item Three
