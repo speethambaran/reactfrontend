@@ -1,4 +1,4 @@
-import { Box, Button, IconButton, Typography, useTheme } from "@mui/material"
+import { Box, Button, IconButton, Typography, Paper, useTheme } from "@mui/material"
 import { tokens } from "../theme";
 import Header from "../components/Header";
 import LineChart from "../components/Linechart";
@@ -7,6 +7,13 @@ import DownloadOutlinedIcon from '@mui/icons-material/DownloadOutlined';
 import RefreshIcon from '@mui/icons-material/Refresh';
 import ThunderstormOutlinedIcon from '@mui/icons-material/ThunderstormOutlined';
 import AirOutlinedIcon from '@mui/icons-material/AirOutlined';
+import { extendTheme, CssVarsProvider } from '@mui/joy/styles';
+import Select from '@mui/joy/Select';
+import Option from '@mui/joy/Option';
+import OnlinePredictionIcon from '@mui/icons-material/OnlinePrediction';
+import Badge from '@mui/material/Badge';
+import Alert from '@mui/material/Alert';
+// import CardMedia from '@mui/material/CardMedia';
 
 const LiveData = () => {
     const theme = useTheme();
@@ -25,7 +32,7 @@ const LiveData = () => {
             <Box
                 display="grid"
                 gridTemplateColumns="repeat(12,1fr)"
-                gridAutoRows="140px"
+                gridAutoRows="178px"
                 gap="19px"
             >
 
@@ -52,20 +59,12 @@ const LiveData = () => {
 
                     </Box>
 
-
                 </Box>
-
-
-
-
-
-
-
 
 
                 <Box
 
-                    gridColumn="span 8"
+                    gridColumn="span 12"
                     gridRow="span 2"
                     backgroundColor={colors.primary[400]}
 
@@ -85,49 +84,81 @@ const LiveData = () => {
                             >
                                 <Button variant="contained">Chart</Button>&nbsp;&nbsp;
                                 <Button variant="contained">Table</Button>&nbsp;&nbsp;
-                                <Button variant="contained"><ThunderstormOutlinedIcon/></Button>&nbsp;&nbsp;
-                                <Button variant="contained"><AirOutlinedIcon/></Button>&nbsp;&nbsp;
-                            </Typography>
+                                <Button variant="contained"><ThunderstormOutlinedIcon /></Button>&nbsp;&nbsp;
+                                <Button variant="contained"><AirOutlinedIcon /></Button>&nbsp;&nbsp;
 
+
+                                <Button >
+                                    <CssVarsProvider >
+                                        <Select
+                                            color="success"
+                                            disabled={false}
+                                            placeholder="Choose one…"
+                                            size="sm"
+                                            variant="soft">
+                                            <Option value="dog">Device 1</Option>
+                                            <Option value="cat">Device</Option>
+                                        </Select>
+                                    </CssVarsProvider>
+                                </Button>
+                            </Typography>
                         </Box>
 
-
                         <Box >
+
                             <IconButton>
-                                < RefreshIcon  SX={{ fontSize: "26px", color: colors.greenAccent[500] }} />
+                                < RefreshIcon SX={{ fontSize: "26px", color: colors.greenAccent[500] }} />
                             </IconButton>
                             <IconButton>
                                 <DownloadOutlinedIcon
                                     SX={{ fontSize: "26px", color: colors.greenAccent[500] }}
                                 />
+                            </IconButton>&nbsp;&nbsp;
+
+                            <IconButton>
+                                <Badge badgeContent={<OnlinePredictionIcon />} color="success">
+
+                                </Badge>
+
                             </IconButton>
                         </Box>
 
+
+
                     </Box>
 
+                    <Box
+                        mt="-1em"
+                        p="0 400px"
+                        display="flex"
+                        justifyContent="space-between"
+                        alignItems="center"
 
-                    <Box height="250px" ml="-20px">
-                        <LineChart isDashboard={true} />
+                    >
+
+                        <Typography varient="h3" color={colors.grey[100]}>
+
+                            <img
+                                mt="1em"
+                                alt="profile-user"
+                                // width="300px"
+                                height="380px"
+                                src={`../../assets/image.png`}
+                                justifyContent="center"
+                                alignItems="center"
+                            />
+                           
+                        </Typography>
+                        <Typography varient="h1"  >
+                        <Alert variant="outlined" severity="error" >
+                                NO DATA FOUND!!!!!
+                            </Alert>
+                            </Typography>
+
+                        
+
                     </Box>
-
-
-
                 </Box>
-
-
-
-                <Box
-                    gridColumn="span 4"
-                    gridRow="span 2"
-                    backgroundColor={colors.primary[400]}
-
-                >
-
-
-                </Box>
-
-
-
 
 
             </Box>
@@ -137,3 +168,12 @@ const LiveData = () => {
 }
 
 export default LiveData;
+
+
+
+
+
+
+
+
+

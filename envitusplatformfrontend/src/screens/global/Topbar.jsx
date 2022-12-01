@@ -9,6 +9,7 @@ import SettingsOutlinedIcon from "@mui/icons-material/SettingsOutlined"
 import SearchIcon from "@mui/icons-material/Search"
 import { useNavigate } from 'react-router-dom'
 import MenuListComposition from "../global/Menu"
+import Badge from '@mui/material/Badge';
 
 const Topbar = () => {
     const theme = useTheme();
@@ -27,14 +28,7 @@ const Topbar = () => {
             {/* search bar */}
 
             <Box display="flex"   >
-                {/* <img
-                    alt="profile-user"
-                    width="100px"
-                    height="50px"
-
-                    src={`../../assets/logo.png`}
                
-                /> */}
 
             </Box>
 
@@ -54,16 +48,16 @@ const Topbar = () => {
                         < DarkModeOutlinedIcon />
                     )}
                 </IconButton>
-                <IconButton style={{ backgroundColor: 'transparent' }}>
-                    <NotificationsOutlinedIcon style={{ backgroundColor: 'transparent' }} />
-                    <span class="badge badge-danger" >1</span>
+                <IconButton>
+                <Badge badgeContent={17} color="error">
+                    <NotificationsOutlinedIcon/>
+                    </Badge>
                 </IconButton>
                 <IconButton>
                     <SettingsOutlinedIcon />
                 </IconButton>
-
-                <IconButton>
-                    <MenuListComposition />
+                 <IconButton marginright={2} >
+                    <MenuListComposition  />
                 </IconButton>
             </Box>
         </Box>
@@ -75,3 +69,10 @@ const Topbar = () => {
 
 export default Topbar;
 
+
+
+
+{/* <IconButton style={{ backgroundColor: 'transparent' }}>
+                    <NotificationsOutlinedIcon style={{ backgroundColor: 'transparent' }} />
+                    <span class="badge badge-danger" >1</span>
+                </IconButton> */}
