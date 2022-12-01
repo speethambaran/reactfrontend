@@ -1,17 +1,21 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 
 function Header() {
   const [userInfo, setUserInfo] = useState(false);
+  const [username,setUsername] = useState('')
   const navigate = useNavigate();
   const logoutUser = () => {
     localStorage.removeItem("loginStatus");
+    localStorage.removeItem("userData")
     navigate("/");
   };
-  useState(() => {
+  useEffect(() => {
     let logginStatus = JSON.parse(localStorage.getItem("loginStatus"));
+    let userInfo = JSON.parse(localStorage.getItem("userData"));
     if (logginStatus) {
       setUserInfo(true);
+      setUsername(userInfo.username)
     }
   }, []);
   return (
@@ -42,7 +46,7 @@ function Header() {
                 aria-haspopup="true"
                 aria-expanded="false"
               >
-                Account
+                {username}
               </i>
               <div
                 className="dropdown-menu"
@@ -69,17 +73,17 @@ function Header() {
       </nav>
       <div>
         <div
-          class="modal fade"
+          className="modal fade"
           id="exampleModalCenter"
           tabindex="-1"
           role="dialog"
           aria-labelledby="exampleModalCenterTitle"
           aria-hidden="true"
         >
-          <div class="modal-dialog modal-dialog-centered" role="document">
-            <div class="modal-content">
+          <div className="modal-dialog modal-dialog-centered" role="document">
+            <div className="modal-content">
               {/*  */}
-              <div class="modal-body">
+              <div className="modal-body">
                 <div className="text-center">
                   <img
                     src="https://media.istockphoto.com/id/1300845620/vector/user-icon-flat-isolated-on-white-background-user-symbol-vector-illustration.jpg?s=612x612&w=0&k=20&c=yBeyba0hUkh14_jgv1OKqIH0CCSWU_4ckRkAoy2p73o="
@@ -109,15 +113,15 @@ function Header() {
                   </div>
                 </div>
               </div>
-              <div class="modal-footer">
+              <div className="modal-footer">
                 <button
                   type="button"
-                  class="btn btn-secondary"
+                  className="btn btn-secondary"
                   data-dismiss="modal"
                 >
                   Close
                 </button>
-                <button type="button" class="btn btn-primary">
+                <button type="button" className="btn btn-primary">
                   Save changes
                 </button>
               </div>

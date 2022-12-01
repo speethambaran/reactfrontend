@@ -14,11 +14,13 @@ function LoginScreen(props) {
     await axios
       .post(`${BASE_URL}/login/`, { username, password })
       .then((response) => {
-        if (response.data.errorCode == 0) {
+        console.log('response : ',response.data)
+        if (response.data.errorCode !== -1) {
           localStorage.setItem(
             "loginStatus",
             JSON.stringify({ loggedIn: true })
           );
+          localStorage.setItem("userData",JSON.stringify(response.data.data))
           navigate("/dashboard");
         } else {
           alert("Invalid username or password");

@@ -7,15 +7,23 @@ import DarkModeOutlinedIcon from "@mui/icons-material/DarkModeOutlined"
 import NotificationsOutlinedIcon from "@mui/icons-material/NotificationsOutlined"
 import SettingsOutlinedIcon from "@mui/icons-material/SettingsOutlined"
 import SearchIcon from "@mui/icons-material/Search"
+import { useNavigate } from 'react-router-dom'
 import MenuListComposition from "../global/Menu"
 
 const Topbar = () => {
     const theme = useTheme();
    
     const colorMode = useContext(ColorModeContext);
+    const navigate = useNavigate();
+
+    const logoutHandler = () => {
+        localStorage.removeItem("loginStatus")
+        localStorage.removeItem("userData")
+        navigate('/')
+    }
 
     return (
-        <Box display="flex" justifyContent="space-between" p={2}>
+        <Box display="flex" justifyContent="space-between" p={2} className="header-icon">
             {/* search bar */}
 
             <Box display="flex"   >
@@ -46,8 +54,9 @@ const Topbar = () => {
                         < DarkModeOutlinedIcon />
                     )}
                 </IconButton>
-                <IconButton>
-                    <NotificationsOutlinedIcon />
+                <IconButton style={{ backgroundColor: 'transparent' }}>
+                    <NotificationsOutlinedIcon style={{ backgroundColor: 'transparent' }} />
+                    <span class="badge badge-danger" >1</span>
                 </IconButton>
                 <IconButton>
                     <SettingsOutlinedIcon />
@@ -57,7 +66,6 @@ const Topbar = () => {
                     <MenuListComposition />
                 </IconButton>
             </Box>
-
         </Box>
 
 

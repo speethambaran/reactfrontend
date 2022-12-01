@@ -10,16 +10,26 @@ import MenuList from '@mui/material/MenuList';
 import Stack from '@mui/material/Stack';
 import PersonOutlinedIcon from "@mui/icons-material/PersonOutlined"
 import { tokens } from "../../theme";
+import { useNavigate } from "react-router-dom";
 
 
 export default function MenuListComposition() {
     const [open, setOpen] = React.useState(false);
+    const [username,setUsername] = React.useState('')
     const anchorRef = React.useRef(null);
     const theme = useTheme();
     const colors = tokens(theme.palette.mode);
 
+    const navigate = useNavigate();
+
     const handleToggle = () => {
         setOpen((prevOpen) => !prevOpen);
+    };
+
+    const logoutUser = () => {
+        localStorage.removeItem("loginStatus");
+        localStorage.removeItem("userData")
+        navigate("/");
     };
 
     const handleClose = (event) => {
@@ -42,6 +52,10 @@ export default function MenuListComposition() {
     // return focus to the button when we transitioned from !open -> open
     const prevOpen = React.useRef(open);
     React.useEffect(() => {
+        let userInfo = JSON.parse(localStorage.getItem("userData"));
+        if (userInfo) {
+            setUsername(userInfo.username)
+        }
         if (prevOpen.current === true && open === false) {
             anchorRef.current.focus();
         }
@@ -69,7 +83,7 @@ export default function MenuListComposition() {
                             color={colors.greenAccent[600]}
                             fontWeight="bold"
                         >
-                            AMAL
+                            {username}
                         </Typography>
 
 
@@ -100,7 +114,7 @@ export default function MenuListComposition() {
                                         onKeyDown={handleListKeyDown}
                                     >
                                         <MenuItem onClick={handleClose}>Profile</MenuItem>
-                                        <MenuItem onClick={handleClose}>Logout</MenuItem>
+                                        <MenuItem onClick={logoutUser}>Logout</MenuItem>
                                     </MenuList>
                                 </ClickAwayListener>
                             </Paper>

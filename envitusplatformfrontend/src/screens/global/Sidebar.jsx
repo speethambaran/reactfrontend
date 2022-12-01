@@ -122,7 +122,7 @@ const Sidebar = () => {
                     <Box paddingLeft={isCollapsed ? undefined : "10%"}>
                         <Item
                             title="Dashboard"
-                            to="/"
+                            to="/dashboard"
                             icon=<HomeOutlinedIcon />
                             selected={selected}
                             setSelected={setSelected}
@@ -137,35 +137,35 @@ const Sidebar = () => {
 
                         <Item
                             title="Devices"
-                            to="/team"
+                            to="/device"
                             icon=<DevicesOutlinedIcon />
                             selected={selected}
                             setSelected={setSelected}
                         />
                         <Item
                             title="Live data"
-                            to="/contacts"
+                            to="/live"
                             icon={<DatasetOutlinedIcon />}
                             selected={selected}
                             setSelected={setSelected}
                         />
                         <Item
                             title="Users"
-                            to="/"
+                            to="/users"
                             icon={<PersonOutlinedIcon />}
                             selected={selected}
                             setSelected={setSelected}
                         />
                         <Item
                             title="Organization"
-                            to="/"
+                            to="/organizations"
                             icon={<DiversityOutlined1Icon />}
                             selected={selected}
                             setSelected={setSelected}
                         />
                         <Item
                             title="Sensors"
-                            to="/"
+                            to="/sensors"
                             icon={<SensorsOutlinedIcon />}
                             selected={selected}
                             setSelected={setSelected}
