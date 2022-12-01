@@ -49,6 +49,10 @@ export default function MenuListComposition() {
         }
     }
 
+    const getProfile = ()=>{
+        navigate('/profile')
+    }
+
     // return focus to the button when we transitioned from !open -> open
     const prevOpen = React.useRef(open);
     React.useEffect(() => {
@@ -113,7 +117,7 @@ export default function MenuListComposition() {
                                         aria-labelledby="composition-button"
                                         onKeyDown={handleListKeyDown}
                                     >
-                                        <MenuItem onClick={handleClose}>Profile</MenuItem>
+                                        <MenuItem onClick={getProfile}>Profile</MenuItem>
                                         <MenuItem onClick={logoutUser}>Logout</MenuItem>
                                     </MenuList>
                                 </ClickAwayListener>

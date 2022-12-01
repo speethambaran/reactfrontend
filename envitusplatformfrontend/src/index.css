@@ -202,7 +202,7 @@ h1{
 }
 .fa-plus-circle{
   font-size: 25px;
-  color: #14204e;
+  color: #e4e9fc;
   margin: 5px;
 }
 h5{
@@ -476,4 +476,13 @@ button.Mui-selected{
 .pro-item-content p{
   top: 3px;
   position: relative;
+}
+.pie_chart{
+  height: 150px;
+  width: 150px;
+}
+canvas{
+  height: 150px;
+  width: 150px;
+  display: inline;
 }

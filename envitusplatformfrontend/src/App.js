@@ -18,6 +18,7 @@ import Users from './components/Users';
 import OrganisationScreen from './screens/OrganisationScreen';
 import AddSensorScreen from './screens/AddSensorScreen';
 import LivedataScreen from './screens/LivedataScreen'
+import ProfileScreen from './screens/ProfileScreen';
 
 function App() {
   const [theme, colorMode] = useMode();
@@ -40,7 +41,7 @@ function App() {
       <ThemeProvider theme={theme}>
         <CssBaseline />
         <div className="app">
-          <Sidebar/>
+          <Sidebar role={userRole}/>
           <main className="content">
           <Topbar />
           <Routes>
@@ -52,7 +53,8 @@ function App() {
             <Route path='/users' element={<Users role={userRole} />} />
             <Route path='/organizations' element={<OrganisationScreen role={userRole} />} />
             <Route path='/sensors' element={<AddSensorScreen role={userRole} />} />
-            <Route path='/livedata' element={<LivedataScreen />} />
+            <Route path='/livedata' element={<LivedataScreen role={userRole} />} />
+            <Route path='/profile' element={<ProfileScreen />} />
             <Route path="/bar" element={<Bar/>}/>
             <Route path="/line" element={<Line/>}/>
             <Route path="/map" element={<AddressMap/>}/>

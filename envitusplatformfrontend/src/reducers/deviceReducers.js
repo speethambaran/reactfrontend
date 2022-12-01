@@ -1,4 +1,7 @@
 import {
+  DASHBOARD_DATA_FAIL,
+  DASHBOARD_DATA_REQUEST,
+  DASHBOARD_DATA_SUCCESS,
   DEVICE_LIST_FAIL,
   DEVICE_LIST_REQUEST,
   DEVICE_LIST_SUCCESS,
@@ -19,3 +22,16 @@ export const deviceListReducer = (
       return state;
   }
 };
+
+export const dashboardDataReducer = (state = { loading: true, dashboardData: [] }, action) => {
+  switch (action.type) {
+    case DASHBOARD_DATA_REQUEST:
+      return { loading: true }
+    case DASHBOARD_DATA_SUCCESS:
+      return { loading: false, dashboardData: action.payload }
+    case DASHBOARD_DATA_FAIL:
+      return { loading: false, error: action.payload }
+    default:
+      return state
+  }
+}

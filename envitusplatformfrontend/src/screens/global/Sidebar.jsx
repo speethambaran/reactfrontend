@@ -40,14 +40,14 @@ const Item = ({ title, to, icon, selected, setSelected }) => {
 
 
 
-const Sidebar = () => {
+const Sidebar = ({ role }) => {
 
     const theme = useTheme();
     const colors = tokens(theme.palette.mode);
     const [isCollapsed, setIsCollapsed] = useState(false);
     const [selected, setSelected] = useState("Dashboard");
 
-
+    console.log('ROLE------------->', role)
 
 
     return (
@@ -120,91 +120,126 @@ const Sidebar = () => {
                     )}
                     {/* menu items */}
                     <Box paddingLeft={isCollapsed ? undefined : "10%"}>
-                        <Item
-                            title="Dashboard"
-                            to="/dashboard"
-                            icon=<HomeOutlinedIcon />
-                            selected={selected}
-                            setSelected={setSelected}
-                        />
+                        {role == "Super Admin" ? (
+                            <div>
+                                <Item
+                                    title="Dashboard"
+                                    to="/dashboard"
+                                    icon=<HomeOutlinedIcon />
+                                    selected={selected}
+                                    setSelected={setSelected}
+                                />
 
-                        <Typography
-                            varient="h6"
-                            color={colors.grey[300]}
-                            sx={{ m: "15px 0 5px 20px" }}
-                        >Data
-                        </Typography>
+                                <Typography
+                                    varient="h6"
+                                    color={colors.grey[300]}
+                                    sx={{ m: "15px 0 5px 20px" }}
+                                >Data
+                                </Typography>
 
-                        <Item
-                            title="Devices"
-                            to="/device"
-                            icon=<DevicesOutlinedIcon />
-                            selected={selected}
-                            setSelected={setSelected}
-                        />
-                        <Item
-                            title="Live data"
-                            to="/livedata"
-                            icon={<DatasetOutlinedIcon />}
-                            selected={selected}
-                            setSelected={setSelected}
-                        />
-                        <Item
-                            title="Users"
-                            to="/users"
-                            icon={<PersonOutlinedIcon />}
-                            selected={selected}
-                            setSelected={setSelected}
-                        />
-                        <Item
-                            title="Organization"
-                            to="/organizations"
-                            icon={<DiversityOutlined1Icon />}
-                            selected={selected}
-                            setSelected={setSelected}
-                        />
-                        <Item
-                            title="Sensors"
-                            to="/sensors"
-                            icon={<SensorsOutlinedIcon />}
-                            selected={selected}
-                            setSelected={setSelected}
-                        />
-                        <Item
-                            title="Api keys"
-                            to="/"
-                            icon={<KeyOutlinedIcon />}
-                            selected={selected}
-                            setSelected={setSelected}
-                        />
-                        <Item
-                            title="Map"
-                            to="/map"
-                            icon={< MapOutlinedIcon />}
-                            selected={selected}
-                            setSelected={setSelected}
-                        />
-                        <Typography
-                            varient="h6"
-                            color={colors.grey[300]}
-                            sx={{ m: "15px 0 5px 20px" }}
-                        >Charts
-                        </Typography>
+                                <Item
+                                    title="Devices"
+                                    to="/device"
+                                    icon=<DevicesOutlinedIcon />
+                                    selected={selected}
+                                    setSelected={setSelected}
+                                />
+                                <Item
+                                    title="Live data"
+                                    to="/livedata"
+                                    icon={<DatasetOutlinedIcon />}
+                                    selected={selected}
+                                    setSelected={setSelected}
+                                />
+                                <Item
+                                    title="Users"
+                                    to="/users"
+                                    icon={<PersonOutlinedIcon />}
+                                    selected={selected}
+                                    setSelected={setSelected}
+                                />
+                                <Item
+                                    title="Organization"
+                                    to="/organizations"
+                                    icon={<DiversityOutlined1Icon />}
+                                    selected={selected}
+                                    setSelected={setSelected}
+                                />
+                                <Item
+                                    title="Sensors"
+                                    to="/sensors"
+                                    icon={<SensorsOutlinedIcon />}
+                                    selected={selected}
+                                    setSelected={setSelected}
+                                />
+                                <Item
+                                    title="Api keys"
+                                    to="/"
+                                    icon={<KeyOutlinedIcon />}
+                                    selected={selected}
+                                    setSelected={setSelected}
+                                />
+                                <Item
+                                    title="Map"
+                                    to="/map"
+                                    icon={< MapOutlinedIcon />}
+                                    selected={selected}
+                                    setSelected={setSelected}
+                                />
+                                <Typography
+                                    varient="h6"
+                                    color={colors.grey[300]}
+                                    sx={{ m: "15px 0 5px 20px" }}
+                                >Charts
+                                </Typography>
 
-                        <Item
-                            title="Bar chart"
-                            to="/bar"
-                            icon={<BarChartOutlinedIcon />}
-                            selected={selected}
-                            setSelected={setSelected}
-                        />
-                        <Item
-                            title="Line chart"
-                            to="/line"
-                            icon={<StackedLineChartOutlinedIcon />}
-                            selected={selected}
-                            setSelected={setSelected}
-                        />
+                                <Item
+                                    title="Bar chart"
+                                    to="/bar"
+                                    icon={<BarChartOutlinedIcon />}
+                                    selected={selected}
+                                    setSelected={setSelected}
+                                />
+                                <Item
+                                    title="Line chart"
+                                    to="/line"
+                                    icon={<StackedLineChartOutlinedIcon />}
+                                    selected={selected}
+                                    setSelected={setSelected}
+                                /></div>
+                        ) : (
+                            <div>
+                                <Item
+                                    title="Dashboard"
+                                    to="/dashboard"
+                                    icon=<HomeOutlinedIcon />
+                                    selected={selected}
+                                    setSelected={setSelected}
+                                />
+
+                                <Typography
+                                    varient="h6"
+                                    color={colors.grey[300]}
+                                    sx={{ m: "15px 0 5px 20px" }}
+                                >Data
+                                </Typography>
+
+                                <Item
+                                    title="Devices"
+                                    to="/device"
+                                    icon=<DevicesOutlinedIcon />
+                                    selected={selected}
+                                    setSelected={setSelected}
+                                />
+                                <Item
+                                    title="Live data"
+                                    to="/livedata"
+                                    icon={<DatasetOutlinedIcon />}
+                                    selected={selected}
+                                    setSelected={setSelected}
+                                />
+                            </div>
+                        )}
 
                     </Box>
 

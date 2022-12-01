@@ -14,6 +14,7 @@ import MessageBox from './MessageBox';
 import LineChart from './Linechart';
 import LiveChart from './LiveChart';
 import { CSVLink, CSVDownload } from "react-csv";
+import moment from 'moment';
 
 const columns = [
   { id: 'deviceId', label: 'Device Id', minWidth: 170 },
@@ -29,11 +30,10 @@ const columns = [
   { id: 'SO2', label: 'SO2', minWidth: 100 },
   { id: 'O3', label: 'O3', minWidth: 100 },
   { id: 'noise', label: 'Noise', minWidth: 100 },
-  { id: 'windSpeedAvg', label: 'WindSpeed Avg', minWidth: 100 },
-  { id: 'windDirection', label: 'Wind Direction', minWidth: 100 },
   { id: 'rain', label: 'Rain', minWidth: 100 },
   { id: 'TSP', label: 'TSP', minWidth: 100 },
   { id: 'receivedTime', label: 'Received Time', minWidth: 100 },
+  { id: 'rawAQI', label: 'rawAQI', minWidth: 100 },
 ];
 
 function createData(name, code, population, size) {
@@ -54,10 +54,16 @@ function formatData(data) {
 
       let dataObj = data[i].data
 
+
       responseObj = {
         ...deviceDetails,
         ...dataObj
       }
+      
+      let epoch = responseObj.receivedTime
+      var d = new Date(epoch* 1000).toLocaleString('en-GB')
+      responseObj.receivedTime = d
+
       responseArr.push(responseObj)
 
     }
@@ -65,7 +71,7 @@ function formatData(data) {
   }
 }
 
-function LivedataTable() {
+function LivedataTable({deviceId}) {
   const [page, setPage] = React.useState(0);
   const [rowsPerPage, setRowsPerPage] = React.useState(10);
 
@@ -73,11 +79,17 @@ function LivedataTable() {
   const liveData = useSelector((state) => state.livedata);
   const { loading, error, livedata } = liveData;
 
-  const dataRow = formatData(livedata)
+  let dataRow = formatData(livedata)
+
+  dataRow = dataRow && dataRow.sort(
+    (p1, p2) => (p1.receivedTime < p2.receivedTime) ? 1 : (p1.receivedTime > p2.receivedTime) ? -1 : 0);
+  
+  console.log(dataRow)
+  
 
   React.useEffect(() => {
-    dispatch(listLiveData());
-  }, [dispatch]);
+    dispatch(listLiveData(deviceId));
+  }, [dispatch, deviceId]);
 
   const handleChangePage = (event, newPage) => {
     setPage(newPage);

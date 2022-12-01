@@ -114,7 +114,7 @@ export  const mockDataTeam = [
         "data": [
           {
             "x": "plane",
-            "y": 144
+            "y": 0
           },
           {
             "x": "helicopter",

@@ -37,12 +37,12 @@ export const listSensorParameters = () => async (dispatch) => {
     }
 }
 
-export const listLiveData = () => async (dispatch) => {
+export const listLiveData = (deviceId) => async (dispatch) => {
     dispatch({
         type: LIVE_DATA_REQUEST
     })
     try {
-        const data = await Axios.get(`${BASE_URL}/getlivedata`)
+        const data = await Axios.get(`${BASE_URL}/getlivedata?deviceId=${deviceId}`)
         dispatch({ type: LIVE_DATA_SUCCESS, payload: data.data.message })
     } catch (error) {
         dispatch({ type: LIVE_DATA_FAIL, payload: error.message })

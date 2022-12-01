@@ -10,6 +10,12 @@ function Table({role}) {
   const dispatch = useDispatch();
   const deviceList = useSelector((state) => state.deviceList);
   const { loading, error, device } = deviceList;
+  const [bgColor,setBgcolor] = useState('whitesmoke')
+
+  const selectedDevice = async(id)=>{
+    console.log('device seleted : ',id)
+    setBgcolor("green")
+  }
   
   useEffect(() => {
     dispatch(listDevices());
@@ -39,12 +45,11 @@ function Table({role}) {
           <tbody>
             {device &&
               device.map((device, index) => (
-                <tr>
+                <tr onClick={(e)=>selectedDevice(device.deviceId)}>
                   <th scope="row">{index + 1}</th>
                   <td>{device.deviceId}</td>
                   {/* < (15 * 60 * 1000) ? 'ASWINS' : 'NOT LIVE' */}
                   <td>
-                    {console.log('LAST RECEIVD TIME : ',device.lastDataReceiveTime)}
                     <i
                       className={`fa fa-dot-circle-o ${((device.lastDataReceiveTime) - (new Date().valueOf() )) < 15 * 60 * 1000 ? 'live' : 'not-live'}`}
                       style={{

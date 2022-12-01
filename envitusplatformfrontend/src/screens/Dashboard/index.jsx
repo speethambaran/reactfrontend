@@ -14,24 +14,39 @@ import InputLabel from '@mui/material/InputLabel';
 import MenuItem from '@mui/material/MenuItem';
 import FormControl from '@mui/material/FormControl';
 import Select from '@mui/material/Select';
-import { useEffect, useState } from "react";
+import { useEffect, useMemo, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { listDevices } from "../../actions/deviceActions";
+import { getDashboardData, listDevices } from "../../actions/deviceActions";
+import { listLiveData } from "../../actions/sensorActions";
+import { mockDataLine } from "../../data/mockData";
+import PieChart from "../../components/PieChart";
 
 const Dashboard = () => {
     const theme = useTheme();
     const colors = tokens(theme.palette.mode);
 
+    const [dashData,setDashData] = useState({})
+
     const [age, setAge] = useState('');
-    const [currentDevice,setCurrentDevice] = useState('')
+    
 
     const dispatch = useDispatch();
     const deviceList = useSelector((state) => state.deviceList);
     const { loading, error, device } = deviceList;
+
+    const [currentDevice,setCurrentDevice] = useState('') 
+
+    console.log('CURRENT DEVICE================',currentDevice)
+
+    const liveData = useSelector((state) => state.livedata);
+    const { livedata } = liveData;
+
     
-    console.log(currentDevice)
     useEffect(() => {
         dispatch(listDevices());
+        dispatch(getDashboardData())
+        dispatch(listLiveData());
+        
     }, [dispatch]);
 
     const handleChange = (event) => {
@@ -175,13 +190,14 @@ const Dashboard = () => {
                         title="Daily AQI"
                         subtitle="air quality index"
                         progress="0.75"
-                        increase="+14%"
+                        
                         icon={
                             <AirOutlinedIcon
                                 sx={{ color: colors.greenAccent[600], fontSize: "26px" }}
                             />
                         }
                     />
+                    <PieChart className="pie_chart w-50" />
                 </Box>
 
                 <Box
@@ -226,7 +242,7 @@ const Dashboard = () => {
                     </Box>
 
                     <Box height="250px" ml="-20px">
-                        <LineChart isDashboard={true} />
+                        <LineChart isDashboard={true} data={mockDataLine} />  
                     </Box>
                 </Box>
 

@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, { useEffect ,useState} from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { listOrganization } from "../actions/organizationActions";
 import { listUsers } from "../actions/userActions";
@@ -10,6 +10,12 @@ import Organization from "../components/Organization";
 import { listDevices } from "../actions/deviceActions";
 
 function OrganisationScreen() {
+  const [name,setName] = useState('')
+  const [description,setDescription] = useState('')
+  const [isDefault,setIsDefault] = useState('no')
+  const [user,setUser] = useState('')
+  const [currentDevice,setCurrentDevice] = useState('')
+
   const dispatch = useDispatch();
   const userList = useSelector((state) => state.userList);
   const organizationList = useSelector((state) => state.organizationList);
@@ -20,7 +26,9 @@ function OrganisationScreen() {
 
   const addOrganisation = async (e) => {
     e.preventDefault();
-    await axios.post(`${BASE_URL}/addorganization/`).then((response) => {
+    let organizationData = {name,description,default: isDefault,users: user,devices : currentDevice}
+
+    await axios.post(`${BASE_URL}/addorganization/`,organizationData).then((response) => {
       if (response.data.errorCode === 0) {
         alert("Organisation successfully added");
         window.location.reload();
@@ -49,10 +57,9 @@ function OrganisationScreen() {
               className="ml-auto fa fa-plus-circle"
               data-toggle="modal"
               data-target="#exampleModalCenterAddOrganisation"
-              style={{ float: "right" }}
+              style={{ float: "right",color: "#e4e9fc" }}
             ></i>
             <div className="row">
-              {console.log(organizations)}
               {organizations &&
                 organizations.map((org) => (
                   <div className="col-md-4 mt-4">
@@ -100,11 +107,12 @@ function OrganisationScreen() {
                             type="text"
                             placeholder="Enter name of organization"
                             className="form-control"
+                            onChange={(e)=>setName(e.target.value)}
                           />
                         </div>
                         <div className="col-md-6 mt-2">
                           <p>Users</p>
-                          <select className="form-control">
+                          <select className="form-control" onChange={(e)=>setUser(e.target.value)}>
                             {users ? (
                               users.map((user) => (
                                 <option>{user.username}</option>
@@ -121,11 +129,12 @@ function OrganisationScreen() {
                             type="text"
                             placeholder="description"
                             className="form-control"
+                            onChange={(e)=>setDescription(e.target.value)}
                           />
                         </div>
                         <div className="col-md-6 mt-2">
                           <p>Devices</p>
-                          <select className="form-control">
+                          <select className="form-control" onChange={(e)=>setCurrentDevice(e.target.value)}>
                           {device ? (
                               device.map((device) => (
                                 <option>{device.deviceId}</option>
@@ -138,7 +147,7 @@ function OrganisationScreen() {
 
                         <div className="col-md-6 mt-2">
                           <p>default</p>
-                          <select className="form-control">
+                          <select className="form-control" onChange={(e)=>setIsDefault(e.target.value)}>
                             <option>Yes</option>
                             <option>No</option>
                           </select>
