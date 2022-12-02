@@ -8,7 +8,7 @@ import TableHead from '@mui/material/TableHead';
 import TablePagination from '@mui/material/TablePagination';
 import TableRow from '@mui/material/TableRow';
 import {useTheme} from "@mui/material";
-import { tokens } from "../theme";
+import { tokens } from "../../theme";
 
 
 const columns = [
@@ -60,7 +60,7 @@ const rows = [
   createData('Brazil', 'BR', 210147125, 8515767),
 ];
 
-export default function ColumnGroupingTable() {
+export default function EnhancedTable() {
   const [page, setPage] = React.useState(0);
   const [rowsPerPage, setRowsPerPage] = React.useState(10);
 
@@ -138,3 +138,10 @@ export default function ColumnGroupingTable() {
   );
   
 }
+
+
+
+
+
+
+

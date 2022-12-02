@@ -33,6 +33,7 @@
     "react-redux": "^8.0.5",
     "react-router-dom": "^6.4.3",
     "react-scripts": "5.0.1",
+    "react-swipeable-views": "^0.14.0",
     "react-tabs": "^5.1.0",
     "react-virtualized": "^9.22.3",
     "redux": "^4.2.0",

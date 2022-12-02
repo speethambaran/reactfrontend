@@ -17,8 +17,8 @@ import Table from './components/Table';
 import Users from './components/Users';
 import OrganisationScreen from './screens/OrganisationScreen';
 import AddSensorScreen from './screens/AddSensorScreen';
-import EnhancedTable from './components/LivedataTable'
-import LiveData from   './components/LiveData'
+import EnhancedTable from './components/LiveData/LivedataTable'
+import LiveData from   './components/LiveData/LiveData'
 
 function App() {
   const [theme, colorMode] = useMode();

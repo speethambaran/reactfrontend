@@ -1,19 +1,10 @@
-import { Box, Button, IconButton, Typography, Paper, useTheme } from "@mui/material"
-import { tokens } from "../theme";
-import Header from "../components/Header";
-import LineChart from "../components/Linechart";
-import EnhancedTable from '../components/LivedataTable'
-import DownloadOutlinedIcon from '@mui/icons-material/DownloadOutlined';
-import RefreshIcon from '@mui/icons-material/Refresh';
-import ThunderstormOutlinedIcon from '@mui/icons-material/ThunderstormOutlined';
-import AirOutlinedIcon from '@mui/icons-material/AirOutlined';
-import { extendTheme, CssVarsProvider } from '@mui/joy/styles';
-import Select from '@mui/joy/Select';
-import Option from '@mui/joy/Option';
-import OnlinePredictionIcon from '@mui/icons-material/OnlinePrediction';
-import Badge from '@mui/material/Badge';
-import Alert from '@mui/material/Alert';
-// import CardMedia from '@mui/material/CardMedia';
+import { Box,  useTheme } from "@mui/material"
+import { tokens } from "../../theme";
+import Header from "../../components/Header";
+// import LineChart from "../components/Linechart";
+import FloatingActionButtonZoom from "../../components/LiveData/LiveScreen"
+import EnhancedTable from "../../components/LiveData/LivedataTable"
+
 
 const LiveData = () => {
     const theme = useTheme();
@@ -76,7 +67,153 @@ const LiveData = () => {
                         justifyContent="space-between"
                         alignItems="center"
                     >
-                        <Box>
+                         <Box height="250px" ml="-2em" width="2000px" mt="-1em" marginRight="-2em">
+                         <FloatingActionButtonZoom />
+                        </Box>
+
+                        
+
+
+                    </Box>
+
+
+                </Box>
+
+            </Box >
+        </Box >
+    )
+}
+
+export default LiveData;
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+{/* <Box>
                             <Typography
                                 variant="h5"
                                 fontWeight="600"
@@ -134,9 +271,9 @@ const LiveData = () => {
                         justifyContent="space-between"
                         alignItems="center"
 
-                    >
+                    > 
 
-                        <Typography varient="h3" color={colors.grey[100]}>
+                         <Typography varient="h3" color={colors.grey[100]}>
 
                             <img
                                 mt="1em"
@@ -147,27 +284,23 @@ const LiveData = () => {
                                 justifyContent="center"
                                 alignItems="center"
                             />
-                           
+
                         </Typography>
                         <Typography varient="h1"  >
-                        <Alert variant="outlined" severity="error" >
+                            <Alert variant="outlined" severity="error" >
                                 NO DATA FOUND!!!!!
                             </Alert>
-                            </Typography>
+                        </Typography>
+                         </Box>
 
-                        
+//                          {/* line chart */}
 
-                    </Box>
-                </Box>
+// {/* <Box height="250px" ml="-20px">
+//                             <LineChart isDashboard={true} />
+//                         </Box> */}
 
+{/* table */ }
 
-            </Box>
-
-        </Box >
-    )
-}
-
-export default LiveData;
 
 
 
