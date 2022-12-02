@@ -486,3 +486,13 @@ canvas{
   width: 150px;
   display: inline;
 }
+.line_graph{
+  max-width: 70%;
+}
+div.MuiBox-root canvas{
+  width: 600px;
+}
+.formBx{
+  background-color: whitesmoke;
+  color: #111;
+}

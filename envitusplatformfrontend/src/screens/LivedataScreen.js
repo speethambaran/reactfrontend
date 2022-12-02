@@ -14,6 +14,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { listDevices } from '../actions/deviceActions';
 import LoadingBox from '../components/LoadingBox';
 import MessageBox from '../components/MessageBox';
+import LivedataGraph from '../components/LivedataGraph';
 
 function TabPanel(props) {
   const { children, value, index, ...other } = props;
@@ -143,7 +144,14 @@ export default function BasicTabs({ role }) {
       </TabPanel>
       <TabPanel value={value} index={1}>
         Graph
-        <LineChart isDashboard={true} data={mockDataLine} />
+        <div className='row'>
+          <div className='col-md-2'></div>
+          <div className='col-md-8'>
+          <LivedataGraph />
+          </div>
+          <div className='col-md-2'></div>
+        
+        </div>
       </TabPanel>
     </Box>
   );

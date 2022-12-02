@@ -42,23 +42,32 @@ export const getDashboardData = () => async (dispatch) => {
   dispatch({ type: DASHBOARD_DATA_REQUEST })
   try {
     let finalRes
-    const deviceData = await Axios.get(`${BASE_URL}/getdevice`).then(async(response)=>{
-      let {data} = await Axios.get(`${BASE_URL}/getlivedata`)
-      // console.log('LIVE DATA----------',data.message)
-      finalRes = data.message
-      for (let i = 0;i<finalRes.length;i++){
-        if (finalRes[i].deviceId == response.data.message[i].deviceId){
-          finalRes[i].AQI = response.data.message[i].latestAQI
-          // console.log('HELLO FOUND')
-        }else{
-          // console.log('NOT FOUND')
-        }
-        return finalRes
+    const deviceData = await Axios.get(`${BASE_URL}/getdevice`)
+    let {data} = await Axios.get(`${BASE_URL}/getlivedata?deviceId=patnaenvtest`)
+    data = data.message
+
+    function compare( a, b ) {
+      if ( a.receivedTime < b.receivedTime ){
+        return -1;
       }
-    })
-    //  console.log('DEVICE DATA---------->', finalRes)
-    dispatch({type: DASHBOARD_DATA_SUCCESS,payload: deviceData.data.message})
+      if ( a.receivedTime > b.receivedTime ){
+        return 1;
+      }
+      return 0;
+    }
+    let result = data.sort(compare)
+    
+    dispatch({type: DASHBOARD_DATA_SUCCESS,payload:result.pop()})
   } catch (error) {
     dispatch({ type: DASHBOARD_DATA_FAIL, payload: error.message })
   }
 }
+
+// var counts = [4, 9, 15, 6, 2],
+//   goal = 5;
+
+// var closest = counts.reduce(function(prev, curr) {
+//   return (Math.abs(curr - goal) < Math.abs(prev - goal) ? curr : prev);
+// });
+
+// console.log(closest);

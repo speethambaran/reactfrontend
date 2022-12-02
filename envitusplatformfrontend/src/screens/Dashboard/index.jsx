@@ -20,12 +20,12 @@ import { getDashboardData, listDevices } from "../../actions/deviceActions";
 import { listLiveData } from "../../actions/sensorActions";
 import { mockDataLine } from "../../data/mockData";
 import PieChart from "../../components/PieChart";
+import VerticalChart from "../../components/VerticalChart";
 
 const Dashboard = () => {
     const theme = useTheme();
     const colors = tokens(theme.palette.mode);
 
-    const [dashData,setDashData] = useState({})
 
     const [age, setAge] = useState('');
     
@@ -36,7 +36,42 @@ const Dashboard = () => {
 
     const [currentDevice,setCurrentDevice] = useState('') 
 
-    console.log('CURRENT DEVICE================',currentDevice)
+    // console.log('CURRENT DEVICE================',currentDevice)
+
+    const liveDataforDashboard = useSelector((state) => state.dashboardData);
+    const { dashboardData } = liveDataforDashboard;
+    console.log('DASHBOARD DATA=============',dashboardData)
+
+    // Need to get data like this
+    // [
+    //     {
+    //         "id": "Device1",
+    //         "color": "hsl(214, 70%, 50%)",
+    //         "data": [
+    //           {
+    //             "x": "plane",
+    //             "y": 0
+    //           },
+    //           {
+    //             "x": "helicopter",
+    //             "y": 71
+    //           },
+    //     }
+    // ]
+    let sampleResObj = {}
+    sampleResObj.id = dashboardData && dashboardData.deviceId
+    sampleResObj.color = "hsl(214, 70%, 50%)"
+    sampleResObj.data = [
+        {
+          "x": "plane",
+          "y": 0
+        },
+        {
+          "x": "helicopter",
+          "y": 100
+        },]
+    console.log('sample jsn------------',sampleResObj)
+    // End data format
 
     const liveData = useSelector((state) => state.livedata);
     const { livedata } = liveData;
@@ -197,7 +232,7 @@ const Dashboard = () => {
                             />
                         }
                     />
-                    <PieChart className="pie_chart w-50" />
+                    {/* <PieChart style={{width:"100px",height:"100px"}} className="pie_chart w-50" /> */}
                 </Box>
 
                 <Box
@@ -243,6 +278,7 @@ const Dashboard = () => {
 
                     <Box height="250px" ml="-20px">
                         <LineChart isDashboard={true} data={mockDataLine} />  
+                        {/* <VerticalChart /> */}
                     </Box>
                 </Box>
 

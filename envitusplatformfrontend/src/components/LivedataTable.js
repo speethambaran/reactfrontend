@@ -82,7 +82,7 @@ function LivedataTable({deviceId}) {
   let dataRow = formatData(livedata)
 
   dataRow = dataRow && dataRow.sort(
-    (p1, p2) => (p1.receivedTime < p2.receivedTime) ? 1 : (p1.receivedTime > p2.receivedTime) ? -1 : 0);
+    (p1, p2) => (p1.receivedTime < p2.receivedTime) ? -1 : (p1.receivedTime > p2.receivedTime) ? 1 : 0);
   
   console.log(dataRow)
   
