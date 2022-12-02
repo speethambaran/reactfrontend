@@ -17,7 +17,7 @@ import TableViewIcon from "@mui/icons-material/TableView";
 import StackedLineChartOutlinedIcon from "@mui/icons-material/StackedLineChartOutlined";
 import Sampletable from "../../components/LiveData/Sampletable";
 import LineChart from "../../components/Linechart";
-
+import Nodata from "../../components/LiveData/Nodata"
 
 function TabPanel(props) {
   const { children, value, index, ...other } = props;
@@ -138,10 +138,10 @@ export default function FloatingActionButtonZoom() {
           < Sampletable />
         </TabPanel>
         <TabPanel value={value} index={2} dir={theme.direction}>
-          Item Three
+          <Nodata/>
         </TabPanel>
         <TabPanel value={value} index={3} dir={theme.direction}>
-          Item four
+        <Nodata/>
         </TabPanel>
       </SwipeableViews>
     </Box>
