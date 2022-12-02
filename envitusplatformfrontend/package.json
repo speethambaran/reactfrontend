@@ -8,6 +8,7 @@
     "@emotion/styled": "^11.10.5",
     "@faker-js/faker": "^7.6.0",
     "@mui/icons-material": "^5.10.15",
+    "@mui/joy": "^5.0.0-alpha.56",
     "@mui/material": "^5.10.15",
     "@mui/x-data-grid": "^5.17.13",
     "@nivo/bar": "^0.80.0",

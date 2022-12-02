@@ -73,7 +73,7 @@ const Sidebar = ({ role }) => {
         >
 
             <ProSidebar collapsed={isCollapsed}>
-                <Menu iconShape="square">
+                <Menu iconShape="circle">
                     {/* logo and menu icon */}
                     <MenuItem
                         onClick={() => setIsCollapsed(!isCollapsed)}

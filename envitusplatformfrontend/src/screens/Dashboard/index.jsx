@@ -163,7 +163,6 @@ const Dashboard = () => {
                         subtitle="device"
                         progress="0.75"
                         increase="progress"
-                        test="jhgfghj"
                         icon={
                             <DevicesOutlinedIcon
                                 sx={{ color: colors.greenAccent[600], fontSize: "26px" }}
@@ -184,7 +183,7 @@ const Dashboard = () => {
                     <StatBox
                         title="Alert"
                         subtitle="alert"
-                        progress="0.75"
+                        progress="0.25"
                         increase="0"
                         icon={
                             <AddAlertOutlinedIcon

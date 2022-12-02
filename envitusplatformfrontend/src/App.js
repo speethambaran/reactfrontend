@@ -19,6 +19,8 @@ import OrganisationScreen from './screens/OrganisationScreen';
 import AddSensorScreen from './screens/AddSensorScreen';
 import LivedataScreen from './screens/LivedataScreen'
 import ProfileScreen from './screens/ProfileScreen';
+// import EnhancedTable from './components/LivedataTable'
+import LiveData from   './components/LiveData'
 
 function App() {
   const [theme, colorMode] = useMode();
@@ -55,9 +57,13 @@ function App() {
             <Route path='/sensors' element={<AddSensorScreen role={userRole} />} />
             <Route path='/livedata' element={<LivedataScreen role={userRole} />} />
             <Route path='/profile' element={<ProfileScreen />} />
+            {/* <Route path="/livedata" element={<EnhancedTable/>}/>  */}
             <Route path="/bar" element={<Bar/>}/>
             <Route path="/line" element={<Line/>}/>
             <Route path="/map" element={<AddressMap/>}/>
+            <Route path="/live" element={<LiveData/>}/>
+
+            
              </Routes>
           </main>
         </div>
