@@ -50,7 +50,7 @@ export default function Users() {
             <div className="table-responsive">
               <table
                 className="table mt-2"
-                style={{ backgroundColor: "white" }}
+                style={{ backgroundColor: "grey" }}
               >
                 <thead className="thead-light">
                   <tr>

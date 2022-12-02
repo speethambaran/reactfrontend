@@ -24,7 +24,7 @@ function Table({role}) {
       ) : (
         <div className="table-responsive mt-2 p-2">
         <h1 className="title">Device List</h1>
-        <table className="table mt-2" style={{ backgroundColor: "white" }}>
+        <table className="table mt-2" style={{ backgroundColor: "grey" }}>
           <thead className="thead-light">
             <tr>
               <th scope="col">SI</th>

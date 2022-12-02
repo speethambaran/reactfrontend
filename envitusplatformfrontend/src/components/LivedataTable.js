@@ -7,7 +7,8 @@ import TableContainer from '@mui/material/TableContainer';
 import TableHead from '@mui/material/TableHead';
 import TablePagination from '@mui/material/TablePagination';
 import TableRow from '@mui/material/TableRow';
-
+import {useTheme} from "@mui/material";
+import { tokens } from "../theme";
 
 
 const columns = [
@@ -71,12 +72,14 @@ export default function ColumnGroupingTable() {
     setRowsPerPage(+event.target.value);
     setPage(0);
   };
+  const theme = useTheme();
+  const colors = tokens(theme.palette.mode);
  
   return (
     
     <Paper >
       <TableContainer sx={{ maxHeight: 325   }}>
-        <Table stickyHeader aria-label="sticky table">
+        <Table  stickyHeader aria-label="sticky table">
           <TableHead>
             <TableRow>
               <TableCell align="center" colSpan={2}>
