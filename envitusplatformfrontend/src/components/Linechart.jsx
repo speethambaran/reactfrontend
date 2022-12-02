@@ -51,8 +51,8 @@ const LineChart = ({ isDashboard = false,data }) => {
             xScale={{ type: 'point' }}
             yScale={{
                 type: 'linear',
-                min: 'auto',
-                max: 'auto',
+                min: 0,
+                max: 1000,
                 stacked: true,
                 reverse: false
             }}

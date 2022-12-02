@@ -1,114 +1,74 @@
-import React from 'react'
+import React, { useEffect } from 'react'
+import { useDispatch, useSelector } from 'react-redux';
+import { listDevices } from '../actions/deviceActions';
+import LoadingBox from './LoadingBox';
+import MessageBox from './MessageBox';
 
 function DeviceList() {
+  const dispatch = useDispatch();
+  const deviceList = useSelector((state) => state.deviceList);
+  const { loading, error, device } = deviceList;
+
+  console.log('DEVICES-------------------', device)
+
+  useEffect(() => {
+    dispatch(listDevices());
+  }, [dispatch]);
   return (
-    <div className="container-fluid mt-5" style={{ backgroundColor: "white" }}>
-      {/* <h1>Device List</h1> */}
-      <table className="table mt-5">
-        <thead className="thead-light">
-          <tr>
-            <th scope="col">device ID</th>
-            <th scope="col">Status</th>
-            <th scope="col">Type</th>
-            <th scope="col">Family</th>
-            <th scope="col">City</th>
-            <th scope="col">LandMark</th>
-            <th scope="col">Action</th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr>
-            <td scope="row">device_1</td>
-            <td>
-              <i
-                className="fa fa-dot-circle-o"
-                style={{
-                  color: "green",
-                  backgroundColor: "#40dd40",
-                  borderRadius: "50%",
-                }}
-              ></i>
-            </td>
-            <td>Air</td>
-            <td>ESPATNAOTDR</td>
-            <td>Kochi</td>
-            <td>Central</td>
-            <td>
-              <i className="fa fa-pencil m-1"></i>
-              <i className="fa fa-trash m-1"></i>
-              <i className="fa fa-eye m-1"></i>
-            </td>
-          </tr>
-          <tr>
-            <td scope="row">device_1</td>
-            <td>
-              <i
-                className="fa fa-dot-circle-o"
-                style={{
-                  color: "green",
-                  backgroundColor: "#40dd40",
-                  borderRadius: "50%",
-                }}
-              ></i>
-            </td>
-            <td>Air</td>
-            <td>ESPATNAOTDR</td>
-            <td>Kochi</td>
-            <td>Central</td>
-            <td>
-              <i className="fa fa-pencil m-1"></i>
-              <i className="fa fa-trash m-1"></i>
-              <i className="fa fa-eye m-1"></i>
-            </td>
-          </tr>
-          <tr>
-            <td scope="row">device_1</td>
-            <td>
-              <i
-                className="fa fa-dot-circle-o"
-                style={{
-                  color: "green",
-                  backgroundColor: "#40dd40",
-                  borderRadius: "50%",
-                }}
-              ></i>
-            </td>
-            <td>Air</td>
-            <td>ESPATNAOTDR</td>
-            <td>Kochi</td>
-            <td>Central</td>
-            <td>
-              <i className="fa fa-pencil m-1"></i>
-              <i className="fa fa-trash m-1"></i>
-              <i className="fa fa-eye m-1"></i>
-            </td>
-          </tr>
-          <tr>
-            <td scope="row">device_1</td>
-            <td>
-              <i
-                className="fa fa-dot-circle-o"
-                style={{
-                  color: "darkgrey",
-                  backgroundColor: "grey",
-                  borderRadius: "50%",
-                }}
-              ></i>
-            </td>
-            <td>Air</td>
-            <td>ESPATNAOTDR</td>
-            <td>Kochi</td>
-            <td>Central</td>
-            <td>
-              <i className="fa fa-pencil m-1"></i>
-              <i className="fa fa-trash m-1"></i>
-              <i className="fa fa-eye m-1"></i>
-            </td>
-          </tr>
-        </tbody>
-      </table>
+    <div className='container-fluid'>
+      <h2>Device List</h2>
+      <div class="table-wrapper-scroll-y my-custom-scrollbar">
+        {loading ? (
+          <LoadingBox />
+        ) : error ? (
+          <MessageBox />
+        ) : (
+          <table class="table table-bordered table-striped mb-0 device-list bg-light">
+            <thead>
+              <tr>
+                <th scope="col">No</th>
+                <th scope="col">Device ID</th>
+                <th scope="col">Status</th>
+                <th scope="col">SubType</th>
+                <th scope="col">Type</th>
+                <th scope="col">City</th>
+                <th scope="col">LandMark</th>
+                <th scope="col">Actions</th>
+              </tr>
+            </thead>
+            <tbody>
+              {device && device.map((dev, index) => (
+                <tr>
+                  <th scope="row">{index + 1}</th>
+                  <td>{dev.deviceId}</td>
+                  <td>
+                    <i
+                      className={`fa fa-dot-circle-o ${((dev.lastDataReceiveTime) - (new Date().valueOf())) < 15 * 60 * 1000 ? 'live' : 'not-live'}`}
+                      style={{
+                        borderRadius: "50%",
+                      }}
+                    ></i>
+                  </td>
+                  <td>{dev.subType}</td>
+                  <td>{dev.type}</td>
+                  <td>{dev.location.city}</td>
+                  <td>{dev.location.landMark}</td>
+                  <td>
+                    <i className="fa fa-pencil m-1"></i>
+                    <i
+                      className="fa fa-trash m-1"
+
+                    ></i>
+                    <i className="fa fa-eye m-1"></i>
+                  </td>
+                </tr>
+              ))}
+            </tbody>
+          </table>
+        )}
+      </div>
     </div>
-  );
+  )
 }
 
 export default DeviceList

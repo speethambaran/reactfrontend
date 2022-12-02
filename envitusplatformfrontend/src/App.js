@@ -21,6 +21,8 @@ import LivedataScreen from './screens/LivedataScreen'
 import ProfileScreen from './screens/ProfileScreen';
 // import EnhancedTable from './components/LivedataTable'
 import LiveData from   './components/LiveData'
+import DeviceList from './components/DeviceList';
+import TableBKP from './components/TableBKP'
 
 function App() {
   const [theme, colorMode] = useMode();
@@ -51,17 +53,17 @@ function App() {
             <Route path="/dashboard" exact={true}  element={<Dashboard/>}/>
             <Route path='/' exact={true} element={<LoginScreen />} />
             <Route path='/register' element={<RegisterScreen />} />
-            <Route path='/device' element={<Table role={userRole} />} />
+            <Route path='/device' element={<DeviceList role={userRole} />} />
             <Route path='/users' element={<Users role={userRole} />} />
             <Route path='/organizations' element={<OrganisationScreen role={userRole} />} />
             <Route path='/sensors' element={<AddSensorScreen role={userRole} />} />
-            <Route path='/livedata' element={<LivedataScreen role={userRole} />} />
+            {/* <Route path='/livedata' element={<LivedataScreen role={userRole} />} /> */}
             <Route path='/profile' element={<ProfileScreen />} />
             {/* <Route path="/livedata" element={<EnhancedTable/>}/>  */}
             <Route path="/bar" element={<Bar/>}/>
             <Route path="/line" element={<Line/>}/>
             <Route path="/map" element={<AddressMap/>}/>
-            <Route path="/live" element={<LiveData/>}/>
+            <Route path="/livedata" element={<LiveData role={userRole} />}/>
 
             
              </Routes>

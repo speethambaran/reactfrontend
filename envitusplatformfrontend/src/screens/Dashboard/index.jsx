@@ -21,6 +21,7 @@ import { listLiveData } from "../../actions/sensorActions";
 import { mockDataLine } from "../../data/mockData";
 import PieChart from "../../components/PieChart";
 import VerticalChart from "../../components/VerticalChart";
+import SimpleMap from "../../components/SimpleMap";
 
 const Dashboard = () => {
     const theme = useTheme();
@@ -28,6 +29,7 @@ const Dashboard = () => {
 
 
     const [age, setAge] = useState('');
+    const [dashData,setDashData] = useState({})
     
 
     const dispatch = useDispatch();
@@ -36,45 +38,13 @@ const Dashboard = () => {
 
     const [currentDevice,setCurrentDevice] = useState('') 
 
-    // console.log('CURRENT DEVICE================',currentDevice)
-
     const liveDataforDashboard = useSelector((state) => state.dashboardData);
-    const { dashboardData } = liveDataforDashboard;
-    console.log('DASHBOARD DATA=============',dashboardData)
-
-    // Need to get data like this
-    // [
-    //     {
-    //         "id": "Device1",
-    //         "color": "hsl(214, 70%, 50%)",
-    //         "data": [
-    //           {
-    //             "x": "plane",
-    //             "y": 0
-    //           },
-    //           {
-    //             "x": "helicopter",
-    //             "y": 71
-    //           },
-    //     }
-    // ]
-    let sampleResObj = {}
-    sampleResObj.id = dashboardData && dashboardData.deviceId
-    sampleResObj.color = "hsl(214, 70%, 50%)"
-    sampleResObj.data = [
-        {
-          "x": "plane",
-          "y": 0
-        },
-        {
-          "x": "helicopter",
-          "y": 100
-        },]
-    console.log('sample jsn------------',sampleResObj)
-    // End data format
+    const { loadingTime,err,dashboardData } = liveDataforDashboard;
 
     const liveData = useSelector((state) => state.livedata);
     const { livedata } = liveData;
+
+    console.log('DEVICE---------------',device)
 
     
     useEffect(() => {
@@ -223,7 +193,7 @@ const Dashboard = () => {
                     <StatBox
                         title="Daily AQI"
                         subtitle="air quality index"
-                        progress="0.75"
+                        progress="0.5"
                         
                         icon={
                             <AirOutlinedIcon
@@ -276,7 +246,15 @@ const Dashboard = () => {
                     </Box>
 
                     <Box height="250px" ml="-20px">
-                        <LineChart isDashboard={true} data={mockDataLine} />  
+                        {/* {loadingTime ? (
+                            <LoadingBox />
+                        ) : error ? (<MessageBox />) : (
+                            <div>
+                                <LineChart isDashboard={true} data={dashboardData} />
+                            </div>
+                        )} */}
+                        {dashboardData && <LineChart isDashboard={true} data={dashboardData} />  }
+                        {/* <LineChart isDashboard={true} data={mockDataLine} />   */}
                         {/* <VerticalChart /> */}
                     </Box>
                 </Box>
@@ -322,6 +300,7 @@ const Dashboard = () => {
 
                     <Box height="300px" width="500px" ml="3px">
                         <AddressMap isDashboard={true} />
+                        {/* <SimpleMap /> */}
                     </Box>
 
                 </Box>

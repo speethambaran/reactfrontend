@@ -19,7 +19,19 @@ export const listDevices = () => async (dispatch) => {
   });
   try {
     const data = await Axios.get(`${BASE_URL}/getdevice`);
-    dispatch({ type: DEVICE_LIST_SUCCESS, payload: data.data.message });
+    // console.log('DEVICE LIST : ',data.data.message)
+    let deviceData = data.data.message
+    for (let i = 0; i < deviceData.length; i++) {
+      if ((new Date().valueOf() - deviceData[i].lastDataReceiveTime) < (15 * 60 * 1000)) {
+        // console.log(deviceData[i].deviceId , 'is online')
+        deviceData[i].isOnline = true
+      } else {
+        // console.log(deviceData[i].deviceId , 'is offline')
+        deviceData[i].isOnline = false
+      }
+
+    }
+    dispatch({ type: DEVICE_LIST_SUCCESS, payload: deviceData });
   } catch (error) {
     dispatch({ type: DEVICE_LIST_FAIL, payload: error.message });
   }
@@ -38,36 +50,51 @@ export const listLivedata = () => async (dispatch) => {
   }
 }
 
+const splitKeyValue = obj => {
+  const keys = Object.keys(obj);
+  const res = [];
+  for (let i = 0; i < keys.length; i++) {
+    res.push({
+      'x': keys[i],
+      'y': obj[keys[i]]
+    });
+  };
+  return res;
+};
+
 export const getDashboardData = () => async (dispatch) => {
   dispatch({ type: DASHBOARD_DATA_REQUEST })
   try {
     let finalRes
     const deviceData = await Axios.get(`${BASE_URL}/getdevice`)
-    let {data} = await Axios.get(`${BASE_URL}/getlivedata?deviceId=patnaenvtest`)
+    let { data } = await Axios.get(`${BASE_URL}/getlivedata?deviceId=patnaenvtest`)
     data = data.message
 
-    function compare( a, b ) {
-      if ( a.receivedTime < b.receivedTime ){
+    function compare(a, b) {
+      if (a.receivedTime < b.receivedTime) {
         return -1;
       }
-      if ( a.receivedTime > b.receivedTime ){
+      if (a.receivedTime > b.receivedTime) {
         return 1;
       }
       return 0;
     }
     let result = data.sort(compare)
-    
-    dispatch({type: DASHBOARD_DATA_SUCCESS,payload:result.pop()})
+    result = result.pop()
+    let resArr = []
+    let dataArr = []
+    delete result.data["receivedTime"]; 
+    dataArr.push(splitKeyValue(result.data))
+
+    let resObj = {}
+    resObj.id = 'patnaenvtest'
+    resObj.color = "hsl(214, 70%, 50%)"
+    resObj.data = dataArr[0]
+    resArr.push(resObj)
+
+    // dispatch({type: DASHBOARD_DATA_SUCCESS,payload:result.pop()})
+    dispatch({ type: DASHBOARD_DATA_SUCCESS, payload: resArr })
   } catch (error) {
     dispatch({ type: DASHBOARD_DATA_FAIL, payload: error.message })
   }
 }
-
-// var counts = [4, 9, 15, 6, 2],
-//   goal = 5;
-
-// var closest = counts.reduce(function(prev, curr) {
-//   return (Math.abs(curr - goal) < Math.abs(prev - goal) ? curr : prev);
-// });
-
-// console.log(closest);

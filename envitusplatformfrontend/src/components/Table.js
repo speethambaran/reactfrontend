@@ -5,6 +5,18 @@ import { listDevices } from "../actions/deviceActions";
 import { BASE_URL } from "../constants/AppliationConstants";
 import LoadingBox from '../components/LoadingBox'
 import MessageBox from '../components/MessageBox'
+// import Table from '@mui/material/Table';
+import TableBody from '@mui/material/TableBody';
+import TableCell from '@mui/material/TableCell';
+import TableContainer from '@mui/material/TableContainer';
+import TableHead from '@mui/material/TableHead';
+import TablePagination from '@mui/material/TablePagination';
+import TableRow from '@mui/material/TableRow';
+
+const columns = [
+  { id: 'deviceId', label: 'Device Id', minWidth: 170 },
+  
+];
 
 function Table({role}) {
   const dispatch = useDispatch();
@@ -30,7 +42,7 @@ function Table({role}) {
       ) : (
         <div className="table-responsive mt-2 p-2">
         <h1 className="title">Device List</h1>
-        <table className="table mt-2" style={{ backgroundColor: "white" }}>
+        <table className="table mt-2" >
           <thead className="thead-light">
             <tr>
               <th scope="col">SI</th>

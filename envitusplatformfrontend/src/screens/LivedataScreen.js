@@ -140,7 +140,7 @@ export default function BasicTabs({ role }) {
       </Box>
       <TabPanel value={value} index={0}>
         <h2>Raw Data</h2>
-        <LivedataTable deviceId = {currentDevice} />
+        <LivedataTable deviceId = {currentDevice} /> 
       </TabPanel>
       <TabPanel value={value} index={1}>
         Graph

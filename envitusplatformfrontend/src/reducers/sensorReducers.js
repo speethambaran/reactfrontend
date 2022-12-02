@@ -43,14 +43,14 @@ export const sensorParameterListReducer = (
     }
 };
 
-export const liveDataReducer = (state = { loading: true, livedata: [] }, action) => {
+export const liveDataReducer = (state = { loadingTime: true, livedata: [] }, action) => {
     switch (action.type) {
         case LIVE_DATA_REQUEST:
-            return { loading: true }
+            return { loadingTime: true }
         case LIVE_DATA_SUCCESS:
-            return { loading: false, livedata: action.payload }
+            return { loadingTime: false, livedata: action.payload }
         case LIVE_DATA_FAIL:
-            return { loading: false, error: action.payload }
+            return { loadingTime: false, err: action.payload }
         default:
             return state
     }

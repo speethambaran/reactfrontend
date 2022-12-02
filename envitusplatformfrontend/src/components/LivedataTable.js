@@ -36,11 +36,6 @@ const columns = [
   { id: 'rawAQI', label: 'rawAQI', minWidth: 100 },
 ];
 
-function createData(name, code, population, size) {
-  const density = population / size;
-  return { name, code, population, size, density };
-}
-
 function formatData(data) {
   if (data) {
     let responseObj = {}
@@ -84,7 +79,7 @@ function LivedataTable({deviceId}) {
   dataRow = dataRow && dataRow.sort(
     (p1, p2) => (p1.receivedTime < p2.receivedTime) ? -1 : (p1.receivedTime > p2.receivedTime) ? 1 : 0);
   
-  console.log(dataRow)
+  console.log("TAW DATA ------",dataRow)
   
 
   React.useEffect(() => {
@@ -121,7 +116,7 @@ function LivedataTable({deviceId}) {
                 </TableRow>
               </TableHead>
               <TableBody>
-                {dataRow &&
+                {dataRow ? 
                   dataRow.slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
                     .map((row) => {
                       return (
@@ -138,7 +133,7 @@ function LivedataTable({deviceId}) {
                           })}
                         </TableRow>
                       );
-                    })}
+                    }) : <h1>NO DATA</h1>}
               </TableBody>
             </Table>
           </TableContainer>

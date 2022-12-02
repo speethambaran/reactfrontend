@@ -496,3 +496,15 @@ div.MuiBox-root canvas{
   background-color: whitesmoke;
   color: #111;
 }
+.my-custom-scrollbar {
+  position: relative;
+  height: 500px;
+  overflow: auto;
+  }
+  .table-wrapper-scroll-y {
+  display: block;
+  }
+  .device-list th,
+  .device-list td{
+    color: #111;
+  }
