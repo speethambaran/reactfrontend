@@ -27,7 +27,7 @@ export const data = {
     },
   ],
 };
-function Doughnut() {
+function DoughnutChart() {
   return (
     <div>
       <Doughnut data={data} />
@@ -35,4 +35,4 @@ function Doughnut() {
   );
 }
 
-export default Doughnut
+export default DoughnutChart

@@ -2,11 +2,14 @@ import axios from "axios";
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { listUsers, deleteUser } from "../actions/userActions";
+import { BASE_URL } from "../constants/AppliationConstants";
+import DeletedUser from "./DeletedUser";
 import LoadingBox from "./LoadingBox";
 import MessageBox from "./MessageBox";
 
 export default function Users() {
   const [user, setUser] = useState([]);
+  const [deactivatedUser, setDeactivatedUser] = useState([]);
 
   const dispatch = useDispatch();
   const userList = useSelector((state) => state.userList);
@@ -15,24 +18,26 @@ export default function Users() {
   useEffect(() => {
     dispatch(listUsers());
   }, [dispatch]);
-  
-  const deleteUser = async(userId)=>{
-      let deletedUser = await axios.post(`/users/deleteuser/`,{id : userId});
-      if (deletedUser.status == 200){
-        // alert('Do you want to delete')
-        return window.confirm("Do you want to delete");
-      }
-  }
+
+  const deleteUser = async (userId) => {
+    let deletedUser = await axios.post(`${BASE_URL}/users/deleteuser/`, {
+      id: userId,
+    });
+    if (deletedUser.status == 200) {
+      // alert('Do you want to delete')
+      return window.confirm("Do you want to delete");
+    }
+  };
 
   return (
-    <div className="container-fluid mt-5">
+    <div className="container-fluid mt-1">
       <h2>All Users</h2>
       {loading ? (
         <LoadingBox></LoadingBox>
       ) : error ? (
         <MessageBox variant="danger">{error}</MessageBox>
       ) : (
-        <div>
+        <div className="scroll panel-content">
           {users.length == 0 ? (
             <h1 className="empty">
               <img
@@ -42,8 +47,11 @@ export default function Users() {
               No User Found!
             </h1>
           ) : (
-            <div>
-              <table className="table" style={{backgroundColor:"white"}}>
+            <div className="table-responsive">
+              <table
+                className="table mt-2"
+                style={{ backgroundColor: "grey" }}
+              >
                 <thead className="thead-light">
                   <tr>
                     <th scope="col">No</th>
@@ -63,7 +71,14 @@ export default function Users() {
                       <td>{user.role}</td>
                       <td>{user.username}</td>
                       <td>{user.email}</td>
-                      <td>{user.is_active == true ? "active" : "inactive"}</td>
+                      <td
+                        style={{ height: "4px" }}
+                        className={`${
+                          user.is_active == true ? "active" : "inactive"
+                        }`}
+                      >
+                        {user.is_active == true ? "active" : "inactive"}
+                      </td>
                       <td>
                         <i className="fa fa-pencil m-1"></i>
                         <i
@@ -78,6 +93,9 @@ export default function Users() {
               </table>
             </div>
           )}
+          <div className="mt-1">
+            <DeletedUser userList={users} />
+          </div>
         </div>
       )}
     </div>

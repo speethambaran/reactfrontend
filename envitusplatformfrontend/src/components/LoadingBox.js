@@ -2,7 +2,7 @@ import React from 'react'
 
 function LoadingBox() {
   return (
-    <div>
+    <div className='loadingBx'>
       <div className="spinner-grow text-primary" role="status">
         <span className="sr-only">Loading...</span>
       </div>

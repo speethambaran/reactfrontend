@@ -3,7 +3,7 @@ import React from 'react'
 function DeviceList() {
   return (
     <div className="container-fluid mt-5" style={{ backgroundColor: "white" }}>
-      <h1>Device List</h1>
+      {/* <h1>Device List</h1> */}
       <table className="table mt-5">
         <thead className="thead-light">
           <tr>
@@ -18,7 +18,7 @@ function DeviceList() {
         </thead>
         <tbody>
           <tr>
-            <th scope="row">device_1</th>
+            <td scope="row">device_1</td>
             <td>
               <i
                 className="fa fa-dot-circle-o"
@@ -40,7 +40,7 @@ function DeviceList() {
             </td>
           </tr>
           <tr>
-            <th scope="row">device_1</th>
+            <td scope="row">device_1</td>
             <td>
               <i
                 className="fa fa-dot-circle-o"
@@ -62,7 +62,7 @@ function DeviceList() {
             </td>
           </tr>
           <tr>
-            <th scope="row">device_1</th>
+            <td scope="row">device_1</td>
             <td>
               <i
                 className="fa fa-dot-circle-o"
@@ -84,7 +84,7 @@ function DeviceList() {
             </td>
           </tr>
           <tr>
-            <th scope="row">device_1</th>
+            <td scope="row">device_1</td>
             <td>
               <i
                 className="fa fa-dot-circle-o"

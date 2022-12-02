@@ -1,9 +1,13 @@
-import React from 'react'
-import Map from './Map';
+import React from "react";
+import Map from "./Map";
 import { Chart as ChartJS, ArcElement, Tooltip, Legend } from "chart.js";
-import { Doughnut } from "react-chartjs-2";
-import { data } from '../data';
+// import { Doughnut } from "react-chartjs-2";
+import { data } from "../data";
 import GoogleMapReact from "google-map-react";
+import Chart from "./Chart";
+// import Doughnut from './DoughnutChart'
+import DoughnutChart from "./DoughnutChart";
+
 const AnyReactComponent = ({ text }) => <div>{text}</div>;
 function Dashboard() {
   const defaultProps = {
@@ -15,17 +19,12 @@ function Dashboard() {
   };
 
   return (
-    <div className="contaiainer-fluid p-2">
+    <div className="container-fluid p-2">
       <div className="row">
         <div className="col-md-3">
           <div
             className="cardBx p-4"
-            style={{
-              color: "#ffff",
-              backgroundColor: "#74ffa0",
-              boxShadow:
-                "0 4px 8px 0 rgba(41, 248, 220, 0.2), 0 6px 20px 0 rgba(26, 243, 142, 0.19)",
-            }}
+            style={{ color: "#ffff", backgroundColor: "rgb(78 209 120)" }}
           >
             <h2 className="text-center">Device</h2>
             <div className="row">
@@ -101,13 +100,14 @@ function Dashboard() {
               />
             </GoogleMapReact> */}
 
-            
             <Map />
             {/* <GoogleMap /> */}
           </div>
           <div className="col-md-6">
             {/* <Doughnut data = {data} /> */}
-            {/* <BarGraph /> */}
+            <div style={{ left: "-80px", position: "relative" }}>
+              <Chart />
+            </div>
           </div>
         </div>
       </div>
@@ -115,4 +115,4 @@ function Dashboard() {
   );
 }
 
-export default Dashboard
+export default Dashboard;
