@@ -79,7 +79,7 @@ function LivedataTable({deviceId}) {
   dataRow = dataRow && dataRow.sort(
     (p1, p2) => (p1.receivedTime < p2.receivedTime) ? -1 : (p1.receivedTime > p2.receivedTime) ? 1 : 0);
   
-  console.log("TAW DATA ------",dataRow)
+  // console.log("TAW DATA ------",dataRow && dataRow)
   
 
   React.useEffect(() => {
@@ -98,7 +98,7 @@ function LivedataTable({deviceId}) {
     <div className='container-fluid'>
       {loading ? (<LoadingBox />) : error ? (<MessageBox>{error}</MessageBox>) : (
         <div className='container'>
-          <CSVLink className='btn btn-success ml-auto' style={{float:"right",top:"-10px",position:"relative"}} data={dataRow}>Download Data</CSVLink>
+          {dataRow && <CSVLink className='btn btn-success ml-auto' style={{float:"right",top:"-10px",position:"relative"}} data={dataRow}>Download Data</CSVLink>}
           <Paper sx={{ width: '100%', overflow: 'hidden' }}>
           <TableContainer sx={{ maxHeight: 440 }}>
             <Table stickyHeader aria-label="sticky table">
