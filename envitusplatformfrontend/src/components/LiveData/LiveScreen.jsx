@@ -92,24 +92,16 @@ export default function FloatingActionButtonZoom() {
           <Tab label=<TableViewIcon /> {...a11yProps(1)} />
           <Tab label=<ThunderstormOutlinedIcon /> {...a11yProps(2)} />
           <Tab label=<AirOutlinedIcon /> {...a11yProps(3)} />
-          <Tab /><Tab /><Tab />
-
-          <Select
-            labelId="demo-simple-select-label"
-            id="demo-simple-select"
-            value={age}
-            label="Age"
-            placeholder="hiii"
-            onChange={handlechange}
-
-          >
-            <MenuItem value={10}>Device 1</MenuItem>
-            <MenuItem value={20}>Device 2</MenuItem>
-            <MenuItem value={30}>Device 3</MenuItem>
-          </Select>
-          <Tab /><Tab />
-          <Tab />
-          <Tab />
+          
+          <Select value={2} style={{ marginTop: 1, marginLeft: 200 ,marginRight:200 }}>
+      <MenuItem value={1}>Device 1</MenuItem>
+      <MenuItem value={2}>Device 2</MenuItem>
+      <MenuItem value={3}>Device 3</MenuItem>
+      <MenuItem value={4}>Device 4</MenuItem>
+      <MenuItem value={5}>Device 5</MenuItem>
+    </Select>
+          
+          
           <IconButton>
             <RefreshIcon />
           </IconButton>
