@@ -78,7 +78,7 @@ export default function EnhancedTable() {
   return (
     
     <Paper >
-      <TableContainer sx={{ maxHeight: 325   }}>
+      <TableContainer sx={{ maxHeight: 280   }}>
         <Table  stickyHeader aria-label="sticky table">
           <TableHead>
             <TableRow>

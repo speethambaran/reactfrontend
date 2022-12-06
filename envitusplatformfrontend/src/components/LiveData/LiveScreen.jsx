@@ -82,8 +82,8 @@ export default function FloatingActionButtonZoom() {
         <Tabs
           value={value}
           onChange={handleChange}
-          indicatorColor="primary"
-          textColor="primary"
+          indicatorColor="grey"
+          textColor="success"
           variant="fullWidth"
           aria-label="action tabs example"
 
@@ -92,7 +92,7 @@ export default function FloatingActionButtonZoom() {
           <Tab label=<TableViewIcon /> {...a11yProps(1)} />
           <Tab label=<ThunderstormOutlinedIcon /> {...a11yProps(2)} />
           <Tab label=<AirOutlinedIcon /> {...a11yProps(3)} />
-          <Tab /><Tab /><Tab /><Tab />
+          <Tab /><Tab /><Tab />
 
           <Select
             labelId="demo-simple-select-label"
@@ -109,7 +109,7 @@ export default function FloatingActionButtonZoom() {
           </Select>
           <Tab /><Tab />
           <Tab />
-          <Tab /><Tab />
+          <Tab />
           <IconButton>
             <RefreshIcon />
           </IconButton>
