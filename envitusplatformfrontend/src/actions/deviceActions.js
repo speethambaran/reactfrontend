@@ -62,12 +62,12 @@ const splitKeyValue = obj => {
   return res;
 };
 
-export const getDashboardData = () => async (dispatch) => {
+export const getDashboardData = (deviceId) => async (dispatch) => {
   dispatch({ type: DASHBOARD_DATA_REQUEST })
   try {
     let finalRes
     const deviceData = await Axios.get(`${BASE_URL}/getdevice`)
-    let { data } = await Axios.get(`${BASE_URL}/getlivedata?deviceId=patnaenvtest`)
+    let { data } = await Axios.get(`${BASE_URL}/getlivedata?deviceId=${deviceId}`)
     data = data.message
 
     function compare(a, b) {

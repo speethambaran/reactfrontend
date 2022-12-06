@@ -20,9 +20,12 @@ import AddSensorScreen from './screens/AddSensorScreen';
 import LivedataScreen from './screens/LivedataScreen'
 import ProfileScreen from './screens/ProfileScreen';
 // import EnhancedTable from './components/LivedataTable'
-import LiveData from   './components/LiveData'
+// import LiveData from   './components/LiveData'
 import DeviceList from './components/DeviceList';
 import TableBKP from './components/TableBKP'
+import EnhancedTable from './components/LiveData/LivedataTable'
+import LiveData from   './components/LiveData/LiveData'
+import ApikeyGenerateKey from './screens/ApikeyGenerateKey';
 
 function App() {
   const [theme, colorMode] = useMode();
@@ -64,7 +67,7 @@ function App() {
             <Route path="/line" element={<Line/>}/>
             <Route path="/map" element={<AddressMap/>}/>
             <Route path="/livedata" element={<LiveData role={userRole} />}/>
-
+            <Route path='/api_key' element={<ApikeyGenerateKey/>}/>
             
              </Routes>
           </main>

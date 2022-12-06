@@ -174,7 +174,7 @@ const Sidebar = ({ role }) => {
                                 />
                                 <Item
                                     title="Api keys"
-                                    to="/"
+                                    to="/api_key"
                                     icon={<KeyOutlinedIcon />}
                                     selected={selected}
                                     setSelected={setSelected}
