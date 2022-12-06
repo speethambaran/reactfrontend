@@ -30,7 +30,7 @@ const LiveData = ({ role }) => {
     const dispatch = useDispatch();
     const deviceList = useSelector((state) => state.deviceList);
     const { loading, error, device } = deviceList;
-    const [currentDevice, setCurrentDevice] = useState(device && device[0].deviceId)
+    const [currentDevice, setCurrentDevice] = useState(device && device[0] && device[0].deviceId)
 
     const selectedDevice = async (id) => {
         setCurrentDevice(id)
