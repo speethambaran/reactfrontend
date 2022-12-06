@@ -8,11 +8,11 @@ import TableHead from '@mui/material/TableHead';
 import TablePagination from '@mui/material/TablePagination';
 import TableRow from '@mui/material/TableRow';
 import { useDispatch, useSelector } from 'react-redux';
-import { listLiveData } from '../actions/sensorActions';
-import LoadingBox from './LoadingBox';
-import MessageBox from './MessageBox';
-import LineChart from './Linechart';
-import LiveChart from './LiveChart';
+import { listLiveData } from '../../actions/sensorActions';
+import LoadingBox from '../LoadingBox';
+import MessageBox from '../MessageBox';
+import LineChart from '../Linechart';
+// import LiveChart from '../LiveChart';
 import { CSVLink, CSVDownload } from "react-csv";
 import moment from 'moment';
 
@@ -79,7 +79,7 @@ function LivedataTable({deviceId}) {
   dataRow = dataRow && dataRow.sort(
     (p1, p2) => (p1.receivedTime < p2.receivedTime) ? -1 : (p1.receivedTime > p2.receivedTime) ? 1 : 0);
   
-  // console.log("TAW DATA ------",dataRow && dataRow)
+  console.log("TAW DATA ------",dataRow ? dataRow :'no data')
   
 
   React.useEffect(() => {
@@ -98,7 +98,7 @@ function LivedataTable({deviceId}) {
     <div className='container-fluid'>
       {loading ? (<LoadingBox />) : error ? (<MessageBox>{error}</MessageBox>) : (
         <div className='container'>
-          {dataRow && <CSVLink className='btn btn-success ml-auto' style={{float:"right",top:"-10px",position:"relative"}} data={dataRow}>Download Data</CSVLink>}
+          <CSVLink className='btn btn-success ml-auto' style={{float:"right",top:"-10px",position:"relative"}} data={dataRow ? dataRow :''}>Download Data</CSVLink>
           <Paper sx={{ width: '100%', overflow: 'hidden' }}>
           <TableContainer sx={{ maxHeight: 440 }}>
             <Table stickyHeader aria-label="sticky table">

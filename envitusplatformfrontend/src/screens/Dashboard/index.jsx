@@ -29,17 +29,17 @@ const Dashboard = () => {
 
 
     const [age, setAge] = useState('');
-    const [dashData,setDashData] = useState({})
-    
+    const [dashData, setDashData] = useState({})
+
 
     const dispatch = useDispatch();
     const deviceList = useSelector((state) => state.deviceList);
     const { loading, error, device } = deviceList;
 
-    const [currentDevice,setCurrentDevice] = useState('') 
+    const [currentDevice, setCurrentDevice] = useState('')
 
     const liveDataforDashboard = useSelector((state) => state.dashboardData);
-    const { loadingTime,err,dashboardData } = liveDataforDashboard;
+    const { loadingTime, err, dashboardData } = liveDataforDashboard;
 
     const liveData = useSelector((state) => state.livedata);
     const { livedata } = liveData;
@@ -52,10 +52,10 @@ const Dashboard = () => {
     // console.log('DEVICE---------------',device_details && device_details[0] &&device_details[0])
     console.log('LIVE DATA-----------------',dashboardData && dashboardData[0] && dashboardData[0].data && dashboardData[0].data[11].y)
 
-    
+
     useEffect(() => {
         dispatch(listDevices());
-        dispatch(getDashboardData())
+        dispatch(getDashboardData('patnaenvtest'))
         dispatch(listLiveData());
         dispatch(getDevice(currentDevice))
     }, [dispatch]);
@@ -70,7 +70,7 @@ const Dashboard = () => {
             <Box display="flex" justifyContent="space-between" alignItems="center" >
                 <Header title="DASHBOARD" subtitle="Welcome" />
                 <Box>
-                    <h2>Device</h2>
+                    {/* <h2>Device</h2>
                     <FormControl fullWidth>
                         <InputLabel id="demo-simple-select-label">{currentDevice}</InputLabel>
                         <Select
@@ -78,13 +78,13 @@ const Dashboard = () => {
                             id="demo-simple-select"
                             value={currentDevice}
                             label="Age"
-                            onChange={(e)=>setCurrentDevice(e.target.value)}
+                            onChange={(e) => setCurrentDevice(e.target.value)}
                         >
-                            {device ? device.map((dev)=>(
+                            {device ? device.map((dev) => (
                                 <MenuItem value={dev.deviceId}>{dev.deviceId}</MenuItem>
                             )) : ''}
                         </Select>
-                    </FormControl>
+                    </FormControl> */}
                     <Button
                         className="m-2"
                         sx={{
@@ -229,14 +229,14 @@ const Dashboard = () => {
                                 fontWeight="600"
                                 color={colors.grey[100]}
                             >
-                                Revenue Generated
+                                Live Data
                             </Typography>
                             <Typography
                                 variant="h3"
                                 fontWeight="500"
                                 color={colors.greenAccent[500]}
                             >
-                                59,765456
+                                Device ID : patnaenvtest
                             </Typography>
                         </Box>
 
@@ -259,7 +259,8 @@ const Dashboard = () => {
                                 <LineChart isDashboard={true} data={dashboardData} />
                             </div>
                         )} */}
-                        {dashboardData && <LineChart isDashboard={true} data={dashboardData} />  }
+                        
+                        {dashboardData && <LineChart isDashboard={true} data={dashboardData} />}
                         {/* <LineChart isDashboard={true} data={mockDataLine} />   */}
                         {/* <VerticalChart /> */}
                     </Box>
