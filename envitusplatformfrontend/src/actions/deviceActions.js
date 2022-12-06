@@ -2,6 +2,9 @@ import {
   DASHBOARD_DATA_FAIL,
   DASHBOARD_DATA_REQUEST,
   DASHBOARD_DATA_SUCCESS,
+  DEVICE_DATA_FAIL,
+  DEVICE_DATA_REQUEST,
+  DEVICE_DATA_SUCCESS,
   DEVICE_LIST_FAIL,
   DEVICE_LIST_REQUEST,
   DEVICE_LIST_SUCCESS,
@@ -19,14 +22,11 @@ export const listDevices = () => async (dispatch) => {
   });
   try {
     const data = await Axios.get(`${BASE_URL}/getdevice`);
-    // console.log('DEVICE LIST : ',data.data.message)
     let deviceData = data.data.message
     for (let i = 0; i < deviceData.length; i++) {
       if ((new Date().valueOf() - deviceData[i].lastDataReceiveTime) < (15 * 60 * 1000)) {
-        // console.log(deviceData[i].deviceId , 'is online')
         deviceData[i].isOnline = true
       } else {
-        // console.log(deviceData[i].deviceId , 'is offline')
         deviceData[i].isOnline = false
       }
 
@@ -36,6 +36,19 @@ export const listDevices = () => async (dispatch) => {
     dispatch({ type: DEVICE_LIST_FAIL, payload: error.message });
   }
 };
+
+export const getDevice = (deviceId) => async (dispatch) => {
+  dispatch({ type: DEVICE_DATA_REQUEST })
+  try {
+    const data = await Axios.get(`${BASE_URL}/getdevice`);
+    let details = data.data.message
+    let deviceDetails = details.find((x) => {return x.deviceId == deviceId})
+    
+    dispatch({ type: DEVICE_DATA_SUCCESS, payload: deviceDetails })
+  } catch (error) {
+    dispatch({ type: DEVICE_DATA_FAIL, payload: error.message });
+  }
+}
 
 
 export const listLivedata = () => async (dispatch) => {
@@ -69,7 +82,7 @@ export const getDashboardData = () => async (dispatch) => {
     const deviceData = await Axios.get(`${BASE_URL}/getdevice`)
     let { data } = await Axios.get(`${BASE_URL}/getlivedata?deviceId=patnaenvtest`)
     data = data.message
-
+    console.log('DATA----------',data)
     function compare(a, b) {
       if (a.receivedTime < b.receivedTime) {
         return -1;
@@ -83,7 +96,7 @@ export const getDashboardData = () => async (dispatch) => {
     result = result.pop()
     let resArr = []
     let dataArr = []
-    delete result.data["receivedTime"]; 
+    delete result.data["receivedTime"];
     dataArr.push(splitKeyValue(result.data))
 
     let resObj = {}

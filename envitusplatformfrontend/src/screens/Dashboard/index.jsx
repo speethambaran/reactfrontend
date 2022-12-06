@@ -16,7 +16,7 @@ import FormControl from '@mui/material/FormControl';
 import Select from '@mui/material/Select';
 import { useEffect, useMemo, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { getDashboardData, listDevices } from "../../actions/deviceActions";
+import { getDashboardData, getDevice, listDevices } from "../../actions/deviceActions";
 import { listLiveData } from "../../actions/sensorActions";
 import { mockDataLine } from "../../data/mockData";
 import PieChart from "../../components/PieChart";
@@ -44,14 +44,20 @@ const Dashboard = () => {
     const liveData = useSelector((state) => state.livedata);
     const { livedata } = liveData;
 
-    console.log('DEVICE---------------',device)
+    const deviceDetails = useSelector((state)=>state.getDevice)
+    const {device_loading,device_details} = deviceDetails
+
+    const [rain,setRain] = useState(0)
+
+    // console.log('DEVICE---------------',device_details && device_details[0] &&device_details[0])
+    console.log('LIVE DATA-----------------',dashboardData && dashboardData[0] && dashboardData[0].data && dashboardData[0].data[11].y)
 
     
     useEffect(() => {
         dispatch(listDevices());
         dispatch(getDashboardData())
         dispatch(listLiveData());
-        
+        dispatch(getDevice(currentDevice))
     }, [dispatch]);
 
     const handleChange = (event) => {
@@ -66,7 +72,7 @@ const Dashboard = () => {
                 <Box>
                     <h2>Device</h2>
                     <FormControl fullWidth>
-                        <InputLabel id="demo-simple-select-label">Device</InputLabel>
+                        <InputLabel id="demo-simple-select-label">{currentDevice}</InputLabel>
                         <Select
                             labelId="demo-simple-select-label"
                             id="demo-simple-select"
@@ -130,9 +136,9 @@ const Dashboard = () => {
                 >
                     <StatBox
                         title="Device"
-                        subtitle="device"
+                        subtitle={currentDevice && currentDevice}
                         progress="0.75"
-                        increase="progress"
+                        increase=""
                         icon={
                             <DevicesOutlinedIcon
                                 sx={{ color: colors.greenAccent[600], fontSize: "26px" }}
@@ -192,8 +198,8 @@ const Dashboard = () => {
                 >
                     <StatBox
                         title="Daily AQI"
-                        subtitle="air quality index"
-                        progress="0.5"
+                        subtitle={device_details && device_details[0] &&device_details[0].latestAQI}
+                        progress={device_details && device_details[0] &&device_details[0].latestAQI /100}
                         
                         icon={
                             <AirOutlinedIcon

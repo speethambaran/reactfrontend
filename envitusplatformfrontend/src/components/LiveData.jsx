@@ -67,71 +67,8 @@ const LiveData = ({ role }) => {
                         alignItems="center"
                     >
                         <Box height="250px" ml="-2em" width="2000px" mt="-1em" marginRight="-2em">
-                            {/* <EnhancedTable /> */}
-                            <div>
-                                {/* <Table /> */}
-                                {/* <DeviceList /> */}
-                                <div>
-                                    <div className="">
-                                        {loading ? (
-                                            <LoadingBox />
-                                        ) : error ? (
-                                            <MessageBox variant="danger" style={{ fontWeight: 500 }}>Oops something went wrong</MessageBox>
-                                        ) : (
-                                            <div className="table-responsive mt-2 p-2">
-                                                <h1 className="title">Device List</h1>
-                                                <table className="table mt-2" style={{ color: "white" }} >
-                                                    <thead className="thead-light">
-                                                        <tr>
-                                                            <th scope="col">SI</th>
-                                                            <th scope="col">Device ID</th>
-                                                            <th scope="col">Status</th>
-                                                            <th scope="col">City</th>
-                                                            <th scope="col">Type</th>
-                                                            <th scope="col">LandMark</th>
-                                                            {role == "Super Admin" && (<th scope="col">Actions</th>)}
-                                                        </tr>
-                                                    </thead>
-                                                    <tbody>
-                                                        {device &&
-                                                            device.map((device, index) => (
-                                                                <tr onClick={(e) => selectedDevice(device.deviceId)}>
-                                                                    <th scope="row">{index + 1}</th>
-                                                                    <td>{device.deviceId}</td>
-                                                                    {/* < (15 * 60 * 1000) ? 'ASWINS' : 'NOT LIVE' */}
-                                                                    <td>
-                                                                        <i
-                                                                            className={`fa fa-dot-circle-o ${((device.lastDataReceiveTime) - (new Date().valueOf())) < 15 * 60 * 1000 ? 'live' : 'not-live'}`}
-                                                                            style={{
-                                                                                borderRadius: "50%",
-                                                                            }}
-                                                                        ></i>
-                                                                    </td>
-                                                                    <td>{device.location.city}</td>
-                                                                    <td>{device.subType}</td>
-                                                                    <td style={{ height: "4px" }} className="">
-                                                                        {device.location.landMark}
-                                                                    </td>
-                                                                    {role == "Super Admin" && (
-                                                                        <td>
-                                                                            <i className="fa fa-pencil m-1"></i>
-                                                                            <i
-                                                                                className="fa fa-trash m-1"
-                                                                                onClick={(e) => deleteUser(user.id)}
-                                                                            ></i>
-                                                                            <i className="fa fa-eye m-1"></i>
-                                                                        </td>
-                                                                    )}
-                                                                </tr>
-                                                            ))}
-                                                    </tbody>
-                                                </table>
-                                            </div>
-                                        )}
-
-                                    </div>
-                                </div>
-                            </div>
+                            <EnhancedTable />   
+                            
                         </Box>
                     </Box>
                 </Box>
