@@ -11,8 +11,6 @@ function SensorParameterList() {
 	const paramList = useSelector((state) => state.sensorParameterList);
 	const { loading, error, parameters } = paramList;
 
-	console.log("parameters : ", parameters);
-
 	useEffect(() => {
 		dispatch(listSensorParameters());
 	}, [dispatch]);

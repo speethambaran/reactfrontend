@@ -19,8 +19,6 @@ const LiveData = ({ role = "Operator" }) => {
 	const [bgColor, setBgcolor] = useState("whitesmoke");
 	const [currentDevice, setCurrentDevice] = useState(device && device[0]);
 
-	console.log("CURRENT DEVICE------------", currentDevice);
-
 	const selectedDevice = async (id) => {
 		setCurrentDevice(id);
 		setBgcolor("green");

@@ -18,8 +18,6 @@ function AddSensorType() {
 	const sensorList = useSelector((state) => state.sensorList);
 	const { loading, error, sensors } = sensorList;
 
-	console.log("list : ", sensors);
-
 	const columns = [
 		{ dataField: "subType", text: "Display Name", sort: true },
 		{ dataField: "description", text: "Param Name", sort: true },
