@@ -67,7 +67,7 @@ const Dashboard = () => {
 
     return (
         <Box m="30px">
-            <Box display="flex" justifyContent="space-between" alignItems="center" >
+            <Box display="flex" justifyContent="space-between" alignItems="center"  >
                 <Header title="DASHBOARD" subtitle="Welcome" />
                 <Box>
                     {/* <h2>Device</h2>
@@ -106,9 +106,10 @@ const Dashboard = () => {
                             fontSize: "14px",
                             fontWeight: "bold",
                             padding: "10px 20px",
+                           
                         }}
                     >
-                        <DownloadOutlinedIcon sx={{ mr: "5px" }} />
+                        <DownloadOutlinedIcon sx={{ mr: "5px"}} />
                         Download Reports
                     </Button>
                 </Box>

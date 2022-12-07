@@ -42,7 +42,7 @@ const LiveData = ({ role = "Operator" }) => {
             <Box
                 display="grid"
                 gridTemplateColumns="repeat(12,1fr)"
-                gridAutoRows="178px"
+                gridAutoRows="155px"
                 gap="19px"
             >
                 <Box

@@ -7,9 +7,9 @@ import LoginScreen from './screens/LoginScreen';
 import RegisterScreen from './screens/RegisterScreen';
 import { ColorModeContext, useMode } from "./theme";
 import { CssBaseline, ThemeProvider } from "@mui/material";
-import Topbar from "./screens/global/Topbar";
+// import Topbar from "./screens/global/Topbar";
 import Dashboard from "./screens/Dashboard/index";
-import Sidebar from "./screens/global/Sidebar";
+// import Sidebar from "./screens/global/Sidebar";
 import Bar from "./screens/bar";
 import Line from "./screens/line"
 import AddressMap from "./components/Map"
@@ -24,8 +24,10 @@ import ProfileScreen from './screens/ProfileScreen';
 import DeviceList from './components/DeviceList';
 import TableBKP from './components/TableBKP'
 import EnhancedTable from './components/LiveData/LivedataTable'
-import LiveData from   './components/LiveData/LiveData'
+// import LiveData from   './components/LiveData/LiveData'
 import ApikeyGenerateKey from './screens/ApikeyGenerateKey';
+import LiveData from './components/LiveData/LiveData'
+import Layout from './screens/Layout';
 
 function App() {
   const [theme, colorMode] = useMode();
@@ -45,36 +47,37 @@ function App() {
   }, []);
   return (
     <ColorModeContext.Provider value={colorMode}>
-      <ThemeProvider theme={theme}>
-        <CssBaseline />
-        <div className="app">
-          <Sidebar role={userRole}/>
-          <main className="content">
-          <Topbar />
-          <Routes>
-            {/* <Route path="/dashboard" element={<HomeScreen />} /> */}
-            <Route path="/dashboard" exact={true}  element={<Dashboard/>}/>
-            <Route path='/' exact={true} element={<LoginScreen />} />
-            <Route path='/register' element={<RegisterScreen />} />
-            <Route path='/device' element={<DeviceList role={userRole} />} />
-            <Route path='/users' element={<Users role={userRole} />} />
-            <Route path='/organizations' element={<OrganisationScreen role={userRole} />} />
-            <Route path='/sensors' element={<AddSensorScreen role={userRole} />} />
-            {/* <Route path='/livedata' element={<LivedataScreen role={userRole} />} /> */}
-            <Route path='/profile' element={<ProfileScreen />} />
-            {/* <Route path="/livedata" element={<EnhancedTable/>}/>  */}
-            <Route path="/bar" element={<Bar/>}/>
-            <Route path="/line" element={<Line/>}/>
-            <Route path="/map" element={<AddressMap/>}/>
-            <Route path="/livedata" element={<LiveData role={userRole} />}/>
-            <Route path='/api_key' element={<ApikeyGenerateKey/>}/>
+          <ThemeProvider theme={theme}>
+            <CssBaseline />
+
+           <main className='content'>
+           <Routes>
+              <Route path='/' exact={true} element={<LoginScreen />} />
+              <Route path='/register' element={<RegisterScreen />} />
+              <Route element={<Layout role={userRole} />}>
+                {/* <Route path='/' element={<Navigate to="/dashboard" replace />} /> */}
+                <Route path="/dashboard"  element={<Dashboard />} />
+                <Route path='/device' element={<DeviceList role={userRole} />} />
+                <Route path='/users' element={<Users role={userRole} />} />
+                <Route path='/organizations' element={<OrganisationScreen role={userRole} />} />
+                <Route path='/sensors' element={<AddSensorScreen role={userRole} />} />
+                <Route path="/livedata" element={<LiveData role={userRole} />}/>
+                <Route path="/bar" element={<Bar />} />
+                <Route path="/line" element={<Line />} />
+                <Route path="/map" element={<AddressMap />} />
+                <Route path="/live" element={<LiveData />} />
+                <Route path='/api_key' element={<ApikeyGenerateKey/>}/>
+              </Route>
+
+            </Routes>
+           </main>
             
-             </Routes>
-          </main>
-        </div>
-      </ThemeProvider>
-    </ColorModeContext.Provider>
+           
+
+          </ThemeProvider>
+        </ColorModeContext.Provider>
   );
 }
 
 export default App;
+

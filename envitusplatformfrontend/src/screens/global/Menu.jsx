@@ -116,6 +116,7 @@ export default function MenuListComposition() {
                                         id="composition-menu"
                                         aria-labelledby="composition-button"
                                         onKeyDown={handleListKeyDown}
+                                        
                                     >
                                         <MenuItem onClick={getProfile}>Profile</MenuItem>
                                         <MenuItem onClick={logoutUser}>Logout</MenuItem>
