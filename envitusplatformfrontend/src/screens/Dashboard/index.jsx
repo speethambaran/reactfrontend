@@ -1,7 +1,7 @@
 import { Box, Button, IconButton, Typography, useTheme } from "@mui/material"
 import { tokens } from "../../theme";
 import Header from "../../components/Header";
-import DevicesOutlinedIcon from '@mui/icons-material/DevicesOutlined';
+// import DevicesOutlinedIcon from '@mui/icons-material/DevicesOutlined';
 import StatBox from "../../components/StatBox"
 import DownloadOutlinedIcon from '@mui/icons-material/DownloadOutlined';
 import AddAlertOutlinedIcon from '@mui/icons-material/AddAlertOutlined';
@@ -28,10 +28,10 @@ const Dashboard = () => {
                             fontSize: "14px",
                             fontWeight: "bold",
                             padding: "10px 20px",
-                           
+
                         }}
                     >
-                        <DownloadOutlinedIcon sx={{ mr: "5px"}} />
+                        <DownloadOutlinedIcon sx={{ mr: "5px" }} />
                         Download Reports
                     </Button>
                 </Box>
@@ -56,18 +56,38 @@ const Dashboard = () => {
                     alignItems="center"
                     justifyContent="left"
                 >
-                    <StatBox
-                        title="Device"
-                        icon={
-                            <DevicesOutlinedIcon
-                                sx={{ color: colors.greenAccent[600], fontSize: "26px" }}
-                            />
-                        }
+                    <Box width="200" m="0 20px">
+                        <Box display="flex" justifyContent="flex-start">
+                            <Box>
+                                {/* <DevicesOutlinedIcon sx={{ color: colors.greenAccent[600], fontSize: "26px", mt: 0 }} /> */}
+                                <Typography
+                                    variant="h5"
+                                    fontWeight="bold"
+                                    sx={{ color: colors.grey[100] }}
+                                >
+                                    Device
+                                </Typography>
+                            </Box>
+                        </Box>
+                        <Box display="flex" justifyContent="space-between">
+                            <Typography
+                                variant="h6"
+                                sx={{ color: colors.greenAccent[500] }}
+                            >
+                                <Typography>DeviceID {'\u00A0'}{'\u00A0'}{'\u00A0'}{'\u00A0'}{'\u00A0'}{'\u00A0'} TestDevice</Typography>  
+                                <Typography>RT Status {'\u00A0'}{'\u00A0'}{'\u00A0'}{'\u00A0'}{'\u00A0'}{'\u00A0'} 24hrs 18mins</Typography>  
+                                <Typography>NT Status {'\u00A0'}{'\u00A0'}{'\u00A0'}{'\u00A0'}{'\u00A0'} {'\u00A0'}28hrs 41mins</Typography>
+                                <Typography>Param1 Desc  {'\u00A0'}Satisfactory</Typography>
+                                <Typography>Prom. Poll.  {'\u00A0'}{'\u00A0'}{'\u00A0'}{'\u00A0'}{'\u00A0'}Pm2p5</Typography>      
+                            </Typography>
+                            
+                           
 
-                    />
+                        </Box>
 
+                    </Box>
                 </Box>
-               
+
                 <Box
                     gridColumn="span 3"
                     backgroundColor={colors.primary[400]}
@@ -76,10 +96,10 @@ const Dashboard = () => {
                     justifyContent="left"
                 >
                     <StatBox
+                        alignItems="center"
                         title="Alert"
-                        subtitle="alert"
+
                         progress="0.25"
-                        increase="0"
                         icon={
                             <AddAlertOutlinedIcon
                                 sx={{ color: colors.greenAccent[600], fontSize: "26px" }}
@@ -96,10 +116,11 @@ const Dashboard = () => {
                     justifyContent="left"
                 >
                     <StatBox
+                        alignItems="center"
                         title="Daily Rain"
-                        subtitle="rain"
+
                         progress="0.75"
-                        increase="0"
+
                         icon={
                             < ThunderstormOutlinedIcon
                                 sx={{ color: colors.greenAccent[600], fontSize: "26px" }}
@@ -113,13 +134,13 @@ const Dashboard = () => {
                     backgroundColor={colors.primary[400]}
                     display="flex"
                     alignItems="center"
-                    justifyContent="center"
+                    justifyContent="left"
                 >
                     <StatBox
                         title="Daily AQI"
-                        subtitle="air quality index"
+
                         progress="0.50"
-                        increase="+14%"
+
                         icon={
                             <AirOutlinedIcon
                                 sx={{ color: colors.greenAccent[600], fontSize: "26px" }}
@@ -204,7 +225,7 @@ const Dashboard = () => {
 
                 <Box
                     mt="0em"
-                    gridColumn="span 6"
+                    gridColumn="span 8"
                     gridRow="span 2"
                     backgroundColor={colors.primary[400]}
                     display="flex"
@@ -213,7 +234,7 @@ const Dashboard = () => {
 
                 >
 
-                    <Box height="300px" width="500px" ml="3px">
+                    <Box height="250px" width="300px" mt="20px" ml="3px">
                         <AddressMap isDashboard={true} />
                     </Box>
 
@@ -222,19 +243,22 @@ const Dashboard = () => {
 
 
                 <Box
-                    gridColumn="span 6"
+                    gridColumn="span 4"
                     gridRow="span 2"
                     backgroundColor={colors.primary[400]}
+                    display="flex"
+                    alignItems="cover"
+                    justifyContent="cover"
 
                 >
-                   
 
-                    
+
+
                 </Box>
 
 
             </Box>
-            
+
         </Box >
     )
 }

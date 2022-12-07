@@ -46,7 +46,7 @@ const StatBox = ({ title, subtitle, icon, progress, increase, test }) => {
                         {test}
                     </Typography>
                 </Box>
-                <Box  mb="10px" ml="100px" >
+                <Box   justifyContent="space-between" >
                     
                         <ProgressCircle progress={progress} /> 
                     

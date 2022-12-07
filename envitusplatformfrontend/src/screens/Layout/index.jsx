@@ -11,7 +11,7 @@ const Layout = () => {
     <Box display={isNonMobile ? "flex" : "block"} width="100%" height="100%">
   <Sidebar  
   isNonMobile={isNonMobile}
-  drawerwidth ="250px"
+  drawerwidth ="200px"
   isSidebarOpen={isSidebarOpen}
   setIsSidebarOpen={setIsSidebarOpen}
   />

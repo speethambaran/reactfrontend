@@ -12,7 +12,7 @@ import MenuItem from "@mui/material/MenuItem";
 import Select from "@mui/material/Select";
 import ThunderstormOutlinedIcon from "@mui/icons-material/ThunderstormOutlined";
 import AirOutlinedIcon from "@mui/icons-material/AirOutlined";
-import { Box, Typography, IconButton , useTheme} from "@mui/material";
+import { Box, Typography, IconButton, useTheme } from "@mui/material";
 import TableViewIcon from "@mui/icons-material/TableView";
 import StackedLineChartOutlinedIcon from "@mui/icons-material/StackedLineChartOutlined";
 import Sampletable from "../../components/LiveData/Sampletable";
@@ -92,16 +92,16 @@ export default function FloatingActionButtonZoom() {
           <Tab label=<TableViewIcon /> {...a11yProps(1)} />
           <Tab label=<ThunderstormOutlinedIcon /> {...a11yProps(2)} />
           <Tab label=<AirOutlinedIcon /> {...a11yProps(3)} />
-          
-          <Select value={2} style={{ marginTop: 1, marginLeft: 200 ,marginRight:200 }}>
-      <MenuItem value={1}>Device 1</MenuItem>
-      <MenuItem value={2}>Device 2</MenuItem>
-      <MenuItem value={3}>Device 3</MenuItem>
-      <MenuItem value={4}>Device 4</MenuItem>
-      <MenuItem value={5}>Device 5</MenuItem>
-    </Select>
-          
-          
+
+          <Select value={2} style={{ marginTop: 1, marginLeft: 200, marginRight: 200 }}>
+            <MenuItem value={1}>Device 1</MenuItem>
+            <MenuItem value={2}>Device 2</MenuItem>
+            <MenuItem value={3}>Device 3</MenuItem>
+            <MenuItem value={4}>Device 4</MenuItem>
+            <MenuItem value={5}>Device 5</MenuItem>
+          </Select>
+
+
           <IconButton>
             <RefreshIcon />
           </IconButton>
@@ -130,10 +130,10 @@ export default function FloatingActionButtonZoom() {
           < Sampletable />
         </TabPanel>
         <TabPanel value={value} index={2} dir={theme.direction}>
-          <Nodata/>
+          <Nodata />
         </TabPanel>
         <TabPanel value={value} index={3} dir={theme.direction}>
-        <Nodata/>
+          <Nodata />
         </TabPanel>
       </SwipeableViews>
     </Box>

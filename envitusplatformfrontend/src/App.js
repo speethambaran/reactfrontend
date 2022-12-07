@@ -21,6 +21,8 @@ import EnhancedTable from './components/LiveData/LivedataTable'
 import LiveData from './components/LiveData/LiveData'
 import Layout from './screens/Layout';
 
+
+
 function App() {
   const [theme, colorMode] = useMode();
   const [isLoggedIn, setIsLoggedIn] = useState(false);
@@ -45,7 +47,7 @@ function App() {
 
            
             <Routes>
-              <Route path='/' exact={true} element={<LoginScreen />} />
+              <Route path='/' exact={true}  element={<LoginScreen />} />
               <Route path='/register' element={<RegisterScreen />} />
               <Route element={<Layout />}>
                 {/* <Route path='/' element={<Navigate to="/dashboard" replace />} /> */}
