@@ -45,7 +45,7 @@ const LiveData = ({ role }) => {
     return (
         <Box m="30px">
             <Box display="flex" justifyContent="space-between" alignItems="center" >
-                <Header title="Live Data" subtitle="Welcome" />
+                <Header title="Live Datas" subtitle="Welcome" />
             </Box>
             <Box
                 display="grid"

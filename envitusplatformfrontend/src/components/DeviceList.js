@@ -3,6 +3,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { listDevices } from '../actions/deviceActions';
 import LoadingBox from './LoadingBox';
 import MessageBox from './MessageBox';
+import { Box, useTheme } from "@mui/material"
 
 function DeviceList() {
   const dispatch = useDispatch();
@@ -15,7 +16,7 @@ function DeviceList() {
     dispatch(listDevices());
   }, [dispatch]);
   return (
-    <div className='container-fluid'>
+    <div className='container-fluid' style={{width:"100%"}}>
       <h2>Device List</h2>
       <div class="table-wrapper-scroll-y my-custom-scrollbar">
         {loading ? (
