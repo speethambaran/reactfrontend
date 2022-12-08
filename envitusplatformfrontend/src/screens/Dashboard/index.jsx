@@ -1,15 +1,16 @@
 import { Box, Button, IconButton, Typography, useTheme } from "@mui/material"
 import { tokens } from "../../theme";
 import Header from "../../components/Header";
-// import DevicesOutlinedIcon from '@mui/icons-material/DevicesOutlined';
 import StatBox from "../../components/StatBox"
 import DownloadOutlinedIcon from '@mui/icons-material/DownloadOutlined';
 import AddAlertOutlinedIcon from '@mui/icons-material/AddAlertOutlined';
 import ThunderstormOutlinedIcon from '@mui/icons-material/ThunderstormOutlined';
 import AirOutlinedIcon from '@mui/icons-material/AirOutlined';
 import LineChart from "../../components/Linechart";
-import BarChart from "../../components/Barchart";
 import AddressMap from "../../components/Map"
+import Select from "@mui/material/Select";
+import MenuItem from "@mui/material/MenuItem";
+import { border } from "@mui/system";
 
 const Dashboard = () => {
     const theme = useTheme();
@@ -43,7 +44,7 @@ const Dashboard = () => {
             <Box
                 display="grid"
                 gridTemplateColumns="repeat(12,1fr)"
-                gridAutoRows="140px"
+                gridAutoRows="120px"
                 gap="17px"
             >
 
@@ -74,17 +75,13 @@ const Dashboard = () => {
                                 variant="h6"
                                 sx={{ color: colors.greenAccent[500] }}
                             >
-                                <Typography>DeviceID {'\u00A0'}{'\u00A0'}{'\u00A0'}{'\u00A0'}{'\u00A0'}{'\u00A0'} TestDevice</Typography>  
-                                <Typography>RT Status {'\u00A0'}{'\u00A0'}{'\u00A0'}{'\u00A0'}{'\u00A0'}{'\u00A0'} 24hrs 18mins</Typography>  
+                                <Typography>DeviceID {'\u00A0'}{'\u00A0'}{'\u00A0'}{'\u00A0'}{'\u00A0'}{'\u00A0'} TestDevice</Typography>
+                                <Typography>RT Status {'\u00A0'}{'\u00A0'}{'\u00A0'}{'\u00A0'}{'\u00A0'}{'\u00A0'} 24hrs 18mins</Typography>
                                 <Typography>NT Status {'\u00A0'}{'\u00A0'}{'\u00A0'}{'\u00A0'}{'\u00A0'} {'\u00A0'}28hrs 41mins</Typography>
                                 <Typography>Param1 Desc  {'\u00A0'}Satisfactory</Typography>
-                                <Typography>Prom. Poll.  {'\u00A0'}{'\u00A0'}{'\u00A0'}{'\u00A0'}{'\u00A0'}Pm2p5</Typography>      
+                                <Typography>Prom. Poll.  {'\u00A0'}{'\u00A0'}{'\u00A0'}{'\u00A0'}{'\u00A0'}Pm2p5</Typography>
                             </Typography>
-                            
-                           
-
                         </Box>
-
                     </Box>
                 </Box>
 
@@ -98,7 +95,6 @@ const Dashboard = () => {
                     <StatBox
                         alignItems="center"
                         title="Alert"
-
                         progress="0.25"
                         icon={
                             <AddAlertOutlinedIcon
@@ -118,9 +114,7 @@ const Dashboard = () => {
                     <StatBox
                         alignItems="center"
                         title="Daily Rain"
-
                         progress="0.75"
-
                         icon={
                             < ThunderstormOutlinedIcon
                                 sx={{ color: colors.greenAccent[600], fontSize: "26px" }}
@@ -138,9 +132,7 @@ const Dashboard = () => {
                 >
                     <StatBox
                         title="Daily AQI"
-
                         progress="0.50"
-
                         icon={
                             <AirOutlinedIcon
                                 sx={{ color: colors.greenAccent[600], fontSize: "26px" }}
@@ -150,14 +142,14 @@ const Dashboard = () => {
                 </Box>
 
                 <Box
-                    gridColumn="span 8"
+                    gridColumn="span 12"
                     gridRow="span 2"
                     backgroundColor={colors.primary[400]}
 
                 >
                     <Box
                         mt="10px"
-                        p="0 30px"
+                        p="0 20px"
                         display="flex"
                         justifyContent="space-between"
                         alignItems="center"
@@ -176,56 +168,36 @@ const Dashboard = () => {
                                 color={colors.greenAccent[500]}
                             >
                                 59,765456
+                                
                             </Typography>
                         </Box>
 
 
                         <Box >
+                            <Select value={2} style={{ marginTop: 1,  marginRight: 10, border: null }}>
+                                <MenuItem value={1}>Device 1</MenuItem>
+                                <MenuItem value={2}>Device 2</MenuItem>
+                                <MenuItem value={3}>Device 3</MenuItem>
+                                <MenuItem value={4}>Device 4</MenuItem>
+                                <MenuItem value={5}>Device 5</MenuItem>
+                            </Select>
                             <IconButton>
                                 <DownloadOutlinedIcon
-                                    SX={{ fontSize: "26px", color: colors.greenAccent[500] }}
+                                    SX={{ fontSize: "26px", color: colors.greenAccent[500], }}
                                 />
                             </IconButton>
+
                         </Box>
-
                     </Box>
-
-                    <Box height="250px" ml="-20px">
+                    <Box height="220px" ml="-20px">
                         <LineChart isDashboard={true} />
                     </Box>
                 </Box>
 
-                <Box
-                    gridColumn="span 4"
-                    gridRow="span 2"
-                    backgroundColor={colors.primary[400]}
-
-                >
-                    <Box mt="1.5em"
-                        display="flex"
-                        alignItems="right"
-                    >
-                        <Box >
-                            <IconButton>
-                                <DownloadOutlinedIcon
-                                    SX={{ fontSize: "26px", color: colors.greenAccent[500] }}
-                                />
-                            </IconButton>
-                        </Box>
-
-                    </Box>
-
-
-                    <Box height="250px" mt="20px" >
-                        <BarChart isDashboard={true} />
-                    </Box>
-                </Box>
-
-
 
                 <Box
                     mt="0em"
-                    gridColumn="span 8"
+                    gridColumn="span 12"
                     gridRow="span 2"
                     backgroundColor={colors.primary[400]}
                     display="flex"
@@ -233,29 +205,11 @@ const Dashboard = () => {
                     justifyContent="cover"
 
                 >
-
                     <Box height="250px" width="300px" mt="20px" ml="3px">
                         <AddressMap isDashboard={true} />
                     </Box>
 
                 </Box>
-
-
-
-                <Box
-                    gridColumn="span 4"
-                    gridRow="span 2"
-                    backgroundColor={colors.primary[400]}
-                    display="flex"
-                    alignItems="cover"
-                    justifyContent="cover"
-
-                >
-
-
-
-                </Box>
-
 
             </Box>
 
