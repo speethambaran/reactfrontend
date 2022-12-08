@@ -2,6 +2,7 @@ import axios from "axios";
 import React, { useState } from "react";
 import { BASE_URL } from "../constants/AppliationConstants";
 import { useNavigate } from "react-router-dom";
+import Header from "../components/HeaderBKP";
 
 function LoginScreen(props) {
 	const [username, setUsername] = useState("");
@@ -29,15 +30,18 @@ function LoginScreen(props) {
 	return (
 		<div>
 			{/*  */}
+			<Header />
 			<div className="container-fluid authentication-screen">
 				<div className="row">
 					<div className="col-md-3"></div>
 					<div className="col-md-4"></div>
 					<div className="col-md-4">
-						<div className="container-fluid p-4">
+						<div className="container-fluid p-4 mt-5">
 							<form onSubmit={handleSubmit}>
-								<div className="formBx p-4">
-									<h2 className="title text-center">Login Here</h2>
+								<div className="formBx p-4 mt-5">
+									<h2 className="title text-center" style={{ color: "#111" }}>
+										Login Here
+									</h2>
 									<p>Username</p>
 									<input
 										type="text"

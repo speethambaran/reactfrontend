@@ -10,15 +10,18 @@ import AirOutlinedIcon from "@mui/icons-material/AirOutlined";
 import LineChart from "../../components/Linechart";
 import BarChart from "../../components/Barchart";
 import AddressMap from "../../components/Map";
+import { styled } from "@mui/material/styles";
 import InputLabel from "@mui/material/InputLabel";
 import MenuItem from "@mui/material/MenuItem";
 import FormControl from "@mui/material/FormControl";
 import Select from "@mui/material/Select";
 import { useEffect, useMemo, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
+import LoadingBox from "../../components/LoadingBox";
 import {
 	getDashboardData,
 	getDevice,
+	getDeviceDetails,
 	listDevices,
 } from "../../actions/deviceActions";
 import { listLiveData } from "../../actions/sensorActions";
@@ -26,10 +29,19 @@ import { mockDataLine } from "../../data/mockData";
 import PieChart from "../../components/PieChart";
 import VerticalChart from "../../components/VerticalChart";
 import SimpleMap from "../../components/SimpleMap";
+import Paper from "@mui/material/Paper";
+import Grid from "@mui/material/Grid";
 
 const Dashboard = () => {
 	const theme = useTheme();
 	const colors = tokens(theme.palette.mode);
+	const Item = styled(Paper)(({ theme }) => ({
+		backgroundColor: theme.palette.mode === "dark" ? "#1A2027" : "#fff",
+		...theme.typography.body2,
+		padding: theme.spacing(1),
+		textAlign: "center",
+		color: theme.palette.text.secondary,
+	}));
 
 	const [age, setAge] = useState("");
 	const [dashData, setDashData] = useState({});
@@ -37,6 +49,8 @@ const Dashboard = () => {
 	const dispatch = useDispatch();
 	const deviceList = useSelector((state) => state.deviceList);
 	const { loading, error, device } = deviceList;
+
+	// console.log("device details**********", device);
 
 	const [currentDevice, setCurrentDevice] = useState("");
 
@@ -49,6 +63,11 @@ const Dashboard = () => {
 	const deviceDetails = useSelector((state) => state.getDevice);
 	const { device_loading, device_details } = deviceDetails;
 
+	const selectDevice = useSelector((state) => state.deviceDetails);
+	const { device_details_loading, device_data } = selectDevice;
+
+	console.log("CURRENT DEVCE---------", currentDevice);
+
 	const [rain, setRain] = useState(0);
 
 	useEffect(() => {
@@ -56,6 +75,7 @@ const Dashboard = () => {
 		dispatch(getDashboardData("patnaenvtest"));
 		dispatch(listLiveData());
 		dispatch(getDevice(currentDevice));
+		dispatch(getDeviceDetails(currentDevice));
 	}, [dispatch]);
 
 	const handleChange = (event) => {
@@ -64,25 +84,35 @@ const Dashboard = () => {
 
 	return (
 		<Box m="30px">
-			<Box display="flex" justifyContent="space-between" alignItems="center">
+			<Box
+				display="grid"
+				gridTemplateColumns="repeat(12,1fr)"
+				gridAutoRows="155px"
+				gap="19px"
+			>
 				<Header title="DASHBOARD" subtitle="Welcome" />
-				<Box>
-					{/* <h2>Device</h2>
-                    <FormControl fullWidth>
-                        <InputLabel id="demo-simple-select-label">{currentDevice}</InputLabel>
-                        <Select
-                            labelId="demo-simple-select-label"
-                            id="demo-simple-select"
-                            value={currentDevice}
-                            label="Age"
-                            onChange={(e) => setCurrentDevice(e.target.value)}
-                        >
-                            {device ? device.map((dev) => (
-                                <MenuItem value={dev.deviceId}>{dev.deviceId}</MenuItem>
-                            )) : ''}
-                        </Select>
-                    </FormControl> */}
-					<Button
+				<Box display="flex" justifyContent="space-between" alignItems="center">
+					<h2>Device</h2>
+					<FormControl fullWidth>
+						<InputLabel id="demo-simple-select-label">
+							{device && device[0] && device[0].deviceId}
+						</InputLabel>
+						<Select
+							labelId="demo-simple-select-label"
+							id="demo-simple-select"
+							value={currentDevice}
+							label="Age"
+							style={{ width: "200px", left: "5px", position: "relative" }}
+							onChange={(e) => setCurrentDevice(e.target.value)}
+						>
+							{device
+								? device.map((dev) => (
+										<MenuItem value={dev.deviceId}>{dev.deviceId}</MenuItem>
+								  ))
+								: ""}
+						</Select>
+					</FormControl>
+					{/* <Button
 						className="m-2"
 						sx={{
 							backgroundColor: colors.blueAccent[700],
@@ -107,7 +137,7 @@ const Dashboard = () => {
 					>
 						<DownloadOutlinedIcon sx={{ mr: "5px" }} />
 						Download Reports
-					</Button>
+					</Button> */}
 				</Box>
 			</Box>
 
@@ -128,17 +158,62 @@ const Dashboard = () => {
 					alignItems="center"
 					justifyContent="left"
 				>
-					<StatBox
+					{/* <StatBox
 						title="Device"
 						subtitle={currentDevice && currentDevice}
-						progress="0.75"
+						progress="0.5"
 						increase=""
 						icon={
 							<DevicesOutlinedIcon
 								sx={{ color: colors.greenAccent[600], fontSize: "26px" }}
 							/>
 						}
-					/>
+					/> */}
+					<Box width="200" m="0 20px">
+						<Box display="flex" justifyContent="flex-start">
+							<Box>
+								{/* <DevicesOutlinedIcon sx={{ color: colors.greenAccent[600], fontSize: "26px", mt: 0 }} /> */}
+								<Typography
+									variant="h5"
+									fontWeight="bold"
+									sx={{ color: colors.grey[100] }}
+								>
+									Device
+								</Typography>
+							</Box>
+						</Box>
+
+						{device_details_loading ? (
+							<LoadingBox />
+						) : (
+							device_data && (
+								<Box sx={{ flexGrow: 1 }}>
+									<Grid container spacing={2}>
+										<Grid item xs={6}>
+											<Item style={{ background: "none", color: "cyan" }}>
+												Device ID
+											</Item>
+										</Grid>
+										<Grid item xs={6}>
+											<Item style={{ background: "none", color: "cyan" }}>
+												{device_data.deviceId}
+											</Item>
+										</Grid>
+										<Grid item xs={6}>
+											<Item style={{ background: "none", color: "cyan" }}>
+												Sub Type
+											</Item>
+										</Grid>
+										<Grid item xs={6}>
+											<Item style={{ background: "none", color: "cyan" }}>
+												{device_data.subType}
+											</Item>
+										</Grid>
+									</Grid>
+								</Box>
+							)
+						)}
+					</Box>
 				</Box>
 
 				<Box

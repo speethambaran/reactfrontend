@@ -5,16 +5,23 @@ body,
 #root,
 .app,
 .content{
-  height: 100%;
+  height: 100vh;
   width: 100%;
   /* margin: 0; */
   font-family: 'Source Sans Pro',sans-serif;
+  
 }
 
 .app {
   display: flex;
   position: relative;
-
+}
+div.MuiBox-root.css-0{
+  overflow-y: scroll;
+  
+}
+div.MuiBox-root.css-0::-webkit-scrollbar { 
+  display: none;  /* Safari and Chrome */
 }
 
 ::-webkit-scrollbar {
@@ -37,13 +44,16 @@ body,
 ::-webkit-scrollbar-thumb:hover {
   background-color: #555;
 }
-.header-logo{
+/* .header-logo{
   width: 100px;
   height: 30px;
   align-items:left;
+} */
+
+span.pro-item-content img{
+  top: -3px;
+  position: relative;
 }
-
-
 
 
 
@@ -144,6 +154,7 @@ h2{
 }
 .header{
   box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+  background-color: white;
 }
 h1{
   font-size: 24px;
@@ -254,16 +265,17 @@ h5{
 .authentication-screen{
   background-color: aliceblue;
   background-image: url('https://www.fullestop.com/blog/wp-content/uploads/2019/04/Importance-of-good-UXUI-for-Startups.jpg');
-  /* background-position: center; */
+  background-position: center;
   background-repeat: no-repeat;
-  height: 90vh;
+  height: 100vh;
 }
 /* .form-input-field{
   padding: 10px 0;
 } */
 .formBx{
-  background-color: white;
-  margin-top: 40px;  
+  background-color: whitesmoke;
+  top: 120px;
+  position: relative; 
   border-radius: 10px;
   box-shadow: 0 4px 8px 0 rgba(41, 248, 220, 0.2), 0 6px 20px 0 rgba(26, 243, 142, 0.19);
 }

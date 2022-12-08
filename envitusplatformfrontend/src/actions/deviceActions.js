@@ -5,6 +5,9 @@ import {
 	DEVICE_DATA_FAIL,
 	DEVICE_DATA_REQUEST,
 	DEVICE_DATA_SUCCESS,
+	DEVICE_DETAILS_FAIL,
+	DEVICE_DETAILS_REQUEST,
+	DEVICE_DETAILS_SUCCESS,
 	DEVICE_LIST_FAIL,
 	DEVICE_LIST_REQUEST,
 	DEVICE_LIST_SUCCESS,
@@ -51,6 +54,16 @@ export const getDevice = (deviceId) => async (dispatch) => {
 		dispatch({ type: DEVICE_DATA_SUCCESS, payload: deviceDetails });
 	} catch (error) {
 		dispatch({ type: DEVICE_DATA_FAIL, payload: error.message });
+	}
+};
+
+export const getDeviceDetails = (deviceId) => async (dispatch) => {
+	dispatch({ type: DEVICE_DETAILS_REQUEST });
+	try {
+		const data = await Axios.get(`${BASE_URL}/getdevice?deviceId=${deviceId}`);
+		dispatch({ type: DEVICE_DETAILS_SUCCESS, payload: data.data.message[0] });
+	} catch (error) {
+		dispatch({ type: DEVICE_DETAILS_FAIL, payload: error.message });
 	}
 };
 
