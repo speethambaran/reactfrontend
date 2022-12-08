@@ -15,6 +15,7 @@ import BarChartOutlinedIcon from "@mui/icons-material/BarChartOutlined";
 import StackedLineChartOutlinedIcon from "@mui/icons-material/StackedLineChartOutlined";
 import MenuOutlinedIcon from "@mui/icons-material/MenuOutlined";
 import MapOutlinedIcon from "@mui/icons-material/MapOutlined";
+import { useEffect } from "react";
 
 const Item = ({ title, to, icon, selected, setSelected }) => {
 	const theme = useTheme();
@@ -33,11 +34,22 @@ const Item = ({ title, to, icon, selected, setSelected }) => {
 	);
 };
 
-const Sidebar = ({ role }) => {
+const Sidebar = () => {
 	const theme = useTheme();
 	const colors = tokens(theme.palette.mode);
 	const [isCollapsed, setIsCollapsed] = useState(false);
 	const [selected, setSelected] = useState("Dashboard");
+	const [isLoggedIn, setIsLoggedIn] = useState(false);
+	const [role, setUserRole] = useState("");
+
+	useEffect(() => {
+		let logginStatus = JSON.parse(localStorage.getItem("loginStatus"));
+		let userInfo = JSON.parse(localStorage.getItem("userData"));
+
+		if (userInfo) {
+			setUserRole(userInfo.role);
+		}
+	}, []);
 
 	return (
 		<Box
