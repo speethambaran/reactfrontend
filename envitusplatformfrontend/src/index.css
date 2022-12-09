@@ -1,48 +1,29 @@
-@import url('https://fonts.googleapis.com/css2?family=Source+Sans+Pro:wght@400;600;700&display=swap');
+@import url("https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap");
 
 html,
 body,
 #root,
-.app,
-.content{
+.app {
   height: 100%;
   width: 100%;
-  /* margin: 0; */
-  font-family: 'Source Sans Pro',sans-serif;
-}
-
-.app {
-  display: flex;
-  position: relative;
-
+  font-family: "Inter", sans-serif;
 }
 
 ::-webkit-scrollbar {
   width: 10px;
 }
-/*track*/
 
+/* Track */
 ::-webkit-scrollbar-track {
-  background-color: #e0e0e0;
-
+  background: #7a7f9d;
 }
 
-/*Handle*/
-
+/* Handle */
 ::-webkit-scrollbar-thumb {
-  background-color: #888;
-  /* border-radius: 10px; */
+  background: #21295c;
 }
 
-::-webkit-scrollbar-thumb:hover {
-  background-color: #555;
+/* Handle on Hover */
+::-webkit-scrollbar-track:hover {
+  background: #21295c;
 }
-.header-logo{
-  width: 100px;
-  height: 30px;
-  align-items:left;
-}
-
-
-
-

@@ -1,66 +1,51 @@
+import React from "react";
 import { Box, Typography, useTheme } from "@mui/material";
-import { tokens } from "../theme"
-import ProgressCircle from "./ProgressCircle";
+import FlexBetween from "./FlexBetween";
 
-const StatBox = ({ title, subtitle, icon, progress, increase, test }) => {
-    const theme = useTheme();
-    const colors = tokens(theme.palette.mode);
+const StatBox = ({ title, value, icon,  }) => {
+  const theme = useTheme();
+  return (
+    <Box
+      gridColumn="span 2"
+      gridRow="span 1"
+      display="flex"
+      flexDirection="column"
+      justifyContent="space-between"
+      p="1.25rem 1rem"
+      flex="1 1 100%"
+      backgroundColor={theme.palette.background.alt}
+      borderRadius="0.55rem"
+    >
+      <FlexBetween>
+        <Typography variant="h6" sx={{ color: theme.palette.secondary[100] }}>
+          {title}
+        </Typography>
+        {icon}
+      </FlexBetween>
 
-    return (
+      <Typography
+        // font="bold"
+        fontWeight="600"
+        sx={{ color: theme.palette.secondary[200] }}
+      >
+        {value}
+      </Typography>
+      <FlexBetween gap="1rem">
+        <Typography
+          // variant="h3"
+          fontStyle="italic"
+          sx={{ color: theme.palette.secondary.light }}
+        >
+      
+        </Typography>
+        <Typography>
 
-        <Box width="200" m="0 20px">
-            <Box display="flex" justifyContent="flex-start">
-                <Box>
-                    {icon}
-                    <Typography
-                        variant="h4"
-                        fontWeight="bold"
-                        sx={{ color: colors.grey[100] }}
-                    >
-                        {title}
-                    </Typography>
-                </Box>
+          
+          
+        </Typography>
+      </FlexBetween>
+    </Box>
+  );
+};
 
-            </Box>
-            <Box display="flex" justifyContent="space-between">
-                <Typography
-                    variant="h5"
-                    sx={{ color: colors.greenAccent[500] }}
-                >
-                    {subtitle}
-                </Typography>
-                <Typography
-                    variant="h5"
-                    fontStyle="italic"
-                    sx={{ color: colors.greenAccent[600] }}
-                >
-                    {increase}
-                </Typography>
-                <Box >
-                    <Typography
-                        variant="h5"
-                        fontStyle="italic"
-                        sx={{ color: colors.greenAccent[600] }}
-
-                    >
-                        {test}
-                    </Typography>
-                </Box>
-                <Box   justifyContent="space-between" >
-                    
-                        <ProgressCircle progress={progress} /> 
-                    
-                </Box>
-            </Box>
-
-            
-                
-            
-
-        </Box>
-
-
-    )
-}
-
-export default StatBox
+export default StatBox;
