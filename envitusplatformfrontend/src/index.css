@@ -520,3 +520,9 @@ div.MuiBox-root canvas{
   .device-list td{
     color: #111;
   }
+  .high{
+    color: red;
+  }
+  .low{
+    color: yellow;
+  }

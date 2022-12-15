@@ -18,6 +18,11 @@ import {
 
 import Axios from "axios";
 import { BASE_URL } from "../constants/AppliationConstants";
+import {
+	SAMPLE_GRAPH_FAIL,
+	SAMPLE_GRAPH_REQUEST,
+	SAMPLE_GRAPH_SUCCESS,
+} from "../constants/sensorConstants";
 
 export const listDevices = () => async (dispatch) => {
 	dispatch({
@@ -57,16 +62,6 @@ export const getDevice = (deviceId) => async (dispatch) => {
 	}
 };
 
-export const getDeviceDetails = (deviceId) => async (dispatch) => {
-	dispatch({ type: DEVICE_DETAILS_REQUEST });
-	try {
-		const data = await Axios.get(`${BASE_URL}/getdevice?deviceId=${deviceId}`);
-		dispatch({ type: DEVICE_DETAILS_SUCCESS, payload: data.data.message[0] });
-	} catch (error) {
-		dispatch({ type: DEVICE_DETAILS_FAIL, payload: error.message });
-	}
-};
-
 export const listLivedata = () => async (dispatch) => {
 	dispatch({
 		type: DEVICE_LIVEDATA_REQUEST,
@@ -80,6 +75,18 @@ export const listLivedata = () => async (dispatch) => {
 };
 
 const splitKeyValue = (obj) => {
+	const keys = Object.keys(obj);
+	const res = [];
+	for (let i = 0; i < keys.length; i++) {
+		res.push({
+			x: keys[i],
+			y: obj[keys[i]],
+		});
+	}
+	return res;
+};
+
+const splitKeyTestValue = (obj) => {
 	const keys = Object.keys(obj);
 	const res = [];
 	for (let i = 0; i < keys.length; i++) {
@@ -111,6 +118,107 @@ export const getDashboardData = (deviceId) => async (dispatch) => {
 			return 0;
 		}
 		let result = data.sort(compare);
+		result = result.pop();
+		let resArr = [];
+		let dataArr = [];
+		delete result.data["receivedTime"];
+		dataArr.push(splitKeyValue(result.data));
+
+		let resObj = {};
+		resObj.id = "patnaenvtest";
+		resObj.color = "hsl(214, 70%, 50%)";
+		resObj.data = dataArr[0];
+		resArr.push(resObj);
+
+		// dispatch({type: DASHBOARD_DATA_SUCCESS,payload:result.pop()})
+		dispatch({ type: DASHBOARD_DATA_SUCCESS, payload: resArr });
+	} catch (error) {
+		dispatch({ type: DASHBOARD_DATA_FAIL, payload: error.message });
+	}
+};
+
+// {
+// 	id: "Pressure",
+// 	color: "hsl(504, 70%, 50%)",
+// 	data: [
+// 		{
+// 			x: "1",
+// 			y: 0,
+// 		},
+// 	]
+// }
+
+export const sampleLiveDataGraph = (deviceId) => async (dispatch) => {
+	dispatch({ type: SAMPLE_GRAPH_REQUEST });
+	try {
+		let { data } = await Axios.get(`${BASE_URL}/getlivedata`);
+		data = data.message;
+		let testArr = [];
+		function compare(a, b) {
+			if (a.receivedTime < b.receivedTime) {
+				return -1;
+			}
+			if (a.receivedTime > b.receivedTime) {
+				return 1;
+			}
+			return 0;
+		}
+		let result = data.sort(compare);
+		let lastTenData = result.slice(Math.max(result.length - 10, 0));
+
+		// testArr.push(splitKeyTestValue(lastTenData.data));
+		// console.log("TEST ARRAY-------------", lastTenData);
+		dispatch({ type: SAMPLE_GRAPH_SUCCESS, payload: data });
+	} catch (error) {
+		dispatch({ type: SAMPLE_GRAPH_FAIL, payload: error.message });
+	}
+};
+
+export const dashboardDataTest = (deviceId) => async (dispatch) => {
+	dispatch({ type: DASHBOARD_DATA_REQUEST });
+	try {
+		let finalRes;
+		const deviceData = await Axios.get(`${BASE_URL}/getdevice`);
+		let { data } = await Axios.get(
+			`${BASE_URL}/getlivedata?deviceId=${deviceId}`
+		);
+		data = data.message;
+
+		function compare(a, b) {
+			if (a.receivedTime < b.receivedTime) {
+				return -1;
+			}
+			if (a.receivedTime > b.receivedTime) {
+				return 1;
+			}
+			return 0;
+		}
+		let result = data.sort(compare);
+		let testvar = result;
+		testvar = testvar.slice(Math.max(testvar.length - 10, 0));
+		// console.log("type==========", typeof testvar);
+		let testObj;
+		for (let i = 0; i < testvar.length; i++) {
+			const e = testvar[i].data;
+			// Object.values(e).forEach((item) => {
+			// 	console.log(`KEY : ${e[item]} ,value : ${item}`);
+			// });
+			let keys = Object.keys(e);
+			// keys.forEach((val) => console.log(`There are ${e[val]} ${val}`));  There are 68.48 noise
+			let singleObj = {};
+
+			// keys.forEach((val) => {
+			// 	console.log("VAL------------", val);
+			// 	testObj.id = val;
+			// 	if (val === 3) {
+			// 		break;
+			// 	}
+			// });
+			// console.log("test============", testObj);
+			// console.log("soingle ---------", singleObj);
+			// console.log("E==========", e);
+		}
+		// console.log("result==============", testvar);
 		result = result.pop();
 		let resArr = [];
 		let dataArr = [];

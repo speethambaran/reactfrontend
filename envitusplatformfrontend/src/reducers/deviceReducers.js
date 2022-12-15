@@ -11,6 +11,11 @@ import {
 	DEVICE_LIST_REQUEST,
 	DEVICE_LIST_SUCCESS,
 } from "../constants/deviceConstants";
+import {
+	SAMPLE_GRAPH_FAIL,
+	SAMPLE_GRAPH_REQUEST,
+	SAMPLE_GRAPH_SUCCESS,
+} from "../constants/sensorConstants";
 
 export const deviceListReducer = (
 	state = { loading: true, device: [] },
@@ -45,7 +50,7 @@ export const getDeviceReducers = (
 };
 
 export const deviceDetailsReducer = (
-	state = { device_details_loading: true, device_data: {} },
+	state = { device_details_loading: true, device_data: [] },
 	action
 ) => {
 	switch (action.type) {
@@ -60,17 +65,52 @@ export const deviceDetailsReducer = (
 	}
 };
 
+export const sampleDashDataReducer = (
+	state = { sample_loading: true, sampleDashData: [] },
+	action
+) => {
+	switch (action.type) {
+		case SAMPLE_GRAPH_REQUEST:
+			return { sample_loading: true };
+		case SAMPLE_GRAPH_SUCCESS:
+			return { sample_loading: false, sampleDashData: action.payload };
+		case SAMPLE_GRAPH_FAIL:
+			return { sample_loading: false, error: action.payload };
+		default:
+			return state;
+	}
+};
+
 export const dashboardDataReducer = (
-	state = { loading: true, dashboardData: [] },
+	state = { loadingTime: true, dashboardData: [] },
 	action
 ) => {
 	switch (action.type) {
 		case DASHBOARD_DATA_REQUEST:
-			return { loading: true };
+			return { loadingTime: true };
 		case DASHBOARD_DATA_SUCCESS:
-			return { loading: false, dashboardData: action.payload };
+			return { loadingTime: false, dashboardData: action.payload };
 		case DASHBOARD_DATA_FAIL:
-			return { loading: false, error: action.payload };
+			return { loadingTime: false, error: action.payload };
+		default:
+			return state;
+	}
+};
+
+export const dashboardDataTestReducer = (
+	state = { loadingTimetest: true, liveDataforDashboardtest: [] },
+	action
+) => {
+	switch (action.type) {
+		case DASHBOARD_DATA_REQUEST:
+			return { loadingTimetest: true };
+		case DASHBOARD_DATA_SUCCESS:
+			return {
+				loadingTimetest: false,
+				liveDataforDashboardtest: action.payload,
+			};
+		case DASHBOARD_DATA_FAIL:
+			return { loadingTimetest: false, error: action.payload };
 		default:
 			return state;
 	}
