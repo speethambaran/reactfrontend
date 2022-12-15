@@ -1,15 +1,12 @@
 import { ResponsiveLine } from "@nivo/line"
 import { useTheme } from "@mui/material";
 import { tokens } from "../theme";
-// import { mockDataLine as data } from "../data/mockData"
+import { mockDataLine as data } from "../data/mockData"
 
-const LineChart = ({ isDashboard = false,data }) => {
+const LiveChart = ({ isDashboard = false }) => {
     const theme = useTheme()
     const colors = tokens(theme.palette.mode)
 
-// const LineChart = ({ isDashboard = false }) => {
-   
-//     const theme = useTheme()
     return (
         <ResponsiveLine
             data={data}
@@ -17,33 +14,33 @@ const LineChart = ({ isDashboard = false,data }) => {
                 axis: {
                     domain: {
                         line: {
-                            stroke: theme.palette.secondary[200]
+                            stroke: colors.grey[100]
                         }
                     },
                     legend: {
                         text: {
-                            fill: theme.palette.secondary[200]
+                            fill: colors.grey[100]
                         }
                     },
                     ticks: {
                         line: {
-                            stroke: theme.palette.secondary[200],
+                            stroke: colors.grey[100],
                             strokeWidth: 1
                         },
                         text: {
-                            fill: theme.palette.secondary[200]
+                            fill: colors.grey[100]
                         }
                     }
 
                 },
                 legends: {
                     text: {
-                        fill: theme.palette.secondary[200]
+                        fill: colors.grey[100]
                     }
                 },
                 tooltip: {
                     container: {
-                        color: theme.palette.secondary[200]
+                        color: colors.primary[500]
                     }
                 }
             }}
@@ -54,8 +51,8 @@ const LineChart = ({ isDashboard = false,data }) => {
             xScale={{ type: 'point' }}
             yScale={{
                 type: 'linear',
-                min: 0,
-                max: 1000,
+                min: 'auto',
+                max: 'auto',
                 stacked: true,
                 reverse: false
             }}
@@ -121,4 +118,4 @@ const LineChart = ({ isDashboard = false,data }) => {
     )
 }
 
-export default LineChart;
+export default LiveChart

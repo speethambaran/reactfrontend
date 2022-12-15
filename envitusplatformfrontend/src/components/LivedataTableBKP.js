@@ -8,11 +8,11 @@ import TableHead from "@mui/material/TableHead";
 import TablePagination from "@mui/material/TablePagination";
 import TableRow from "@mui/material/TableRow";
 import { useDispatch, useSelector } from "react-redux";
-import { listLiveData } from "../../actions/sensorActions";
-import LoadingBox from "../LoadingBox";
-import MessageBox from "../MessageBox";
-import LineChart from "../Linechart";
-// import LiveChart from '../LiveChart';
+import { listLiveData } from "../actions/sensorActions";
+import LoadingBox from "./LoadingBox";
+import MessageBox from "./MessageBox";
+import LineChart from "./Linechart";
+import LiveChart from "./LiveChart";
 import { CSVLink, CSVDownload } from "react-csv";
 import moment from "moment";
 
@@ -35,6 +35,11 @@ const columns = [
 	{ id: "receivedTime", label: "Received Time", minWidth: 100 },
 	{ id: "rawAQI", label: "rawAQI", minWidth: 100 },
 ];
+
+function createData(name, code, population, size) {
+	const density = population / size;
+	return { name, code, population, size, density };
+}
 
 function formatData(data) {
 	if (data) {
@@ -107,7 +112,7 @@ function LivedataTable({ deviceId }) {
 					<CSVLink
 						className="btn btn-success ml-auto"
 						style={{ float: "right", top: "-10px", position: "relative" }}
-						data={dataRow ? dataRow : ""}
+						data={dataRow}
 					>
 						Download Data
 					</CSVLink>
@@ -128,7 +133,7 @@ function LivedataTable({ deviceId }) {
 									</TableRow>
 								</TableHead>
 								<TableBody>
-									{dataRow ? (
+									{dataRow &&
 										dataRow
 											.slice(
 												page * rowsPerPage,
@@ -154,10 +159,7 @@ function LivedataTable({ deviceId }) {
 														})}
 													</TableRow>
 												);
-											})
-									) : (
-										<LoadingBox />
-									)}
+											})}
 								</TableBody>
 							</Table>
 						</TableContainer>
