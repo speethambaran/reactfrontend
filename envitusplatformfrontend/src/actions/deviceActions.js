@@ -124,9 +124,16 @@ export const getDashboardData = (deviceId) => async (dispatch) => {
 		delete result.data["receivedTime"];
 		dataArr.push(splitKeyValue(result.data));
 
+		var letters = "0123456789ABCDEF";
+		var color = "#";
+
+		for (var i = 0; i < 6; i++) {
+			color += letters[Math.floor(Math.random() * 16)];
+		}
+
 		let resObj = {};
 		resObj.id = "patnaenvtest";
-		resObj.color = "hsl(214, 70%, 50%)";
+		resObj.color = color;
 		resObj.data = dataArr[0];
 		resArr.push(resObj);
 
@@ -137,22 +144,27 @@ export const getDashboardData = (deviceId) => async (dispatch) => {
 	}
 };
 
-// {
-// 	id: "Pressure",
-// 	color: "hsl(504, 70%, 50%)",
-// 	data: [
-// 		{
-// 			x: "1",
-// 			y: 0,
-// 		},
-// 	]
-// }
+function reduceFunction(arr, key) {
+	return arr.map(function(e, index) {
+		let paramName = key;
+		return {
+			x: index + 1,
+			y: e.data[paramName],
+		};
+	});
+}
 
-export const sampleLiveDataGraph = (deviceId) => async (dispatch) => {
+export const sampleLiveDataGraph = (deviceId, param_name) => async (
+	dispatch
+) => {
 	dispatch({ type: SAMPLE_GRAPH_REQUEST });
 	try {
 		let { data } = await Axios.get(`${BASE_URL}/getlivedata`);
 		data = data.message;
+		var newArray = data.filter(function(el) {
+			return el.deviceId == deviceId;
+		});
+
 		let testArr = [];
 		function compare(a, b) {
 			if (a.receivedTime < b.receivedTime) {
@@ -163,12 +175,18 @@ export const sampleLiveDataGraph = (deviceId) => async (dispatch) => {
 			}
 			return 0;
 		}
-		let result = data.sort(compare);
+		let result = newArray.sort(compare);
 		let lastTenData = result.slice(Math.max(result.length - 10, 0));
 
-		// testArr.push(splitKeyTestValue(lastTenData.data));
-		// console.log("TEST ARRAY-------------", lastTenData);
-		dispatch({ type: SAMPLE_GRAPH_SUCCESS, payload: data });
+		let dataOnlyTemperature = reduceFunction(lastTenData, param_name);
+		let sampleStructure = {
+			id: param_name,
+			color: "hsl(504, 70%, 50%)",
+			data: dataOnlyTemperature,
+		};
+		let formatArr = [];
+		formatArr.push(sampleStructure);
+		dispatch({ type: SAMPLE_GRAPH_SUCCESS, payload: formatArr });
 	} catch (error) {
 		dispatch({ type: SAMPLE_GRAPH_FAIL, payload: error.message });
 	}
@@ -196,29 +214,13 @@ export const dashboardDataTest = (deviceId) => async (dispatch) => {
 		let result = data.sort(compare);
 		let testvar = result;
 		testvar = testvar.slice(Math.max(testvar.length - 10, 0));
-		// console.log("type==========", typeof testvar);
 		let testObj;
 		for (let i = 0; i < testvar.length; i++) {
 			const e = testvar[i].data;
-			// Object.values(e).forEach((item) => {
-			// 	console.log(`KEY : ${e[item]} ,value : ${item}`);
-			// });
 			let keys = Object.keys(e);
-			// keys.forEach((val) => console.log(`There are ${e[val]} ${val}`));  There are 68.48 noise
 			let singleObj = {};
-
-			// keys.forEach((val) => {
-			// 	console.log("VAL------------", val);
-			// 	testObj.id = val;
-			// 	if (val === 3) {
-			// 		break;
-			// 	}
-			// });
-			// console.log("test============", testObj);
-			// console.log("soingle ---------", singleObj);
-			// console.log("E==========", e);
 		}
-		// console.log("result==============", testvar);
+
 		result = result.pop();
 		let resArr = [];
 		let dataArr = [];

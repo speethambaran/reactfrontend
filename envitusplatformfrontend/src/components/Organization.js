@@ -30,13 +30,6 @@ function Organization({ org }) {
 			users,
 			devices,
 		};
-		// console.log('DATA FOR UPDTE===========>',dataForUpdate)
-		// await axios.post(`${BASE_URL}/updateorganization/`,dataForUpdate).then((response)=>{
-		//     if (response.data.errorCode == 0){
-		//         alert('Organisation updated')
-		//         window.location.reload()
-		//     }
-		// })
 	};
 	return (
 		<div>

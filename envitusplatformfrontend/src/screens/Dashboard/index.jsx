@@ -26,7 +26,10 @@ import {
 	listDevices,
 	sampleLiveDataGraph,
 } from "../../actions/deviceActions";
-import { listLiveData } from "../../actions/sensorActions";
+import {
+	listLiveData,
+	listSensorParameters,
+} from "../../actions/sensorActions";
 import { mockDataLine } from "../../data/mockData";
 import PieChart from "../../components/PieChart";
 import VerticalChart from "../../components/VerticalChart";
@@ -50,6 +53,9 @@ const Dashboard = () => {
 
 	const [initialLoading, setInitialLoading] = useState(false);
 	const [initialError, setInitalError] = useState(false);
+	const [sensorData, setSensorData] = useState([]);
+
+	const [selectedParm, setSeletedParam] = useState("temperature");
 
 	const [age, setAge] = useState("");
 	const [dashData, setDashData] = useState({});
@@ -76,6 +82,9 @@ const Dashboard = () => {
 	const sampleDashLiveData = useSelector((state) => state.sampleDashData);
 	const { sample_loading, sampleDashData } = sampleDashLiveData;
 
+	const paramList = useSelector((state) => state.sensorParameterList);
+	const { parameters } = paramList;
+
 	const liveData = useSelector((state) => state.livedata);
 	const { livedata } = liveData;
 
@@ -85,12 +94,13 @@ const Dashboard = () => {
 		dispatch(listDevices());
 		dispatch(getDashboardData(currentDevice));
 		dispatch(dashboardDataTest(currentDevice));
-		dispatch(sampleLiveDataGraph(currentDevice));
+		dispatch(sampleLiveDataGraph(currentDevice, "temperature"));
 		dispatch(listLiveData());
+		dispatch(listSensorParameters());
 		const fetchData = async () => {
-			// const data = await axios.get(
-			// 	`${BASE_URL}/getdevice?deviceId=${currentDevice}`
-			// );
+			const data = await axios.get(
+				`${BASE_URL}/getdevice?deviceId=${currentDevice}`
+			);
 
 			try {
 				setInitialLoading(true);
@@ -99,6 +109,7 @@ const Dashboard = () => {
 				);
 
 				setInitialLoading(false);
+
 				setSelectedDeviceDetails(data.data);
 			} catch (error) {
 				setInitalError(error.message);
@@ -125,6 +136,12 @@ const Dashboard = () => {
 		fetchData(event.target.value);
 		// selectedDevice(currentDevice);
 		getDashboardData(currentDevice);
+		dispatch(sampleLiveDataGraph(currentDevice, "temperature"));
+	};
+
+	const changeParamName = (event) => {
+		setSeletedParam(event.target.value);
+		dispatch(sampleLiveDataGraph(currentDevice, event.target.value));
 	};
 
 	return (
@@ -147,7 +164,7 @@ const Dashboard = () => {
 							justifyContent="space-between"
 							alignItems="center"
 						>
-							<h2>Device</h2>
+							<h2 style={{ left: "-10px", position: "relative" }}>Device</h2>
 							<FormControl fullWidth>
 								<select
 									onChange={handleChange}
@@ -178,76 +195,22 @@ const Dashboard = () => {
 							backgroundColor={colors.primary[400]}
 							display="flex"
 							alignItems="center"
-							justifyContent="left"
+							justifyContent="center"
 						>
-							<Box width="200" m="0 20px">
-								<Box display="flex" justifyContent="flex-start">
-									<Box>
-										{/* <DevicesOutlinedIcon sx={{ color: colors.greenAccent[600], fontSize: "26px", mt: 0 }} /> */}
-										<Typography
-											variant="h5"
-											fontWeight="bold"
-											sx={{ color: colors.grey[100] }}
-											className="text-center"
-										>
-											{/* Device */}
-										</Typography>
-									</Box>
-								</Box>
-
-								<Box sx={{ flexGrow: 1 }}>
-									{cardLoading ? (
-										<Spinner />
-									) : error ? (
-										<MessageBox />
-									) : (
-										<div>
-											<h2
-												className="text-center"
-												style={{
-													alignItems: "center",
-													justifyContent: "center",
-												}}
-											>
-												Device Details
-											</h2>
-											<div className="row">
-												<div className="col-md-6">
-													<h6>Device ID </h6>
-												</div>
-												<div className="col-md-6">
-													<h6>{currentDevice}</h6>
-												</div>
-											</div>
-											<div className="row">
-												<div className="col-md-6">
-													<h6>Subtype</h6>
-												</div>
-												<div className="col-md-6">
-													{/* {selectedDeviceDetails.subType} */}
-													<h6>ESPATNAOTDR</h6>
-												</div>
-											</div>
-											<div className="row">
-												<div className="col-md-6">
-													<h6>Location</h6>
-												</div>
-												<div className="col-md-6">
-													<h6>location</h6>
-												</div>
-											</div>
-											<div className="row">
-												<div className="col-md-6">
-													<h6>LandMark</h6>
-												</div>
-												<div className="col-md-6">
-													<h6>landmark</h6>
-												</div>
-											</div>
-										</div>
-									)}
-								</Box>
-							</Box>
+							{cardLoading ? (
+								<Spinner />
+							) : cardError ? (
+								<MessageBox />
+							) : (
+								<div>
+									<h2>Device Details</h2>
+									<br />
+									<div className="row">
+										<div className="col-md-6">Device ID : </div>
+										<div className="col-md-6">{currentDevice}</div>
+									</div>
+								</div>
+							)}
 						</Box>
 
 						<Box
@@ -257,7 +220,7 @@ const Dashboard = () => {
 							alignItems="center"
 							justifyContent="left"
 						>
-							<StatBox
+							{/* <StatBox
 								title="Alert"
 								subtitle="alert"
 								progress="0.25"
@@ -267,7 +230,11 @@ const Dashboard = () => {
 										sx={{ color: colors.greenAccent[600], fontSize: "26px" }}
 									/>
 								}
-							/>
+							/> */}
+							<div className="container">
+								<h2>Alerts</h2>
+								<div className="count">0</div>
+							</div>
 						</Box>
 
 						<Box
@@ -275,7 +242,7 @@ const Dashboard = () => {
 							backgroundColor={colors.primary[400]}
 							display="flex"
 							alignItems="center"
-							justifyContent="left"
+							justifyContent="center"
 						>
 							{cardLoading ? (
 								<Spinner />
@@ -283,19 +250,19 @@ const Dashboard = () => {
 								<MessageBox />
 							) : (
 								<StatBox
-									title="Daily Rain"
-									subtitle="rain"
+									title="Rain"
+									subtitle="Rain"
 									progress={
 										selectedDeviceDetails &&
 										selectedDeviceDetails.data &&
 										selectedDeviceDetails.data.statPerDeviceId[0].stat
-											.dailyStat[0].statParams.latestValue / 100
+											.dailyStat[1].statParams.latestValue / 100
 									}
 									increase={
 										selectedDeviceDetails &&
 										selectedDeviceDetails.data &&
 										selectedDeviceDetails.data.statPerDeviceId[0].stat
-											.dailyStat[0].statParams.latestValue
+											.dailyStat[1].statParams.latestValue
 									}
 									icon={
 										<ThunderstormOutlinedIcon
@@ -343,7 +310,7 @@ const Dashboard = () => {
 						</Box>
 
 						<Box
-							gridColumn="span 8"
+							gridColumn="span 12"
 							gridRow="span 2"
 							backgroundColor={colors.primary[400]}
 						>
@@ -372,9 +339,28 @@ const Dashboard = () => {
 								</Box>
 
 								<Box>
-									<select>
-										<option>temperature</option>
-										<option>pressure</option>
+									<select onChange={changeParamName} className="form-control">
+										{/* {parameters &&
+											parameters.map((parameter) => (
+												<option value={parameter.displayName}>
+													{parameter.displayName}
+												</option>
+											))} */}
+										<option value="temperature">Temperature</option>
+										<option value="pressure">Pressure</option>
+										<option value="CO">CO</option>
+										<option value="CO2">CO2</option>
+										<option value="NO2">NO2</option>
+										<option value="O3">O3</option>
+										<option value="PM2p5">PM2p5</option>
+										<option value="PM10">PM10</option>
+										<option value="SO2">SO2</option>
+										<option value="TSP">TSP</option>
+										<option value="humidity">Humidity</option>
+										<option value="noise">Noise</option>
+										<option value="rain">Rain</option>
+										<option value="windDirection">Wind Direction</option>
+										<option value="windSpeedAvg">Wind SpeedAvg</option>
 									</select>
 									<IconButton>
 										<DownloadOutlinedIcon
@@ -385,35 +371,12 @@ const Dashboard = () => {
 							</Box>
 
 							<Box height="250px" ml="-20px">
-								{loadingTime ? (
+								{sample_loading ? (
 									<Spinner />
+								) : sampleDashData ? (
+									<LineChart isDashboard={true} data={sampleDashData} />
 								) : (
-									dashboardData && (
-										<LineChart isDashboard={true} data={dashboardData} />
-									)
-								)}
-							</Box>
-						</Box>
-
-						<Box
-							gridColumn="span 4"
-							gridRow="span 2"
-							backgroundColor={colors.primary[400]}
-						>
-							<Box mt="1.5em" display="flex" alignItems="right">
-								<Box>
-									<IconButton>
-										<DownloadOutlinedIcon
-											sx={{ fontSize: "26px", color: colors.greenAccent[500] }}
-										/>
-									</IconButton>
-								</Box>
-							</Box>
-
-							<Box height="250px" mt="20px">
-								{/* <BarChart isDashboard={true} /> */}
-								{dashboardData && (
-									<LineChart isDashboard={true} data={mockDataLine} />
+									<h1>NO DATA</h1>
 								)}
 							</Box>
 						</Box>
