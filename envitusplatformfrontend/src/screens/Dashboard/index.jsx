@@ -36,6 +36,7 @@ import Grid from "@mui/material/Grid";
 import axios from "axios";
 import { BASE_URL } from "../../constants/AppliationConstants";
 import Spinner from "../../components/Spinner";
+import FlexBetween from "../../components/FlexBetween";
 
 const Dashboard = () => {
 	const theme = useTheme();
@@ -127,322 +128,231 @@ const Dashboard = () => {
 		getDashboardData(currentDevice);
 	};
 
+
 	return (
-		<Box m="30px">
+		<Box m="1.5rem 2.5rem">
 			{initialLoading ? (
 				<LoadingBox />
 			) : initialError ? (
 				<MessageBox>{error}</MessageBox>
 			) : (
 				<div>
-					<Box
-						display="grid"
-						gridTemplateColumns="repeat(12,1fr)"
-						gridAutoRows="155px"
-						gap="19px"
+					{/* <FlexBetween> */}
+					<Header title="DASHBOARD"
+						subtitle="Welcome to your dashboard" />
+					<FormControl
+						p="-1rem"
 					>
-						<Header title="DASHBOARD" subtitle="Welcome" />
+						<select
+							onChange={handleChange}
+							className="form-control"
+							style={{ width: "200px" }}
+						>
+							{device &&
+								device.map((dev, index) => (
+									<option value={dev.deviceId}>{dev.deviceId}</option>
+								))}
+						</select>
+					</FormControl>
+
+					{/* </FlexBetween> */}
+
+					<Box
+						mt="20px"
+						display="grid"
+						gridTemplateColumns="repeat(12, 1fr)"
+						gridAutoRows="160px"
+						gap="20px"
+					// sx={{
+					//   "& > div": { gridColumn: isNonMediumScreens ? undefined : "span 12" },
+					// }}
+					>
+						{/* ROW 1 */}
+
 						<Box
+							gridColumn="span 2"
+							gridRow="span 1"
 							display="flex"
+							flexDirection="column"
 							justifyContent="space-between"
-							alignItems="center"
-						>
-							<h2>Device</h2>
-							<FormControl fullWidth>
-								<select
-									onChange={handleChange}
-									className="form-control"
-									style={{ width: "200px" }}
-								>
-									{device &&
-										device.map((dev, index) => (
-											<option value={dev.deviceId}>{dev.deviceId}</option>
-										))}
-								</select>
-							</FormControl>
-						</Box>
-					</Box>
-
-					{/* grids */}
-
-					<Box
-						display="grid"
-						gridTemplateColumns="repeat(12,1fr)"
-						gridAutoRows="140px"
-						gap="17px"
-					>
-						{/* row   */}
-
-						<Box
-							gridColumn="span 3"
+							p="1.25rem 1rem"
+							flex="1 1 100%"
 							backgroundColor={colors.primary[400]}
-							display="flex"
-							alignItems="center"
-							justifyContent="left"
-						>
-							<Box width="200" m="0 20px">
-								<Box display="flex" justifyContent="flex-start">
-									<Box>
-										{/* <DevicesOutlinedIcon sx={{ color: colors.greenAccent[600], fontSize: "26px", mt: 0 }} /> */}
+							borderRadius="0.55rem">
+
+							{cardLoading ? (
+								<Spinner />
+							) : error ? (
+								<MessageBox />
+							) : (
+								<div>
+									<Typography
+										variant="h4"
+										fontWeight="bold"
+										sx={{ color: colors.grey[100] }}
+										justifyContent="flex-start"
+									>
+										Device Details
+									</Typography>
+
+									<Box display="flex" justifyContent="space-between" padding={1}>
 										<Typography
-											variant="h5"
+											variant="h6"
 											fontWeight="bold"
-											sx={{ color: colors.grey[100] }}
-											className="text-center"
+											display="table-column"
+											sx={{ color: colors.greenAccent[500] }}
+											justifyContent="flex-start"
 										>
-											{/* Device */}
+											<Typography>Device ID</Typography>
+											<Typography>Subtype</Typography>
+											<Typography>Location</Typography>
+											<Typography>LandMark</Typography>
+
 										</Typography>
+										<Typography
+											variant="h6"
+											display="table-column"
+											sx={{ color: colors.grey[100] }}
+											justifyContent="flex-end"
+										>
+											<Typography>{currentDevice}</Typography>
+											<Typography>ESPATNAOTDR</Typography>
+											<Typography>Location</Typography>
+											<Typography>LandMark</Typography>
+										</Typography>
+
 									</Box>
-								</Box>
-
-								<Box sx={{ flexGrow: 1 }}>
-									{cardLoading ? (
-										<Spinner />
-									) : error ? (
-										<MessageBox />
-									) : (
-										<div>
-											<h2
-												className="text-center"
-												style={{
-													alignItems: "center",
-													justifyContent: "center",
-												}}
-											>
-												Device Details
-											</h2>
-											<div className="row">
-												<div className="col-md-6">
-													<h6>Device ID </h6>
-												</div>
-												<div className="col-md-6">
-													<h6>{currentDevice}</h6>
-												</div>
-											</div>
-											<div className="row">
-												<div className="col-md-6">
-													<h6>Subtype</h6>
-												</div>
-												<div className="col-md-6">
-													{/* {selectedDeviceDetails.subType} */}
-													<h6>ESPATNAOTDR</h6>
-												</div>
-											</div>
-											<div className="row">
-												<div className="col-md-6">
-													<h6>Location</h6>
-												</div>
-												<div className="col-md-6">
-													<h6>location</h6>
-												</div>
-											</div>
-											<div className="row">
-												<div className="col-md-6">
-													<h6>LandMark</h6>
-												</div>
-												<div className="col-md-6">
-													<h6>landmark</h6>
-												</div>
-											</div>
-										</div>
-									)}
-								</Box>
-							</Box>
-						</Box>
-
-						<Box
-							gridColumn="span 3"
-							backgroundColor={colors.primary[400]}
-							display="flex"
-							alignItems="center"
-							justifyContent="left"
-						>
-							<StatBox
-								title="Alert"
-								subtitle="alert"
-								progress="0.25"
-								increase="0"
-								icon={
-									<AddAlertOutlinedIcon
-										sx={{ color: colors.greenAccent[600], fontSize: "26px" }}
-									/>
-								}
-							/>
-						</Box>
-
-						<Box
-							gridColumn="span 3"
-							backgroundColor={colors.primary[400]}
-							display="flex"
-							alignItems="center"
-							justifyContent="left"
-						>
-							{cardLoading ? (
-								<Spinner />
-							) : cardError ? (
-								<MessageBox />
-							) : (
-								<StatBox
-									title="Daily Rain"
-									subtitle="rain"
-									progress={
-										selectedDeviceDetails &&
-										selectedDeviceDetails.data &&
-										selectedDeviceDetails.data.statPerDeviceId[0].stat
-											.dailyStat[0].statParams.latestValue / 100
-									}
-									increase={
-										selectedDeviceDetails &&
-										selectedDeviceDetails.data &&
-										selectedDeviceDetails.data.statPerDeviceId[0].stat
-											.dailyStat[0].statParams.latestValue
-									}
-									icon={
-										<ThunderstormOutlinedIcon
-											sx={{ color: colors.greenAccent[600], fontSize: "26px" }}
-										/>
-									}
-								></StatBox>
+								</div>
 							)}
 						</Box>
 
-						<Box
-							gridColumn="span 3"
-							backgroundColor={colors.primary[400]}
-							display="flex"
-							alignItems="center"
-							justifyContent="center"
-						>
-							{cardLoading ? (
-								<Spinner />
-							) : cardError ? (
-								<MessageBox />
-							) : (
-								<StatBox
-									title="Daily AQI"
-									subtitle="AQI"
-									progress={
-										selectedDeviceDetails &&
-										selectedDeviceDetails.data &&
-										selectedDeviceDetails.data.statPerDeviceId[0].stat
-											.dailyStat[2].statParams.latestValue / 500
-									}
-									increase={
-										selectedDeviceDetails &&
-										selectedDeviceDetails.data &&
-										selectedDeviceDetails.data.statPerDeviceId[0].stat
-											.dailyStat[2].statParams.latestValue
-									}
-									icon={
-										<ThunderstormOutlinedIcon
-											sx={{ color: colors.greenAccent[600], fontSize: "26px" }}
-										/>
-									}
-								></StatBox>
-							)}
-						</Box>
 
+						<StatBox
+							title="Alert"
+							subtitle="alert"
+							progress="0.25"
+							increase="0"
+							icon={
+								<AddAlertOutlinedIcon
+									sx={{ color: colors.greenAccent[600], fontSize: "26px" }}
+								/>
+							}
+						/>
 						<Box
 							gridColumn="span 8"
 							gridRow="span 2"
-							backgroundColor={colors.primary[400]}
+							//   backgroundColor={colors.primary[400]}
+							p="1rem"
+							borderRadius="0.55rem"
 						>
-							<Box
-								mt="10px"
-								p="0 30px"
-								display="flex"
-								justifyContent="space-between"
-								alignItems="center"
-							>
-								<Box>
-									<Typography
-										variant="h5"
-										fontWeight="600"
-										color={colors.grey[100]}
-									>
-										Live Data
-									</Typography>
-									<Typography
-										variant="h3"
-										fontWeight="500"
-										color={colors.greenAccent[500]}
-									>
-										Device ID : {currentDevice}
-									</Typography>
-								</Box>
 
+							{dashboardData && (
+								<LineChart isDashboard={true} data={mockDataLine} />
+							)}
+
+
+						</Box>
+
+
+						<StatBox
+							title="Daily Rain"
+							subtitle="rain"
+							progress={
+								selectedDeviceDetails &&
+								selectedDeviceDetails.data &&
+								selectedDeviceDetails.data.statPerDeviceId[0].stat
+									.dailyStat[0].statParams.latestValue / 100
+							}
+							increase={
+								selectedDeviceDetails &&
+								selectedDeviceDetails.data &&
+								selectedDeviceDetails.data.statPerDeviceId[0].stat
+									.dailyStat[0].statParams.latestValue
+							}
+							icon={
+								<ThunderstormOutlinedIcon
+									sx={{ color: colors.greenAccent[600], fontSize: "26px" }}
+								/>
+							}
+						/>
+						<StatBox
+							title="Daily AQI"
+							subtitle="AQI"
+							progress={
+								selectedDeviceDetails &&
+								selectedDeviceDetails.data &&
+								selectedDeviceDetails.data.statPerDeviceId[0].stat
+									.dailyStat[2].statParams.latestValue / 500
+							}
+							increase={
+								selectedDeviceDetails &&
+								selectedDeviceDetails.data &&
+								selectedDeviceDetails.data.statPerDeviceId[0].stat
+									.dailyStat[2].statParams.latestValue
+							}
+							icon={
+								<ThunderstormOutlinedIcon
+									sx={{ color: colors.greenAccent[600], fontSize: "26px" }}
+								/>
+							}
+						/>
+
+						{/* ROW 2 */}
+						<Box
+							gridColumn="span 12"
+							gridRow="span 3"
+							backgroundColor={colors.primary[400]}
+							p="1.5rem"
+							borderRadius="0.55rem"
+						>
+							<FlexBetween>
+								<Typography
+									variant="h3"
+									fontWeight="500"
+									display="row"
+									color={colors.greenAccent[500]}
+									justifyContent="flex-start"
+								>
+									Device ID : {currentDevice}
+								</Typography>
 								<Box>
 									<select>
 										<option>temperature</option>
 										<option>pressure</option>
 									</select>
+
 									<IconButton>
 										<DownloadOutlinedIcon
 											sx={{ fontSize: "26px", color: colors.greenAccent[500] }}
 										/>
 									</IconButton>
 								</Box>
-							</Box>
+							</FlexBetween>
 
-							<Box height="250px" ml="-20px">
-								{loadingTime ? (
-									<Spinner />
-								) : (
-									dashboardData && (
-										<LineChart isDashboard={true} data={dashboardData} />
-									)
-								)}
-							</Box>
-						</Box>
 
-						<Box
-							gridColumn="span 4"
-							gridRow="span 2"
-							backgroundColor={colors.primary[400]}
-						>
-							<Box mt="1.5em" display="flex" alignItems="right">
-								<Box>
-									<IconButton>
-										<DownloadOutlinedIcon
-											sx={{ fontSize: "26px", color: colors.greenAccent[500] }}
-										/>
-									</IconButton>
-								</Box>
-							</Box>
 
-							<Box height="250px" mt="20px">
-								{/* <BarChart isDashboard={true} /> */}
-								{dashboardData && (
+							{loadingTime ? (
+								<Spinner />
+							) : (
+
+								dashboardData && (
 									<LineChart isDashboard={true} data={mockDataLine} />
-								)}
-							</Box>
+								)
+							)}
 						</Box>
-
 						<Box
-							mt="0em"
-							gridColumn="span 6"
+							gridColumn="span 8"
 							gridRow="span 2"
 							backgroundColor={colors.primary[400]}
-							display="flex"
-							alignItems="cover"
-							justifyContent="cover"
+							p="1.5rem"
+							borderRadius="0.55rem"
 						>
-							<Box height="300px" width="500px" ml="3px">
-								<AddressMap isDashboard={true} />
-								{/* <SimpleMap /> */}
-							</Box>
+							<AddressMap isDashboard={true} />
 						</Box>
-
-						<Box
-							gridColumn="span 6"
-							gridRow="span 2"
-							backgroundColor={colors.primary[400]}
-						></Box>
 					</Box>
 				</div>
 			)}
 		</Box>
 	);
 };
-
 export default Dashboard;
