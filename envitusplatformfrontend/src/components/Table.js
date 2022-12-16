@@ -1,100 +1,117 @@
-import axios from "axios";
-import React, { useEffect, useState } from "react";
-import { useDispatch, useSelector } from "react-redux";
-import { listDevices } from "../actions/deviceActions";
-import { BASE_URL } from "../constants/AppliationConstants";
-import LoadingBox from "../components/LoadingBox";
-import MessageBox from "../components/MessageBox";
-// import Table from '@mui/material/Table';
-import TableBody from "@mui/material/TableBody";
-import TableCell from "@mui/material/TableCell";
-import TableContainer from "@mui/material/TableContainer";
-import TableHead from "@mui/material/TableHead";
-import TablePagination from "@mui/material/TablePagination";
-import TableRow from "@mui/material/TableRow";
+import React from 'react'
+import BootstrapTable from "react-bootstrap-table-next";
+import paginationFactory from "react-bootstrap-table2-paginator";
 
-const columns = [{ id: "deviceId", label: "Device Id", minWidth: 170 }];
+function Table() {
+    const test = ()=>{
+        alert('test')
+    }
+    const devices = [
+      { device_id: 1, status: "active",City:"Ernakulam",type:"sensor",landmark:"Kochi", family: "Air" },
+      { device_id: 2, status: "offline",City:"Ernakulam",type:"sensor",landmark:"Kochi", family: "Water" },
+      { device_id: 3, status: "active",City:"Ernakulam",type:"sensor",landmark:"Kochi", family: "Flood" },
+      { device_id: 4, status: "active",City:"Ernakulam",type:"sensor",landmark:"Kochi", family: "Flood" },
+      { device_id: 5, status: "active",City:"Ernakulam",type:"sensor",landmark:"Kochi", family: "Water" },
+      { device_id: 6, status: "active",City:"Ernakulam",type:"sensor",landmark:"Kochi", family: "Water" },
+      { device_id: 7, status: "active",City:"Ernakulam",type:"sensor",landmark:"Kochi", family: "Flood" },
+      { device_id: 8, status: "active",City:"Ernakulam",type:"sensor",landmark:"Kochi", family: "Air" },
+      { device_id: 9, status: "active",City:"Ernakulam",type:"sensor",landmark:"Kochi", family: "Water" },
+      { device_id: 10, status: "active",City:"Ernakulam",type:"sensor",landmark:"Kochi", family: "Flood" },
+      { device_id: 11, status: "active",City:"Ernakulam",type:"sensor",landmark:"Kochi", family: "Water" },
+      { device_id: 12, status: "active",City:"Ernakulam",type:"sensor",landmark:"Kochi", family: "Flood" },
+      { device_id: 13, status: "active",City:"Ernakulam",type:"sensor",landmark:"Kochi", family: "Air" },
+      { device_id: 14, status: "active",City:"Ernakulam",type:"sensor",landmark:"Kochi", family: "Air" },
+      { device_id: 15, status: "active",City:"Ernakulam",type:"sensor",landmark:"Kochi", family: "Flood" },
+    ];
 
-function Table({ role }) {
-	const dispatch = useDispatch();
-	const deviceList = useSelector((state) => state.deviceList);
-	const { loading, error, device } = deviceList;
-	const [bgColor, setBgcolor] = useState("whitesmoke");
+    const actionList = {
+        "edit" : <i className='fa fa-pencil'></i>,
+        "delete" : <i className='fa fa-trash'></i>,
+        "view" : <i className='fa fa-pencil'></i>
+    }   
 
-	const selectedDevice = async (id) => {
-		setBgcolor("green");
-	};
+    for (let i=0;i<devices.length;i++){
+        devices[i].edit = actionList.edit;
+        devices[i].delete = actionList.delete;
+        devices[i].view = actionList.view;
+        if(devices[i].status == "active"){
+            devices[i].status = (
+              <i
+                className="fa fa-dot-circle-o"
+                style={{
+                  color: "green",
+                  backgroundColor: "#40dd40",
+                  borderRadius: "50%",
+                }}
+              ></i>
+            );
+        }else if (devices[i].status == "offline") {
+                devices[i].status = (
+                  <i
+                    className="fa fa-dot-circle-o"
+                    style={{
+                      color: "darkgrey",
+                      backgroundColor: "#grey",
+                      borderRadius: "50%",
+                    }}
+                  ></i>
+                );
+              }
+    }
 
-	useEffect(() => {
-		dispatch(listDevices());
-	}, [dispatch]);
+    const columns = [
+      { dataField: "device_id", text: "devicId", sort: true },
+      { dataField: "status", text: "Status", sort: true },
+      { dataField: "type", text: "Type", sort: true },
+      { dataField: "family", text: "Family", sort: true },
+      { dataField: "type", text: "Type", sort: true },
+      { dataField: "City", text: "City", sort: true },
+      { dataField: "landmark", text: "LandMark", sort: true },
+      { dataField: "edit", text: "", onClick: { test } },
+      { dataField: "delete", text: "", onClick: { test } },
+      { dataField: "view", text: "", onClick: { test } },
+    ];
 
-	return (
-		<div className="mt-5">
-			{loading ? (
-				<LoadingBox />
-			) : error ? (
-				<MessageBox variant="danger" style={{ fontWeight: 500 }}>
-					Oops something went wrong
-				</MessageBox>
-			) : (
-				<div className="table-responsive mt-2 p-2">
-					<h1 className="title">Device List</h1>
-					<table className="table mt-2">
-						<thead className="thead-light">
-							<tr>
-								<th scope="col">SI</th>
-								<th scope="col">Device ID</th>
-								<th scope="col">Status</th>
-								<th scope="col">City</th>
-								<th scope="col">Type</th>
-								<th scope="col">LandMark</th>
-								{role == "Super Admin" && <th scope="col">Actions</th>}
-							</tr>
-						</thead>
-						<tbody>
-							{device &&
-								device.map((device, index) => (
-									<tr onClick={(e) => selectedDevice(device.deviceId)}>
-										<th scope="row">{index + 1}</th>
-										<td>{device.deviceId}</td>
-										{/* < (15 * 60 * 1000) ? 'ASWINS' : 'NOT LIVE' */}
-										<td>
-											<i
-												className={`fa fa-dot-circle-o ${
-													device.lastDataReceiveTime - new Date().valueOf() <
-													15 * 60 * 1000
-														? "live"
-														: "not-live"
-												}`}
-												style={{
-													borderRadius: "50%",
-												}}
-											></i>
-										</td>
-										<td>{device.location.city}</td>
-										<td>{device.subType}</td>
-										<td style={{ height: "4px" }} className="">
-											{device.location.landMark}
-										</td>
-										{role == "Super Admin" && (
-											<td>
-												<i className="fa fa-pencil m-1"></i>
-												<i
-													className="fa fa-trash m-1"
-													onClick={(e) => deleteUser(user.id)}
-												></i>
-												<i className="fa fa-eye m-1"></i>
-											</td>
-										)}
-									</tr>
-								))}
-						</tbody>
-					</table>
-				</div>
-			)}
-		</div>
-	);
+    const defaultSorted = [
+      {
+        dataField: "name",
+        order: "desc",
+      },
+    ];
+
+    const pagination = paginationFactory({
+      page: 2,
+      sizePerPage: 5,
+      lastPageText: ">>",
+      firstPageText: "<<",
+      nextPageText: ">",
+      prePageText: "<",
+      showTotal: true,
+      alwaysShowAllBtns: true,
+      onPageChange: function(page, sizePerPage) {
+        console.log("page", page);
+        console.log("sizePerPage", sizePerPage);
+      },
+      onSizePerPageChange: function(page, sizePerPage) {
+        console.log("page", page);
+        console.log("sizePerPage", sizePerPage);
+      },
+    });
+  return (
+    <div className='container-fluid mt-5'>
+        <h1>Device List</h1>
+      <BootstrapTable
+      className="mt-4"
+      rowStyle={{color:"#111",backgroundColor:"white"}}
+        bootstrap4
+        keyField="id"
+        data={devices}
+        columns={columns}
+        defaultSorted={defaultSorted}
+        pagination={pagination}
+      />
+    </div>
+  );
 }
 
-export default Table;
+export default Table
