@@ -41,6 +41,7 @@ import FlexBetween from "../../components/FlexBetween";
 const Dashboard = () => {
 	const theme = useTheme();
 	const colors = tokens(theme.palette.mode);
+	
 	const Item = styled(Paper)(({ theme }) => ({
 		backgroundColor: theme.palette.mode === "dark" ? "#1A2027" : "#fff",
 		...theme.typography.body2,
